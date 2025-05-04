@@ -74,7 +74,7 @@ ElaAppBar::ElaAppBar(QWidget* parent)
 
     // 设置置顶
     d->_stayTopButton = new ElaToolButton(this);
-    d->_stayTopButton->setElaIcon(ElaIconType::ArrowUpToArc);
+    d->_stayTopButton->setElaIcon(ElaIconType::LocationPin);
     d->_stayTopButton->setFixedSize(40, 30);
     connect(d->_stayTopButton, &ElaIconButton::clicked, this, [=]() {
         this->setIsStayTop(!this->getIsStayTop());
