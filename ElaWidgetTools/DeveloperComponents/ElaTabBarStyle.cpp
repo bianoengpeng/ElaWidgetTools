@@ -123,7 +123,7 @@ void ElaTabBarStyle::drawControl(ControlElement element, const QStyleOption* opt
             }
 
             //间隔符绘制
-            if (!topt->state.testFlag(QStyle::State_Selected) && topt->position != QStyleOptionTab::End && topt->selectedPosition != QStyleOptionTab::NextIsSelected)
+            if (topt->state.testFlag(QStyle::State_Selected) && topt->position != QStyleOptionTab::End && topt->selectedPosition != QStyleOptionTab::NextIsSelected)
             {
                 painter->setPen(Qt::NoPen);
                 painter->setBrush(ElaThemeColor(_themeMode, PrimaryNormal));
