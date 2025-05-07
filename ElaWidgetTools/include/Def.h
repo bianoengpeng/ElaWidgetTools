@@ -30,6 +30,26 @@ private:                         \
 #define Q_ENUM_CREATE(CLASS) Q_ENUM(CLASS)
 #endif
 
+Q_BEGIN_ENUM_CREATE(ElaPushButtonType)
+enum Appearance
+{
+    Default = 0x0000,
+    Primary = 0x0001,    
+    Outline = 0x0002,
+    Subtle = 0x0003,
+    Transparent = 0x0004
+};
+Q_ENUM_CREATE(Appearance)
+
+enum Shape
+{
+    Rounded = 0x0000,
+    Circular = 0x0001,
+    Square = 0x0002
+};
+Q_ENUM_CREATE(Shape)
+Q_END_ENUM_CREATE(ElaPushButtonType)
+
 Q_BEGIN_ENUM_CREATE(ElaThemeType)
 enum ThemeMode
 {
@@ -37,7 +57,6 @@ enum ThemeMode
     Dark = 0x0001,
 };
 Q_ENUM_CREATE(ThemeMode)
-
 enum ThemeColor
 {
     ScrollBarHandle,
