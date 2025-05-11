@@ -58,3 +58,9 @@ compile_commands.json
 *.clang-format
 /install
 /build/**
+.vs
+out/
+CMakePresets.json
+CMakeUserPresets.json
+.vscode/
+.cursor/
