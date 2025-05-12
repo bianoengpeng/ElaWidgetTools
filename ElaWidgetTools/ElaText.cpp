@@ -16,7 +16,7 @@ ElaText::ElaText(QWidget* parent)
     setStyleSheet("#ElaText{background-color:transparent;}");
     QFont textFont = font();
     textFont.setLetterSpacing(QFont::AbsoluteSpacing, d->_textSpacing);
-    textFont.setPixelSize(28);
+    textFont.setPixelSize(14);
     setFont(textFont);
     setWordWrap(true);
     d->_themeMode = eTheme->getThemeMode();
