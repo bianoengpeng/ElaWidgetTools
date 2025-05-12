@@ -122,12 +122,12 @@ void ElaTabBarStyle::drawControl(ControlElement element, const QStyleOption* opt
                 tabRect.setHeight(tabRect.height() - 10);
             }
 
-            //间隔符绘制
-            if (!topt->state.testFlag(QStyle::State_Selected) && topt->position != QStyleOptionTab::End && topt->selectedPosition != QStyleOptionTab::NextIsSelected)
+            //选择标记绘制
+            if (topt->state.testFlag(QStyle::State_Selected)) //&& topt->position != QStyleOptionTab::End && topt->selectedPosition != QStyleOptionTab::NextIsSelected)
             {
                 painter->setPen(Qt::NoPen);
                 painter->setBrush(ElaThemeColor(_themeMode, PrimaryNormal));
-                painter->drawRoundedRect(QRectF(tabRect.right() - 3, tabRect.y() + 7, 3, tabRect.height() - 14), 2, 2);
+                painter->drawRoundedRect(QRectF(tabRect.left() + 12, tabRect.y() + 7, 3, tabRect.height() - 14), 2, 2);
             }
             painter->restore();
             return;
