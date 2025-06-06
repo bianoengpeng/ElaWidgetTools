@@ -14,6 +14,7 @@ class ElaSlider;
 class ElaRadioButton;
 class ElaProgressBar;
 class ElaProgressRing;
+class ElaPushButton;
 class T_BaseComponents : public T_BasePage
 {
     Q_OBJECT
@@ -42,6 +43,10 @@ private:
     ElaProgressRing* _progressPercentRing{nullptr};
     ElaProgressRing* _progressBusyRing{nullptr};
     ElaProgressRing* _progressBusyTransparentRing{nullptr};
+	
+	ElaPushButton* _pushButton1{nullptr};
+    ElaPushButton* _pushButton2{nullptr};
+    ElaPushButton* _pushButton4{nullptr};
 };
 
 #endif // T_BASECOMPONENTS_H

@@ -17,6 +17,7 @@
 #include "ElaText.h"
 #include "ElaToggleButton.h"
 #include "ElaToggleSwitch.h"
+#include "ElaPushButton.h"
 T_BaseComponents::T_BaseComponents(QWidget* parent)
     : T_BasePage(parent)
 {
@@ -239,6 +240,20 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
 
     ElaPlainTextEdit* edit = new ElaPlainTextEdit(this);
     edit->setPlainText("这是一个ElaPlainTextEdit  暂时放在这里");
+    _pushButton1 = new ElaPushButton("primary", this);
+    _pushButton1->setButtonAppearance(ElaPushButtonType::Appearance::Primary);
+
+    _pushButton2 = new ElaPushButton("circular", this);
+    _pushButton2->setButtonShape(ElaPushButtonType::Shape::Circular);
+
+    ElaScrollPageArea* buttonArea = new ElaScrollPageArea(this);
+    QHBoxLayout* buttonLayout = new QHBoxLayout(buttonArea);
+    ElaText* buttonText = new ElaText("ElaPushButton", this);
+    buttonText->setTextPixelSize(15);
+    buttonLayout->addWidget(buttonText);
+    buttonLayout->addWidget(_pushButton1);
+    buttonLayout->addWidget(_pushButton2);
+    buttonLayout->addStretch();
 
     QWidget* centralWidget = new QWidget(this);
     centralWidget->setWindowTitle("ElaBaseComponents");
@@ -254,6 +269,7 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     centerLayout->addWidget(radioButtonArea);
     centerLayout->addWidget(progressBarArea);
     centerLayout->addWidget(progressRingArea);
+	centerLayout->addWidget(buttonArea);
     centerLayout->addWidget(edit);
     centerLayout->addStretch();
     centerLayout->setContentsMargins(0, 0, 0, 0);

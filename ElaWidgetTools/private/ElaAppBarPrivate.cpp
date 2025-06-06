@@ -70,6 +70,13 @@ void ElaAppBarPrivate::onStayTopButtonClicked()
         q->window()->show();
     }
 #endif
+    if(_pIsStayTop){
+        _stayTopButton->setElaIcon(ElaIconType::LocationPinSlash);
+    }else{
+        _stayTopButton->setElaIcon(ElaIconType::LocationPin);
+    }
+
+
     _stayTopButton->setIsSelected(_pIsStayTop);
     _stayTopButton->update();
 }

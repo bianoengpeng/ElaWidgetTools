@@ -4,6 +4,7 @@
 #include <QLinearGradient>
 #include <QMap>
 #include <QObject>
+#include <QFrame>
 
 #include "Def.h"
 #include "stdafx.h"
@@ -14,6 +15,7 @@ class ElaAppBar;
 class ElaCentralStackedWidget;
 class QHBoxLayout;
 class QVBoxLayout;
+class QGridLayout;
 class ElaThemeAnimationWidget;
 class ElaWindowPrivate : public QObject
 {
@@ -46,13 +48,16 @@ private:
     ElaCentralStackedWidget* _centerStackedWidget{nullptr};
     ElaAppBar* _appBar{nullptr};
     QHBoxLayout* _centerLayout{nullptr};
+    QGridLayout* _gridLayout{nullptr};
+    QWidget* _centralWidget{nullptr};
+    QFrame* _dockAreaContainer{ nullptr };
+
     int _contentsMargins{5};
     bool _isNavigationDisplayModeChanged{false};
     bool _isNavigationEnable{true};
     bool _isNavigationBarExpanded{false};
     bool _isWMClickedAnimationFinished{true};
     ElaThemeAnimationWidget* _animationWidget{nullptr};
-
     ElaNavigationType::NavigationDisplayMode _currentNavigationBarDisplayMode{ElaNavigationType::Maximal};
 
     QMap<QString, QWidget*> _routeMap; // key__nodeKey title可以一致  value__Page

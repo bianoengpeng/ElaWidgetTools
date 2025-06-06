@@ -21,6 +21,7 @@ public:
     Q_SLOT void onThemeChanged(ElaThemeType::ThemeMode themeMode);
 
 private:
+    bool _isFirstPopup{false};
     bool _isAllowHidePopup{false};
     ElaComboBoxStyle* _comboBoxStyle{nullptr};
     ElaThemeType::ThemeMode _themeMode;

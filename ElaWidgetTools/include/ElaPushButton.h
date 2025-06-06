@@ -3,6 +3,7 @@
 
 #include <QPushButton>
 
+#include "Def.h"
 #include "stdafx.h"
 class ElaPushButtonPrivate;
 class ELA_EXPORT ElaPushButton : public QPushButton
@@ -16,6 +17,8 @@ class ELA_EXPORT ElaPushButton : public QPushButton
     Q_PROPERTY_CREATE_Q_H(QColor, DarkHoverColor)
     Q_PROPERTY_CREATE_Q_H(QColor, LightPressColor)
     Q_PROPERTY_CREATE_Q_H(QColor, DarkPressColor)
+    Q_PROPERTY_CREATE_Q_H(ElaPushButtonType::Appearance, ButtonAppearance)
+    Q_PROPERTY_CREATE_Q_H(ElaPushButtonType::Shape, ButtonShape)
 public:
     explicit ElaPushButton(QWidget* parent = nullptr);
     explicit ElaPushButton(QString text, QWidget* parent = nullptr);

@@ -68,10 +68,23 @@ ElaWindow::ElaWindow(QWidget* parent)
     // 中心堆栈窗口
     d->_centerStackedWidget = new ElaCentralStackedWidget(this);
     d->_centerStackedWidget->setContentsMargins(0, 0, 0, 0);
-    QWidget* centralWidget = new QWidget(this);
-    centralWidget->setObjectName("ElaWindowCentralWidget");
-    centralWidget->setStyleSheet("#ElaWindowCentralWidget{background-color:transparent;}");
-    d->_centerLayout = new QHBoxLayout(centralWidget);
+    d->_centralWidget = new QWidget(this);
+    d->_centralWidget->setContentsMargins(0, 0, 0, 0);
+    d->_centralWidget->setObjectName("ElaWindowCentralWidget");
+	d->_centralWidget->setStyleSheet("#ElaWindowCentralWidget{background-color:transparent;}");
+
+    d->_gridLayout = new QGridLayout(d->_centralWidget);
+    d->_gridLayout->setSpacing(6);
+    d->_gridLayout->setContentsMargins(0, 0, 0, 0);
+    d->_gridLayout->setObjectName("gridLayout");
+
+    d->_dockAreaContainer = new QFrame(d->_centralWidget);
+    d->_dockAreaContainer->setObjectName("dockAreaContainer");
+
+    d->_gridLayout->addWidget(d->_dockAreaContainer, 0, 0, 1, 1);
+
+    //
+    d->_centerLayout = new QHBoxLayout(d->_dockAreaContainer);
     d->_centerLayout->setSpacing(0);
     d->_centerLayout->addWidget(d->_navigationBar);
     d->_centerLayout->addWidget(d->_centerStackedWidget);
@@ -89,8 +102,9 @@ ElaWindow::ElaWindow(QWidget* parent)
     connect(eTheme, &ElaTheme::themeModeChanged, d, &ElaWindowPrivate::onThemeModeChanged);
     connect(d->_appBar, &ElaAppBar::themeChangeButtonClicked, d, &ElaWindowPrivate::onThemeReadyChange);
     d->_isInitFinished = true;
-    setCentralWidget(centralWidget);
-    centralWidget->installEventFilter(this);
+    setCentralWidget(d->_centralWidget);
+    d->_centralWidget->installEventFilter(this);
+
     setObjectName("ElaWindow");
     setStyleSheet("#ElaWindow{background-color:transparent;}");
     setStyle(new ElaWindowStyle(style()));
@@ -375,6 +389,11 @@ void ElaWindow::setWindowButtonFlags(ElaAppBarType::ButtonFlags buttonFlags)
 ElaAppBarType::ButtonFlags ElaWindow::getWindowButtonFlags() const
 {
     return d_ptr->_appBar->getWindowButtonFlags();
+}
+
+QWidget* ElaWindow::getDockAreaContainer() const
+{
+    return d_ptr->_dockAreaContainer;
 }
 
 void ElaWindow::closeWindow()

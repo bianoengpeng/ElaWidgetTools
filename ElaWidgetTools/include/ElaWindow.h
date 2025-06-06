@@ -59,6 +59,8 @@ public:
     void setWindowButtonFlags(ElaAppBarType::ButtonFlags buttonFlags);
     ElaAppBarType::ButtonFlags getWindowButtonFlags() const;
 
+    QWidget* getDockAreaContainer() const;
+
     void closeWindow();
 Q_SIGNALS:
     Q_SIGNAL void userInfoCardClicked();

@@ -18,6 +18,7 @@ public:
     void setEditable(bool editable);
 
 protected:
+    void paintEvent(QPaintEvent* e) override;
     virtual void showPopup() override;
     virtual void hidePopup() override;
 };

@@ -37,7 +37,7 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
 #else
     window()->setWindowFlags((window()->windowFlags()) | Qt::FramelessWindowHint);
 #endif
-    d->_leftButton = new ElaPushButton("cancel", this);
+    d->_leftButton = new ElaPushButton(u8"取消", this);
     connect(d->_leftButton, &ElaPushButton::clicked, this, [=]() {
         Q_EMIT leftButtonClicked();
         onLeftButtonClicked();
@@ -47,7 +47,7 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
     d->_leftButton->setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
     d->_leftButton->setFixedHeight(38);
     d->_leftButton->setBorderRadius(6);
-    d->_middleButton = new ElaPushButton("minimum", this);
+    d->_middleButton = new ElaPushButton(u8"最小化", this);
     connect(d->_middleButton, &ElaPushButton::clicked, this, [=]() {
         Q_EMIT middleButtonClicked();
         onMiddleButtonClicked();
@@ -56,7 +56,7 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
     d->_middleButton->setMaximumSize(QSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX));
     d->_middleButton->setFixedHeight(38);
     d->_middleButton->setBorderRadius(6);
-    d->_rightButton = new ElaPushButton("exit", this);
+    d->_rightButton = new ElaPushButton(u8"退出", this);
     connect(d->_rightButton, &ElaPushButton::clicked, this, [=]() {
         Q_EMIT rightButtonClicked();
         onRightButtonClicked();
@@ -78,9 +78,9 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
     d->_centralWidget = new QWidget(this);
     QVBoxLayout* centralVLayout = new QVBoxLayout(d->_centralWidget);
     centralVLayout->setContentsMargins(15, 25, 15, 10);
-    ElaText* title = new ElaText("退出", this);
+    ElaText* title = new ElaText(u8"退出", this);
     title->setTextStyle(ElaTextType::Title);
-    ElaText* subTitle = new ElaText("确定要退出程序吗", this);
+    ElaText* subTitle = new ElaText(u8"确定要退出程序吗", this);
     subTitle->setTextStyle(ElaTextType::Body);
     centralVLayout->addWidget(title);
     centralVLayout->addSpacing(2);
