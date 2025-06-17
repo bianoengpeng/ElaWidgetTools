@@ -630,9 +630,21 @@ enum StackSwitchMode
     Popup = 0x0001,
     Scale = 0x0002,
     Flip = 0x0003,
+    Blur = 0x0004,
 };
 Q_ENUM_CREATE(StackSwitchMode)
 Q_END_ENUM_CREATE(ElaWindowType)
+
+Q_BEGIN_ENUM_CREATE(ElaSpinBoxType)
+enum ButtonMode
+{
+    Inline = 0x0000,
+    Compact = 0x0001,
+    Side = 0x0002,
+    PMSide = 0x0003,
+};
+Q_ENUM_CREATE(ButtonMode)
+Q_END_ENUM_CREATE(ElaSpinBoxType)
 
 Q_BEGIN_ENUM_CREATE(ElaIconType)
 enum IconName
