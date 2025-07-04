@@ -56,5 +56,7 @@ compile_commands.json
 # CLion
 /.idea
 *.clang-format
-/install
-/build
+/install/**
+/build/**
+.cursorignore
+*.code-workspace

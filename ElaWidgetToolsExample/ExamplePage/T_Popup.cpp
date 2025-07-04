@@ -109,7 +109,7 @@ T_Popup::T_Popup(QWidget* parent)
     }
     _roller->setItemList(rollerItemList);
     ElaScrollPageArea* rollerArea = new ElaScrollPageArea(this);
-    rollerArea->setFixedHeight(220);
+    //rollerArea->setFixedHeight(220);
     QHBoxLayout* rollerLayout = new QHBoxLayout(rollerArea);
     ElaText* rollerText = new ElaText("ElaRoller", this);
     rollerText->setTextPixelSize(15);
