@@ -22,8 +22,8 @@ ElaToolButton::ElaToolButton(QWidget* parent)
     // 默认外观
     d->_pButtonAppearance = ElaPushButtonType::Appearance::Default;
     d->_toolButtonStyle->setButtonAppearance(d->_pButtonAppearance);
-    // Default 外观为非透明
-    setIsTransparent(false);
+    // Default 外观为透明
+    setIsTransparent(true);
 }
 
 ElaToolButton::~ElaToolButton()
@@ -148,6 +148,8 @@ void ElaToolButton::setButtonAppearance(ElaPushButtonType::Appearance appearance
     bool transparent = false;
     switch (appearance) {
     case ElaPushButtonType::Appearance::Default:
+        transparent = true;
+        break;
     case ElaPushButtonType::Appearance::Primary:
         transparent = false;
         break;
