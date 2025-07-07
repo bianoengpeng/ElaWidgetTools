@@ -73,6 +73,9 @@ T_TableViewModel::T_TableViewModel(QObject* parent)
     _iconList.append(QIcon(QPixmap(":/Resource/Image/Model/STYXHELIX.jpg").scaled(38, 38, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
     _iconList.append(QIcon(QPixmap(":/Resource/Image/Model/LASTSTARDUST.jpg").scaled(38, 38, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
     _iconList.append(QIcon(QPixmap(":/Resource/Image/Model/RunningInTheDark.jpg").scaled(38, 38, Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+
+    // 初始化复选框状态（100 行）
+    _checkStates.fill(Qt::Unchecked, 100);
 }
 
 T_TableViewModel::~T_TableViewModel()
@@ -86,27 +89,45 @@ int T_TableViewModel::rowCount(const QModelIndex& parent) const
 
 int T_TableViewModel::columnCount(const QModelIndex& parent) const
 {
-    return _header.count();
+    return _header.count() + 1; // 额外增加一列用于复选框
 }
 
 QVariant T_TableViewModel::data(const QModelIndex& index, int role) const
 {
-    if (role == Qt::DisplayRole && index.column() != 0)
+    // 第 0 列：复选框
+    if (index.column() == 0)
     {
-        return _dataList[index.row() % 9][index.column() - 1];
+        if (role == Qt::CheckStateRole)
+        {
+            return _checkStates[index.row()];
+        }
+        return QVariant();
     }
-    else if (role == Qt::DecorationRole && index.column() == 0)
+
+    // 第 1 列：预览图标
+    if (index.column() == 1)
     {
-        return _iconList[index.row() % 9];
+        if (role == Qt::DecorationRole)
+        {
+            return _iconList[index.row() % 9];
+        }
+        else if (role == Qt::DecorationPropertyRole)
+        {
+            return Qt::AlignCenter;
+        }
+        return QVariant();
     }
-    else if (role == Qt::DecorationPropertyRole)
+
+    // 其它列显示文字数据
+    if (role == Qt::DisplayRole)
+    {
+        return _dataList[index.row() % 9][index.column() - 2];
+    }
+    else if (role == Qt::TextAlignmentRole && index.column() == 5)
     {
         return Qt::AlignCenter;
     }
-    else if (role == Qt::TextAlignmentRole && index.column() == 4)
-    {
-        return Qt::AlignCenter;
-    }
+
     return QVariant();
 }
 
@@ -114,7 +135,36 @@ QVariant T_TableViewModel::headerData(int section, Qt::Orientation orientation, 
 {
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole)
     {
-        return _header[section];
+        if (section == 0)
+            return "选择";
+        return _header[section - 1];
     }
     return QAbstractTableModel::headerData(section, orientation, role);
+}
+
+// 复选框支持
+Qt::ItemFlags T_TableViewModel::flags(const QModelIndex &index) const
+{
+    Qt::ItemFlags defaultFlags = QAbstractTableModel::flags(index);
+    if (!index.isValid())
+        return defaultFlags;
+
+    if (index.column() == 0)
+    {
+        return defaultFlags | Qt::ItemIsUserCheckable;
+    }
+
+    return defaultFlags;
+}
+
+bool T_TableViewModel::setData(const QModelIndex &index, const QVariant &value, int role)
+{
+    if (index.column() == 0 && role == Qt::CheckStateRole)
+    {
+        _checkStates[index.row()] = static_cast<Qt::CheckState>(value.toInt());
+        emit dataChanged(index, index, {Qt::CheckStateRole});
+        return true;
+    }
+
+    return QAbstractTableModel::setData(index, value, role);
 }

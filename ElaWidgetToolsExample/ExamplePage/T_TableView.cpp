@@ -35,11 +35,12 @@ T_TableView::T_TableView(QWidget* parent)
     _tableView->verticalHeader()->setMinimumSectionSize(46);
     _tableView->setFixedHeight(450);
     connect(_tableView, &ElaTableView::tableViewShow, this, [=]() {
-        _tableView->setColumnWidth(0, 60);
-        _tableView->setColumnWidth(1, 205);
-        _tableView->setColumnWidth(2, 170);
-        _tableView->setColumnWidth(3, 150);
-        _tableView->setColumnWidth(4, 60);
+        _tableView->setColumnWidth(0, 40); // 选择
+        _tableView->setColumnWidth(1, 60); // 预览
+        _tableView->setColumnWidth(2, 205); // 歌名
+        _tableView->setColumnWidth(3, 170); // 歌手
+        _tableView->setColumnWidth(4, 150); // 专辑
+        _tableView->setColumnWidth(5, 60); // 时长
     });
     QHBoxLayout* tableViewLayout = new QHBoxLayout();
     tableViewLayout->setContentsMargins(0, 0, 10, 0);

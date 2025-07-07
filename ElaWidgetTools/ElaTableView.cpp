@@ -23,6 +23,7 @@ ElaTableView::ElaTableView(QWidget* parent)
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    setEditTriggers(QAbstractItemView::NoEditTriggers);
     d->_tableViewStyle = new ElaTableViewStyle(style());
     setStyle(d->_tableViewStyle);
 }
@@ -79,4 +80,50 @@ void ElaTableView::leaveEvent(QEvent* event)
         update();
     }
     QTableView::leaveEvent(event);
+}
+
+void ElaTableView::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        QModelIndex index = indexAt(event->pos());
+        if (index.isValid() && index.column() == 0)
+        {
+            // 获取单元格的样式选项
+            QStyleOptionViewItem option;
+            option.rect = visualRect(index);
+            option.features = QStyleOptionViewItem::HasCheckIndicator;
+            
+            // 获取 checkbox 的精确区域
+            QRect checkRect = style()->subElementRect(QStyle::SE_ItemViewItemCheckIndicator, &option, this);
+            
+            // 检查点击是否在 checkbox 区域内
+            if (checkRect.contains(event->pos()))
+            {
+                QVariant state = model()->data(index, Qt::CheckStateRole);
+                Qt::CheckState newState = (state.toInt() == Qt::Checked) ? Qt::Unchecked : Qt::Checked;
+                model()->setData(index, newState, Qt::CheckStateRole);
+                return; // 已处理
+            }
+        }
+    }
+
+    QTableView::mousePressEvent(event);
+}
+
+void ElaTableView::mouseReleaseEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton)
+    {
+        QModelIndex index = indexAt(event->pos());
+        if (index.isValid() && index.column() == 0)
+        {
+            // 与 mousePressEvent 中已处理，阻止默认委托再次切换
+            // 直接吃掉事件，避免二次切换
+            event->accept();
+            return;
+        }
+    }
+
+    QTableView::mouseReleaseEvent(event);
 }

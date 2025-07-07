@@ -186,9 +186,85 @@ void ElaTableViewStyle::drawControl(ControlElement element, const QStyleOption* 
             QRect itemRect = option->rect;
             painter->save();
             painter->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform | QPainter::TextAntialiasing);
+            // 新增：绘制复选框指示器
+            QRect checkRect;
+            if (vopt->features.testFlag(QStyleOptionViewItem::HasCheckIndicator))
+            {
+                // 自定义复选框绘制，参考 ElaCheckBoxStyle
+                checkRect = proxy()->subElementRect(SE_ItemViewItemCheckIndicator, vopt, widget);
+                QRect innerRect = checkRect.adjusted(1, 1, -1, -1);
+
+                bool isEnabled = vopt->state.testFlag(QStyle::State_Enabled);
+                // 直接从模型获取状态，避免 QStyleOptionViewItem 状态不准确
+                QVariant checkState = vopt->index.data(Qt::CheckStateRole);
+                bool isChecked = (checkState.toInt() == Qt::Checked);
+                bool isPartially = (checkState.toInt() == Qt::PartiallyChecked);
+                bool isPressed = vopt->state.testFlag(QStyle::State_Sunken);
+                bool isHover   = vopt->state.testFlag(QStyle::State_MouseOver);
+
+                // 调试输出
+                qDebug() << "CheckBox State - Row:" << vopt->index.row() 
+                         << "Checked:" << isChecked 
+                         << "CheckStateRole:" << vopt->index.data(Qt::CheckStateRole).toInt();
+
+                // 背景
+                painter->save();
+                painter->setPen(Qt::NoPen);
+                if (isChecked || isPartially)
+                {
+                    if (isPressed)
+                    {
+                        painter->setBrush(ElaThemeColor(_themeMode, PrimaryPress));
+                    }
+                    else
+                    {
+                        painter->setBrush(isHover ? ElaThemeColor(_themeMode, PrimaryHover)
+                                                   : ElaThemeColor(_themeMode, PrimaryNormal));
+                    }
+                }
+                else
+                {
+                    painter->setPen(ElaThemeColor(_themeMode, BasicBorderDeep));
+                    if (isPressed)
+                    {
+                        painter->setBrush(ElaThemeColor(_themeMode, BasicBase));
+                    }
+                    else
+                    {
+                        painter->setBrush(isHover ? ElaThemeColor(_themeMode, BasicHover)
+                                                   : ElaThemeColor(_themeMode, BasicBase));
+                    }
+                }
+                painter->drawRoundedRect(innerRect, 2, 2);
+
+                // 勾选/中线
+                painter->setPen(ElaThemeColor(ElaThemeType::Dark, BasicText));
+                if (isChecked)
+                {
+                    painter->save();
+                    QFont iconFont("ElaAwesome");
+                    iconFont.setPixelSize(innerRect.height() * 0.75);
+                    painter->setFont(iconFont);
+                    painter->drawText(innerRect, Qt::AlignCenter, QChar(static_cast<unsigned short>(ElaIconType::Check)));
+                    painter->restore();
+                }
+                else if (isPartially)
+                {
+                    QLine line(innerRect.x() + 3, innerRect.center().y(), innerRect.right() - 3, innerRect.center().y());
+                    painter->drawLine(line);
+                }
+                painter->restore();
+            }
             // QRect checkRect = proxy()->subElementRect(SE_ItemViewItemCheckIndicator, vopt, widget);
             QRect iconRect = proxy()->subElementRect(SE_ItemViewItemDecoration, vopt, widget);
             QRect textRect = proxy()->subElementRect(SE_ItemViewItemText, vopt, widget);
+            // 若存在复选框，则为图标与文本添加偏移，避免覆盖
+            if (!checkRect.isNull())
+            {
+                int offset = checkRect.width() + _horizontalPadding;
+                iconRect.translate(offset, 0);
+                textRect.translate(offset, 0);
+            }
             if (vopt->index.column() == 0)
             {
                 iconRect.adjust(_horizontalPadding, 0, _horizontalPadding, 0);
@@ -253,4 +329,22 @@ int ElaTableViewStyle::pixelMetric(PixelMetric metric, const QStyleOption* optio
     }
     }
     return QProxyStyle::pixelMetric(metric, option, widget);
+}
+
+// 复写：让复选框指示器在单元格内居中，并提供精确的点击区域
+QRect ElaTableViewStyle::subElementRect(SubElement element, const QStyleOption* option, const QWidget* widget) const
+{
+    if (element == QStyle::SE_ItemViewItemCheckIndicator)
+    {
+        if (const QStyleOptionViewItem* vopt = qstyleoption_cast<const QStyleOptionViewItem*>(option))
+        {
+            // 采用固定尺寸，或可调用 PM_IndicatorWidth
+            int indicator = 21;
+            QRect rect = vopt->rect;
+            int x = rect.x() + (rect.width() - indicator) / 2;
+            int y = rect.y() + (rect.height() - indicator) / 2;
+            return QRect(x, y, indicator, indicator);
+        }
+    }
+    return QProxyStyle::subElementRect(element, option, widget);
 }
