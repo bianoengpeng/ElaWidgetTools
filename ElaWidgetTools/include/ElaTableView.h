@@ -24,8 +24,6 @@ protected:
     virtual void hideEvent(QHideEvent* event) override;
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void leaveEvent(QEvent* event) override;
-    virtual void mousePressEvent(QMouseEvent* event) override;
-    virtual void mouseReleaseEvent(QMouseEvent* event) override;
 };
 
 #endif // ELATABLEVIEW_H

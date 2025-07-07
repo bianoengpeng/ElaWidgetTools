@@ -19,6 +19,11 @@ ElaToolButton::ElaToolButton(QWidget* parent)
     setPopupMode(QToolButton::InstantPopup);
     d->_toolButtonStyle = new ElaToolButtonStyle(style());
     setStyle(d->_toolButtonStyle);
+    // 默认外观
+    d->_pButtonAppearance = ElaPushButtonType::Appearance::Default;
+    d->_toolButtonStyle->setButtonAppearance(d->_pButtonAppearance);
+    // Default 外观为非透明
+    setIsTransparent(false);
 }
 
 ElaToolButton::~ElaToolButton()
@@ -125,4 +130,42 @@ bool ElaToolButton::eventFilter(QObject* watched, QEvent* event)
         }
     }
     return QObject::eventFilter(watched, event);
+}
+
+// ButtonAppearance property implementation
+void ElaToolButton::setButtonAppearance(ElaPushButtonType::Appearance appearance)
+{
+    Q_D(ElaToolButton);
+    if (d->_pButtonAppearance == appearance)
+        return;
+
+    d->_pButtonAppearance = appearance;
+
+    // 同步到 style
+    d->_toolButtonStyle->setButtonAppearance(appearance);
+
+    // 根据不同外观设置透明背景
+    bool transparent = false;
+    switch (appearance) {
+    case ElaPushButtonType::Appearance::Default:
+    case ElaPushButtonType::Appearance::Primary:
+        transparent = false;
+        break;
+    case ElaPushButtonType::Appearance::Outline:
+    case ElaPushButtonType::Appearance::Subtle:
+    case ElaPushButtonType::Appearance::Transparent:
+        transparent = true;
+        break;
+    }
+
+    d->_toolButtonStyle->setIsTransparent(transparent);
+
+    Q_EMIT pButtonAppearanceChanged();
+    update();
+}
+
+ElaPushButtonType::Appearance ElaToolButton::getButtonAppearance() const
+{
+    Q_D(const ElaToolButton);
+    return d->_pButtonAppearance;
 }

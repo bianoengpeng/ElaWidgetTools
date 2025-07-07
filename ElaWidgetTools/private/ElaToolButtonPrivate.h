@@ -4,6 +4,8 @@
 #include <QObject>
 
 #include "stdafx.h"
+#include "Def.h"
+
 class ElaToolButton;
 class ElaToolButtonStyle;
 class ElaToolButtonPrivate : public QObject
@@ -15,6 +17,7 @@ public:
     ~ElaToolButtonPrivate();
 
 private:
+    Q_PROPERTY_CREATE_D(ElaPushButtonType::Appearance, ButtonAppearance)
     ElaToolButtonStyle* _toolButtonStyle{nullptr};
 };
 

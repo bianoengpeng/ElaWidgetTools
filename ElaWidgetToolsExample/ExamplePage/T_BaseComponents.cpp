@@ -15,6 +15,7 @@
 #include "ElaToggleButton.h"
 #include "ElaToggleSwitch.h"
 #include "ElaPushButton.h"
+#include "ElaToolButton.h"
 
 #include <QButtonGroup>
 #include <QHBoxLayout>
@@ -277,6 +278,16 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     _pushButton2 = new ElaPushButton("circular", this);
     _pushButton2->setButtonShape(ElaPushButtonType::Shape::Circular);
 
+    // ElaToolButtons
+    _toolButton1 = new ElaToolButton(this);
+    // _toolButton1->setText("primary");
+    _toolButton1->setElaIcon(ElaIconType::Play);
+    _toolButton1->setButtonAppearance(ElaPushButtonType::Appearance::Primary);
+
+    _toolButton2 = new ElaToolButton(this);
+    _toolButton2->setText("outline");
+    _toolButton2->setButtonAppearance(ElaPushButtonType::Appearance::Outline);
+
     ElaScrollPageArea* buttonArea = new ElaScrollPageArea(this);
     QHBoxLayout* buttonLayout = new QHBoxLayout(buttonArea);
     ElaText* buttonText = new ElaText("ElaPushButton", this);
@@ -284,6 +295,8 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     buttonLayout->addWidget(buttonText);
     buttonLayout->addWidget(_pushButton1);
     buttonLayout->addWidget(_pushButton2);
+    buttonLayout->addWidget(_toolButton1);
+    buttonLayout->addWidget(_toolButton2);
     buttonLayout->addStretch();
 
     QWidget* centralWidget = new QWidget(this);
@@ -300,7 +313,7 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     centerLayout->addWidget(radioButtonArea);
     centerLayout->addWidget(progressBarArea);
     centerLayout->addWidget(progressRingArea);
-	centerLayout->addWidget(buttonArea);
+    centerLayout->addWidget(buttonArea);
     centerLayout->addWidget(edit);
     centerLayout->addStretch();
     centerLayout->setContentsMargins(0, 0, 0, 0);

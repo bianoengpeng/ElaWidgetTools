@@ -13,6 +13,7 @@ ElaToolButtonStyle::ElaToolButtonStyle(QStyle* style)
     _pIsTransparent = true;
     _pExpandIconRotate = 0;
     _pBorderRadius = 4;
+    _pButtonAppearance = ElaPushButtonType::Appearance::Default;
     _themeMode = eTheme->getThemeMode();
     connect(eTheme, &ElaTheme::themeModeChanged, this, [=](ElaThemeType::ThemeMode themeMode) {
         _themeMode = themeMode;
@@ -44,38 +45,45 @@ void ElaToolButtonStyle::drawComplexControl(ComplexControl control, const QStyle
             }
             painter->save();
             painter->setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
-            painter->setPen(_pIsTransparent ? Qt::transparent : ElaThemeColor(_themeMode, BasicBorder));
+            // 设置边框颜色
+            if (_pButtonAppearance == ElaPushButtonType::Appearance::Outline) {
+                painter->setPen(ElaThemeColor(_themeMode, BasicBorder));
+            } else {
+                painter->setPen(_pIsTransparent ? Qt::transparent : ElaThemeColor(_themeMode, BasicBorder));
+            }
             // 背景绘制
-            if (bopt->state.testFlag(QStyle::State_Enabled))
-            {
-                if (bopt->state.testFlag(QStyle::State_Sunken))
-                {
-                    painter->setBrush(_pIsTransparent ? ElaThemeColor(_themeMode, BasicPressAlpha) : ElaThemeColor(_themeMode, BasicPress));
-                    painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
-                }
-                else
-                {
-                    if (_pIsSelected)
-                    {
-                        painter->setBrush(_pIsTransparent ? ElaThemeColor(_themeMode, BasicSelectedAlpha) : ElaThemeColor(_themeMode, BasicHover));
-                        painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
+            if (bopt->state.testFlag(QStyle::State_Enabled)) {
+                if (_pButtonAppearance == ElaPushButtonType::Appearance::Primary) {
+                    QColor bg;
+                    if (bopt->state.testFlag(QStyle::State_Sunken)) {
+                        bg = ElaThemeColor(_themeMode, colorCompoundBrandBackgroundPressed);
+                    } else if (bopt->state.testFlag(QStyle::State_MouseOver) || bopt->state.testFlag(QStyle::State_On) || _pIsSelected) {
+                        bg = ElaThemeColor(_themeMode, colorCompoundBrandBackgroundHover);
+                    } else {
+                        bg = ElaThemeColor(_themeMode, colorCompoundBrandBackground);
                     }
-                    else
-                    {
-                        if (bopt->state.testFlag(QStyle::State_MouseOver) || bopt->state.testFlag(QStyle::State_On))
-                        {
-                            painter->setBrush(_pIsTransparent ? ElaThemeColor(_themeMode, BasicHoverAlpha) : ElaThemeColor(_themeMode, BasicHover));
+                    painter->setBrush(bg);
+                    painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
+                } else {
+                    if (bopt->state.testFlag(QStyle::State_Sunken)) {
+                        painter->setBrush(_pIsTransparent ? ElaThemeColor(_themeMode, BasicPressAlpha) : ElaThemeColor(_themeMode, BasicPress));
+                        painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
+                    } else {
+                        if (_pIsSelected) {
+                            painter->setBrush(_pIsTransparent ? ElaThemeColor(_themeMode, BasicSelectedAlpha) : ElaThemeColor(_themeMode, BasicHover));
                             painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
-                        }
-                        else
-                        {
-                            if (!_pIsTransparent)
-                            {
-                                painter->setBrush(ElaThemeColor(_themeMode, BasicBase));
+                        } else {
+                            if (bopt->state.testFlag(QStyle::State_MouseOver) || bopt->state.testFlag(QStyle::State_On)) {
+                                painter->setBrush(_pIsTransparent ? ElaThemeColor(_themeMode, BasicHoverAlpha) : ElaThemeColor(_themeMode, BasicHover));
                                 painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
-                                // 底边线绘制
-                                painter->setPen(ElaThemeColor(_themeMode, BasicBaseLine));
-                                painter->drawLine(toolButtonRect.x() + _pBorderRadius, toolButtonRect.y() + toolButtonRect.height(), toolButtonRect.x() + toolButtonRect.width() - _pBorderRadius, toolButtonRect.y() + toolButtonRect.height());
+                            } else {
+                                if (!_pIsTransparent) {
+                                    painter->setBrush(ElaThemeColor(_themeMode, BasicBase));
+                                    painter->drawRoundedRect(toolButtonRect, _pBorderRadius, _pBorderRadius);
+                                    // 底边线绘制
+                                    painter->setPen(ElaThemeColor(_themeMode, BasicBaseLine));
+                                    painter->drawLine(toolButtonRect.x() + _pBorderRadius, toolButtonRect.y() + toolButtonRect.height(), toolButtonRect.x() + toolButtonRect.width() - _pBorderRadius, toolButtonRect.y() + toolButtonRect.height());
+                                }
                             }
                         }
                     }
@@ -219,13 +227,14 @@ void ElaToolButtonStyle::_drawIcon(QPainter* painter, QRectF iconRect, const QSt
         {
             // 绘制ElaIcon
             painter->save();
-            if (bopt->state.testFlag(QStyle::State_Enabled))
-            {
-                painter->setPen(ElaThemeColor(_themeMode, BasicText));
-            }
-            else
-            {
-                painter->setPen(ElaThemeColor(_themeMode, BasicTextDisable));
+            if (_pButtonAppearance == ElaPushButtonType::Appearance::Primary && bopt->state.testFlag(QStyle::State_Enabled)) {
+                painter->setPen(Qt::white);
+            } else {
+                if (bopt->state.testFlag(QStyle::State_Enabled)) {
+                    painter->setPen(ElaThemeColor(_themeMode, BasicText));
+                } else {
+                    painter->setPen(ElaThemeColor(_themeMode, BasicTextDisable));
+                }
             }
             QFont iconFont = QFont("ElaAwesome");
             switch (bopt->toolButtonStyle)
@@ -272,13 +281,14 @@ void ElaToolButtonStyle::_drawText(QPainter* painter, QRect contentRect, const Q
 {
     if (!bopt->text.isEmpty())
     {
-        if (bopt->state.testFlag(QStyle::State_Enabled))
-        {
-            painter->setPen(ElaThemeColor(_themeMode, BasicText));
-        }
-        else
-        {
-            painter->setPen(ElaThemeColor(_themeMode, BasicTextDisable));
+        if (_pButtonAppearance == ElaPushButtonType::Appearance::Primary && bopt->state.testFlag(QStyle::State_Enabled)) {
+            painter->setPen(Qt::white);
+        } else {
+            if (bopt->state.testFlag(QStyle::State_Enabled)) {
+                painter->setPen(ElaThemeColor(_themeMode, BasicText));
+            } else {
+                painter->setPen(ElaThemeColor(_themeMode, BasicTextDisable));
+            }
         }
         switch (bopt->toolButtonStyle)
         {

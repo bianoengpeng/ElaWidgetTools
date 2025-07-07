@@ -28,7 +28,10 @@ T_TableView::T_TableView(QWidget* parent)
     _tableView->setModel(new T_TableViewModel(this));
     _tableView->setAlternatingRowColors(true);
     _tableView->setIconSize(QSize(38, 38));
-    _tableView->verticalHeader()->setHidden(true);
+    // 显示行号
+    _tableView->verticalHeader()->setHidden(false);
+    _tableView->verticalHeader()->setFixedWidth(40);
+    _tableView->verticalHeader()->setDefaultAlignment(Qt::AlignCenter);
     _tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Interactive);
     _tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     _tableView->horizontalHeader()->setMinimumSectionSize(60);

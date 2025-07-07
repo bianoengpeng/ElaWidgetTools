@@ -194,7 +194,6 @@ void ElaTableViewStyle::drawControl(ControlElement element, const QStyleOption* 
                 checkRect = proxy()->subElementRect(SE_ItemViewItemCheckIndicator, vopt, widget);
                 QRect innerRect = checkRect.adjusted(1, 1, -1, -1);
 
-                bool isEnabled = vopt->state.testFlag(QStyle::State_Enabled);
                 // 直接从模型获取状态，避免 QStyleOptionViewItem 状态不准确
                 QVariant checkState = vopt->index.data(Qt::CheckStateRole);
                 bool isChecked = (checkState.toInt() == Qt::Checked);
