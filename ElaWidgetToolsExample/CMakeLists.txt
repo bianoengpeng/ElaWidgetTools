@@ -114,29 +114,39 @@ if (WIN32)
             DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME} OPTIONAL)
     endif ()
     # QT依赖安装 只做Release安装 Debug自行打包
-    install(FILES ${QT_SDK_DIR}/plugins/platforms/qwindows.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/platforms)
-    install(FILES ${QT_SDK_DIR}/plugins/generic/qtuiotouchplugin.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/generic)
-    install(
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qgif.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qicns.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qico.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qjpeg.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qtga.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qtiff.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qwbmp.dll
-        FILES ${QT_SDK_DIR}/plugins/imageformats/qwebp.dll
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/imageformats
-    )
-    install(FILES ${QT_SDK_DIR}/plugins/styles/qwindowsvistastyle.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/styles)
-    FILE(GLOB TRANSLATIONS ${QT_SDK_DIR}/translations_install/*.qm)
-    install(FILES ${TRANSLATIONS} DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/translations)
-    install(
-        FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Widgets.dll
-        FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Core.dll
-        FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Gui.dll
-        FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Network.dll
-        FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Xml.dll
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
-    )
+    #install(FILES ${QT_SDK_DIR}/plugins/platforms/qwindows.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/platforms)
+    #install(FILES ${QT_SDK_DIR}/plugins/generic/qtuiotouchplugin.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/generic)
+    #install(
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qgif.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qicns.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qico.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qjpeg.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qtga.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qtiff.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qwbmp.dll
+    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qwebp.dll
+    #    DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/imageformats
+    #)
+    #install(FILES ${QT_SDK_DIR}/plugins/styles/qwindowsvistastyle.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/styles)
+    #FILE(GLOB TRANSLATIONS ${QT_SDK_DIR}/translations_install/*.qm)
+    #install(FILES ${TRANSLATIONS} DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/translations)
+    #install(
+    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Widgets.dll
+    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Core.dll
+    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Gui.dll
+    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Network.dll
+    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Xml.dll
+    #    DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
+    #)
+
+    # [ADD THIS] 添加这个代码块来自动化部署
+    # 这会在 'cmake --install' 步骤中，为我们的可执行文件运行 windeployqt
+    if(WIN32)
+        install(CODE "
+            # windeployqt 会由 install-qt-action 添加到系统 PATH 中，所以可以直接调用
+            execute_process(COMMAND windeployqt --release --no-translations --dir \"\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}\" \"\$<TARGET_FILE:ElaWidgetToolsExample>\")
+        ")
+    endif()
+
 endif ()
 
