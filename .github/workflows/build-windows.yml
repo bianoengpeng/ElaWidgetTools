@@ -1,0 +1,82 @@
+# .github/workflows/build-windows.yml
+# 这个工作流用于在 Windows 上编译、安装并打包一个使用 CMake 的 Qt 项目。
+# 它执行完整的 configure -> build -> install 流程。
+
+name: Build and Package Qt/CMake Project on Windows
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # 任务名称，会显示在 GitHub Actions 的 UI 中
+    name: Build and Package on Windows (Qt 6.8.3, MSVC 2022)
+
+    # 运行环境：指定使用 GitHub 提供的最新版 Windows 虚拟机
+    runs-on: windows-latest
+
+    steps:
+
+      # 第一步：使用官方的 checkout action 将仓库代码下载到虚拟机中
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 第二步：缓存 Qt 安装
+      - name: Cache Qt
+        id: cache-qt
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.Qt6_Dir }}
+          key: ${{ runner.os }}-qt-6.8.3-msvc2022_64
+
+      # 第三步：安装 Qt 6.8.3
+      # 使用社区维护的 install-qt-action 来自动化安装过程。
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          # 指定需要安装的 Qt 版本
+          version: '6.8.3'
+          # 指定精确的架构，确保使用 MSVC 2022 64-bit
+          arch: 'win64_msvc2022_64'
+          # 如果上一步的缓存命中 (cache-hit)，则跳过下载，直接使用缓存
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+          
+      # 第三步：安装 Qt 6.8.3
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.8.3'
+          arch: 'win64_msvc2022_64'
+          cached: ${{ steps.cache-qt.outputs.cache-hit }}
+
+      # 第四步：配置、构建和安装
+      # 这一步将执行完整的 CMake 流程
+      - name: Configure, Build, and Install
+        shell: msvc-vs-batch {0}
+        run: |
+          # 1. 配置项目 (Configure)
+          #    -DCMAKE_INSTALL_PREFIX=./Install: 指定安装目录为工作区下的 'Install' 文件夹
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=./Install
+
+          # 2. 执行编译 (Build)
+          cmake --build build --config ${{ env.BUILD_TYPE }} --parallel
+
+          # 3. 执行安装 (Install)
+          #    这一步会运行所有 install() 命令，包括我们添加的 windeployqt 脚本
+          cmake --install build --config ${{ env.BUILD_TYPE }}
+
+      # 第五步：打包并上传最终产物
+      # 我们将整个 'Install' 文件夹打包上传，它包含了可执行文件和所有依赖。
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ElaFramework-Windows-Package
+          # 上传整个安装目录
+          path: Install/
