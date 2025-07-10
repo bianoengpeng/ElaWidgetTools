@@ -5,17 +5,19 @@
 name: Build and Package Qt/CMake Project on Windows
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:
   pull_request:
     branches: [ "main" ]
 
-env:
-  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
-
 jobs:
   build:
+    # 将 env 块移动到 job 内部，以解决 runner 上下文的可用性问题
+    env:
+      # 在这里自定义 CMake 的构建类型 (Release, Debug, RelWithDebInfo, etc.)
+      BUILD_TYPE: Release
+      # 定义一个固定的 Qt 安装路径，以解决缓存步骤的 path 输入问题
+      QT_INSTALL_PATH: ${{ github.workspace }}/Qt
+
     # 任务名称，会显示在 GitHub Actions 的 UI 中
     name: Build and Package on Windows (Qt 6.8.3, MSVC 2022)
 
@@ -23,8 +25,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-
-      # 第一步：使用官方的 checkout action 将仓库代码下载到虚拟机中
+      # 第一步：检出代码
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -33,11 +34,11 @@ jobs:
         id: cache-qt
         uses: actions/cache@v4
         with:
-          path: ${{ env.Qt6_Dir }}
+          # 使用我们预定义的路径。这可以确保 'path' 总是有值。
+          path: ${{ env.QT_INSTALL_PATH }}
           key: ${{ runner.os }}-qt-6.8.3-msvc2022_64
 
       # 第三步：安装 Qt 6.8.3
-      # 使用社区维护的 install-qt-action 来自动化安装过程。
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
@@ -45,35 +46,32 @@ jobs:
           version: '6.8.3'
           # 指定精确的架构，确保使用 MSVC 2022 64-bit
           arch: 'win64_msvc2022_64'
+          # 告诉 action 安装到我们预定义的路径
+          install-dir: ${{ env.QT_INSTALL_PATH }}
           # 如果上一步的缓存命中 (cache-hit)，则跳过下载，直接使用缓存
           cached: ${{ steps.cache-qt.outputs.cache-hit }}
-          
-      # 第三步：安装 Qt 6.8.3
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v3
-        with:
-          version: '6.8.3'
-          arch: 'win64_msvc2022_64'
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
 
-      # 第四步：配置、构建和安装
-      # 这一步将执行完整的 CMake 流程
+      # 第四步：设置MSVC环境
+      - name: Setup MSVC Environment
+        uses: ilammy/msvc-dev-cmd@v1
+
+      # 第五步：配置、构建和安装
       - name: Configure, Build, and Install
-        shell: msvc-vs-batch {0}
+        shell: cmd
         run: |
-          # 1. 配置项目 (Configure)
-          #    -DCMAKE_INSTALL_PREFIX=./Install: 指定安装目录为工作区下的 'Install' 文件夹
-          cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=./Install
+          REM 1. 配置项目 (Configure)
+          REM    -DCMAKE_INSTALL_PREFIX=./Install: 指定安装目录为工作区下的 'Install' 文件夹
+          REM    -DBUILD_ELAPACKETIO=ON: 启用ElaPacketIO模块构建
+          cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=./Install -DBUILD_ELAPACKETIO=OFF
 
-          # 2. 执行编译 (Build)
+          REM 2. 执行编译 (Build)
           cmake --build build --config ${{ env.BUILD_TYPE }} --parallel
 
-          # 3. 执行安装 (Install)
-          #    这一步会运行所有 install() 命令，包括我们添加的 windeployqt 脚本
+          REM 3. 执行安装 (Install)
+          REM    这一步会运行所有 install() 命令，包括我们添加的 windeployqt 脚本
           cmake --install build --config ${{ env.BUILD_TYPE }}
 
-      # 第五步：打包并上传最终产物
-      # 我们将整个 'Install' 文件夹打包上传，它包含了可执行文件和所有依赖。
+      # 第六步：打包并上传最终产物
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:

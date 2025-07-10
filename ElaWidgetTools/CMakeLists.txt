@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.5)
+﻿cmake_minimum_required(VERSION 3.16)
 
 project(ElaWidgetTools VERSION 2.0.0 LANGUAGES CXX)
 
@@ -10,6 +10,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+
+# 设置Qt相关的CMake策略
+if(POLICY CMP0071)
+    cmake_policy(SET CMP0071 NEW)
+endif()
 
 add_definitions(-DELAWIDGETTOOLS_LIBRARY)
 option(ELAWIDGETTOOLS_BUILD_STATIC_LIB "Build static library." OFF)
@@ -28,7 +33,6 @@ set(PROJECT_SOURCES
     ${INCLUDE}
     ${PRIVATE}
     ${DEVELOPER}
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/ElaWidgetTools.qrc
 )
 
 if (ELAWIDGETTOOLS_BUILD_STATIC_LIB)
@@ -40,10 +44,12 @@ endif ()
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_library(${PROJECT_NAME} ${LIB_TYPE}
         ${PROJECT_SOURCES}
+        include/ElaWidgetTools.qrc
     )
 else ()
     add_library(${PROJECT_NAME} ${LIB_TYPE}
         ${PROJECT_SOURCES}
+        include/ElaWidgetTools.qrc
     )
 endif ()
 
@@ -65,6 +71,13 @@ endif ()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+# 为多配置生成器设置配置特定的输出目录
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PUBLIC
         Qt${QT_VERSION_MAJOR}::Widgets

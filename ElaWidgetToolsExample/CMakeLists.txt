@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.5)
+﻿cmake_minimum_required(VERSION 3.16)
 
 project(ElaWidgetToolsExample VERSION 0.1 LANGUAGES CXX)
 
@@ -11,6 +11,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
 
+# 设置Qt相关的CMake策略
+if(POLICY CMP0087)
+    cmake_policy(SET CMP0087 NEW)
+endif()
+
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
@@ -21,6 +26,12 @@ FILE(GLOB EAXMPLEPAGE ExamplePage/*.h ExamplePage/*.cpp)
 source_group(ModelView FILES ${MODELVIEW})
 source_group(ExamplePage FILES ${EAXMPLEPAGE})
 
+# 处理条件编译的ElaPacketIO相关文件
+if(NOT BUILD_ELAPACKETIO)
+    # 如果不构建ElaPacketIO，则跳过AutoMoc处理
+    set_property(SOURCE ExamplePage/T_ElaPacketIO.h PROPERTY SKIP_AUTOMOC ON)
+    set_property(SOURCE ExamplePage/T_ElaPacketIO.cpp PROPERTY SKIP_AUTOMOC ON)
+endif()
 
 set(PROJECT_SOURCES
     ${ORIGIN}
@@ -57,6 +68,13 @@ endif ()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+# 为多配置生成器设置配置特定的输出目录
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
+endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 
 if (WIN32)
     target_include_directories(${PROJECT_NAME} PUBLIC
@@ -144,7 +162,7 @@ if (WIN32)
     if(WIN32)
         install(CODE "
             # windeployqt 会由 install-qt-action 添加到系统 PATH 中，所以可以直接调用
-            execute_process(COMMAND windeployqt --release --no-translations --dir \"\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}\" \"\$<TARGET_FILE:ElaWidgetToolsExample>\")
+            execute_process(COMMAND windeployqt --release --no-translations --dir \"\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}\" \"\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/${PROJECT_NAME}.exe\")
         ")
     endif()
 
