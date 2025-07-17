@@ -60,3 +60,5 @@ compile_commands.json
 /build/**
 .cursorignore
 *.code-workspace
+todo.md
+tmp/**

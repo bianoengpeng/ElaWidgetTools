@@ -73,7 +73,6 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow()
 {
-    delete this->_aboutPage;
 }
 
 void MainWindow::initWindow()
@@ -273,15 +272,14 @@ void MainWindow::initContent()
     addExpanderNode("TEST17", testKey_1, ElaIconType::Acorn);
 
     addFooterNode("About", nullptr, _aboutKey, 0, ElaIconType::User);
-    _aboutPage = new T_About();
-
-    _aboutPage->hide();
     connect(this, &ElaWindow::navigationNodeClicked, this, [=](ElaNavigationType::NavigationNodeType nodeType, QString nodeKey) {
         if (_aboutKey == nodeKey)
         {
-            _aboutPage->setFixedSize(400, 400);
-            _aboutPage->moveToCenter();
-            _aboutPage->show();
+            T_About* aboutDialog = new T_About(this);
+            aboutDialog->setFixedSize(400, 400);
+            aboutDialog->moveToCenter();
+            aboutDialog->exec();  // 使用exec()显示模态对话框
+            aboutDialog->deleteLater();  // 对话框关闭后删除对象
         }
     });
     addFooterNode("Setting", _settingPage, _settingKey, 0, ElaIconType::GearComplex);

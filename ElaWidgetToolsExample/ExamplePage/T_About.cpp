@@ -7,13 +7,12 @@
 #include "ElaImageCard.h"
 #include "ElaText.h"
 T_About::T_About(QWidget* parent)
-    : ElaWidget(parent)
+    : ElaDialog(parent)
 {
     setWindowTitle("关于..");
     setWindowIcon(QIcon(":/include/Image/Moon.jpg"));
-    this->setIsFixedSize(true);
-    setWindowModality(Qt::ApplicationModal);
-    setWindowButtonFlags(ElaAppBarType::CloseButtonHint);
+    resize(400, 400);
+    
     ElaImageCard* pixCard = new ElaImageCard(this);
     pixCard->setFixedSize(60, 60);
     pixCard->setIsPreserveAspectCrop(false);
@@ -63,9 +62,12 @@ T_About::T_About(QWidget* parent)
     contentLayout->addSpacing(30);
     contentLayout->addLayout(textLayout);
 
-    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+    QWidget* centralWidget = new QWidget();
+    QVBoxLayout* mainLayout = new QVBoxLayout(centralWidget);
     mainLayout->setContentsMargins(0, 25, 0, 0);
     mainLayout->addLayout(contentLayout);
+    
+    setCentralWidget(centralWidget);
 }
 
 T_About::~T_About()

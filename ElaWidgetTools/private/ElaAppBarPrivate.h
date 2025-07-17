@@ -19,6 +19,8 @@ class ElaAppBarPrivate : public QObject
     Q_PROPERTY_CREATE_D(bool, IsStayTop)
     Q_PROPERTY_CREATE_D(bool, IsFixedSize)
     Q_PROPERTY_CREATE_D(bool, IsDefaultClosed)
+    Q_PROPERTY_CREATE_D(bool, IsDefaultMinimized)
+    Q_PROPERTY_CREATE_D(bool, IsDefaultMaximized)
     Q_PROPERTY_CREATE_D(bool, IsOnlyAllowMinAndClose)
     Q_PROPERTY_CREATE_D(int, AppBarHeight)
     Q_PROPERTY_CREATE_D(QWidget*, CustomWidget)
