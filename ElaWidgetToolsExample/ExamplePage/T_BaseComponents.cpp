@@ -2,6 +2,7 @@
 
 #include "ElaCheckBox.h"
 #include "ElaComboBox.h"
+#include "ElaMessageBox.h"
 #include "ElaMessageButton.h"
 #include "ElaMultiSelectComboBox.h"
 #include "ElaPlainTextEdit.h"
@@ -160,6 +161,96 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     messageButtonLayout->addWidget(messageButtonDisableText);
     messageButtonLayout->addSpacing(10);
 
+    // ElaMessageBox 示例区域
+    ElaPushButton* informationBoxButton = new ElaPushButton("Information", this);
+    informationBoxButton->setFixedWidth(100);
+    connect(informationBoxButton, &ElaPushButton::clicked, this, [=]() {
+        ElaMessageBox::information(this, "提示", "这是一个信息提示框，用于显示一般信息。");
+    });
+
+    ElaPushButton* questionBoxButton = new ElaPushButton("Question", this);
+    questionBoxButton->setFixedWidth(100);
+    connect(questionBoxButton, &ElaPushButton::clicked, this, [=]() {
+        auto result = ElaMessageBox::question(this, "询问", "是否保存当前更改？",
+            QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel,
+            QMessageBox::Yes);
+        if (result == QMessageBox::Yes) {
+            ElaMessageBox::information(this, "结果", "您选择了\"是\"");
+        } else if (result == QMessageBox::No) {
+            ElaMessageBox::information(this, "结果", "您选择了\"否\"");
+        } else {
+            ElaMessageBox::information(this, "结果", "您选择了\"取消\"");
+        }
+    });
+
+    ElaPushButton* warningBoxButton = new ElaPushButton("Warning", this);
+    warningBoxButton->setFixedWidth(100);
+    connect(warningBoxButton, &ElaPushButton::clicked, this, [=]() {
+        ElaMessageBox::warning(this, "警告", "这是一个警告消息，请注意可能的风险！");
+    });
+
+    ElaPushButton* criticalBoxButton = new ElaPushButton("Critical", this);
+    criticalBoxButton->setFixedWidth(100);
+    connect(criticalBoxButton, &ElaPushButton::clicked, this, [=]() {
+        ElaMessageBox::critical(this, "错误", "发生了严重错误，操作无法继续！");
+    });
+
+    ElaPushButton* customBoxButton = new ElaPushButton("Custom", this);
+    customBoxButton->setFixedWidth(100);
+    connect(customBoxButton, &ElaPushButton::clicked, this, [=]() {
+        ElaMessageBox box(this);
+        box.setTitle("自定义对话框");
+        box.setText("这是一个自定义的消息框示例");
+        box.setInformativeText("您可以自定义按钮、图标和文本内容");
+        box.setIcon(QMessageBox::Information);
+        box.setStandardButtons(QMessageBox::Ok | QMessageBox::Help | QMessageBox::Cancel);
+        box.setButtonText(QMessageBox::Ok, "确认操作");
+        box.setButtonText(QMessageBox::Cancel, "稍后处理");
+        box.setDefaultButton(QMessageBox::Ok);
+        box.setEscapeButton(QMessageBox::Cancel)
+            ;
+        
+        auto result = box.execForResult();
+        if (result == QMessageBox::Ok) {
+            ElaMessageBox::information(this, "结果", "您点击了\"确认操作\"");
+        } else if (result == QMessageBox::Help) {
+            ElaMessageBox::information(this, "帮助", "这里是帮助信息");
+        }
+    });
+
+    ElaPushButton* aboutBoxButton = new ElaPushButton("About", this);
+    aboutBoxButton->setFixedWidth(100);
+    connect(aboutBoxButton, &ElaPushButton::clicked, this, [=]() {
+        ElaMessageBox::about(this, "关于", "ElaWidgetTools - 基于 Qt 的现代化 Fluent UI 组件库\n\n版本：2.0.0\n作者：Liniyous\n许可证：MIT");
+    });
+
+    ElaScrollPageArea* messageBoxArea = new ElaScrollPageArea(this);
+    QHBoxLayout* messageBoxLayout = new QHBoxLayout(messageBoxArea);
+    ElaText* messageBoxText = new ElaText("ElaMessageBox", this);
+    messageBoxText->setTextPixelSize(15);
+    messageBoxLayout->addWidget(messageBoxText);
+    messageBoxLayout->addWidget(informationBoxButton);
+    messageBoxLayout->addWidget(questionBoxButton);
+    messageBoxLayout->addWidget(warningBoxButton);
+    messageBoxLayout->addWidget(criticalBoxButton);
+    messageBoxLayout->addWidget(customBoxButton);
+    messageBoxLayout->addWidget(aboutBoxButton);
+    messageBoxLayout->addStretch();
+    ElaToggleSwitch* messageBoxDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* messageBoxDisableText = new ElaText("禁用", this);
+    messageBoxDisableText->setTextPixelSize(15);
+    connect(messageBoxDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        informationBoxButton->setDisabled(checked);
+        questionBoxButton->setDisabled(checked);
+        warningBoxButton->setDisabled(checked);
+        criticalBoxButton->setDisabled(checked);
+        customBoxButton->setDisabled(checked);
+        aboutBoxButton->setDisabled(checked);
+    });
+    messageBoxLayout->addWidget(messageBoxDisableSwitch);
+    messageBoxLayout->addWidget(messageBoxDisableText);
+    messageBoxLayout->addSpacing(10);
+
     _checkBox = new ElaCheckBox("CheckBox", this);
     ElaScrollPageArea* checkBoxArea = new ElaScrollPageArea(this);
     QHBoxLayout* checkBoxLayout = new QHBoxLayout(checkBoxArea);
@@ -307,6 +398,7 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     centerLayout->addWidget(comboBoxArea);
     centerLayout->addWidget(multiSelectComboBoxArea);
     centerLayout->addWidget(messageButtonArea);
+    centerLayout->addWidget(messageBoxArea);
     centerLayout->addWidget(checkBoxArea);
     centerLayout->addWidget(spinBoxArea);
     centerLayout->addWidget(sliderArea);
