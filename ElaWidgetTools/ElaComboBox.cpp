@@ -63,6 +63,8 @@ ElaComboBox::ElaComboBox(QWidget* parent)
 
 ElaComboBox::~ElaComboBox()
 {
+    Q_D(ElaComboBox);
+    delete d->_comboBoxStyle;
 }
 
 void ElaComboBox::setEditable(bool editable)

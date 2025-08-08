@@ -28,6 +28,8 @@ ElaToolButton::ElaToolButton(QWidget* parent)
 
 ElaToolButton::~ElaToolButton()
 {
+    Q_D(ElaToolButton);
+    delete d->_toolButtonStyle;
 }
 
 void ElaToolButton::setBorderRadius(int borderRadius)
