@@ -34,6 +34,10 @@ void ElaMessageBoxPrivate::setupUi(QWidget* parentWidget)
         maskWidget->setFixedSize(parentWidget->size());
         maskWidget->setVisible(false);
     }
+    else
+    {
+        maskWidget = nullptr;
+    }
 
     centralWidget = new QWidget(q);
     auto* centralLayout = new QVBoxLayout(centralWidget);
@@ -194,7 +198,7 @@ void ElaMessageBoxPrivate::centerToScreenIfNoParent(QWidget* dialog)
 
 void ElaMessageBoxPrivate::doMaskOnShow()
 {
-    if (maskWidget)
+    if (maskWidget && maskWidget->parentWidget())
     {
         maskWidget->setVisible(true);
         maskWidget->raise();

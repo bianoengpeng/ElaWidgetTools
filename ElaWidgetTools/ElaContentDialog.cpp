@@ -22,10 +22,14 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
     Q_D(ElaContentDialog);
     d->q_ptr = this;
 
-    d->_maskWidget = new ElaMaskWidget(parent);
-    d->_maskWidget->move(0, 0);
-    d->_maskWidget->setFixedSize(parent->size());
-    d->_maskWidget->setVisible(false);
+    if (parent) {
+        d->_maskWidget = new ElaMaskWidget(parent);
+        d->_maskWidget->move(0, 0);
+        d->_maskWidget->setFixedSize(parent->size());
+        d->_maskWidget->setVisible(false);
+    } else {
+        d->_maskWidget = nullptr;
+    }
 
     resize(400, height());
     setWindowModality(Qt::ApplicationModal);
@@ -160,10 +164,12 @@ void ElaContentDialog::close()
 void ElaContentDialog::showEvent(QShowEvent* event)
 {
     Q_D(ElaContentDialog);
-    d->_maskWidget->setVisible(true);
-    d->_maskWidget->raise();
-    d->_maskWidget->setFixedSize(parentWidget()->size());
-    d->_maskWidget->doMaskAnimation(90);
+    if (d->_maskWidget && parentWidget()) {
+        d->_maskWidget->setVisible(true);
+        d->_maskWidget->raise();
+        d->_maskWidget->setFixedSize(parentWidget()->size());
+        d->_maskWidget->doMaskAnimation(90);
+    }
 #ifdef Q_OS_WIN
 #if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 3) && QT_VERSION <= QT_VERSION_CHECK(6, 6, 1))
     HWND hwnd = (HWND)d->_currentWinID;

@@ -62,3 +62,5 @@ compile_commands.json
 *.code-workspace
 todo.md
 tmp/**
+CLAUDE.md
+.claude/settings.local.json

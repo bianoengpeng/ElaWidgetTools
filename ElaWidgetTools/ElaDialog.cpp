@@ -26,10 +26,14 @@ ElaDialog::ElaDialog(QWidget* parent)
     d->q_ptr = this;
 
     // 创建遮罩widget
-    d->_maskWidget = new ElaMaskWidget(parent);
-    d->_maskWidget->move(0, 0);
-    d->_maskWidget->setFixedSize(parent->size());
-    d->_maskWidget->setVisible(false);
+    if (parent) {
+        d->_maskWidget = new ElaMaskWidget(parent);
+        d->_maskWidget->move(0, 0);
+        d->_maskWidget->setFixedSize(parent->size());
+        d->_maskWidget->setVisible(false);
+    } else {
+        d->_maskWidget = nullptr;
+    }
 
     // 设置默认尺寸
     resize(500, 400);
@@ -246,7 +250,7 @@ void ElaDialog::showEvent(QShowEvent* event)
 {
     Q_D(ElaDialog);
     // 显示遮罩并执行动画
-    if (d->_maskWidget) {
+    if (d->_maskWidget && parentWidget()) {
         d->_maskWidget->setVisible(true);
         d->_maskWidget->raise();
         d->_maskWidget->setFixedSize(parentWidget()->size());

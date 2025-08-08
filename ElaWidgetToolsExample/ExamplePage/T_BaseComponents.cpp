@@ -2,6 +2,7 @@
 
 #include "ElaCheckBox.h"
 #include "ElaComboBox.h"
+#include "ElaInputDialog.h"
 #include "ElaMessageBox.h"
 #include "ElaMessageButton.h"
 #include "ElaMultiSelectComboBox.h"
@@ -251,6 +252,102 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     messageBoxLayout->addWidget(messageBoxDisableText);
     messageBoxLayout->addSpacing(10);
 
+    // ElaInputDialog 示例区域
+    ElaPushButton* getTextButton = new ElaPushButton("Text", this);
+    getTextButton->setFixedWidth(80);
+    connect(getTextButton, &ElaPushButton::clicked, this, [=]() {
+        bool ok;
+        QString text = ElaInputDialog::getText(this, "输入文本", "请输入您的姓名：",
+                                              QLineEdit::Normal, "默认文本", &ok);
+        if (ok && !text.isEmpty()) {
+            ElaMessageBox::information(this, "输入结果", QString("您输入的文本是：%1").arg(text));
+        }
+    });
+
+    ElaPushButton* getIntButton = new ElaPushButton("Integer", this);
+    getIntButton->setFixedWidth(80);
+    connect(getIntButton, &ElaPushButton::clicked, this, [=]() {
+        bool ok;
+        int value = ElaInputDialog::getInt(this, "输入整数", "请输入一个数字（0-100）：",
+                                          50, 0, 100, 1, &ok);
+        if (ok) {
+            ElaMessageBox::information(this, "输入结果", QString("您输入的整数是：%1").arg(value));
+        }
+    });
+
+    ElaPushButton* getDoubleButton = new ElaPushButton("Double", this);
+    getDoubleButton->setFixedWidth(80);
+    connect(getDoubleButton, &ElaPushButton::clicked, this, [=]() {
+        bool ok;
+        double value = ElaInputDialog::getDouble(this, "输入小数", "请输入一个小数（0.0-10.0）：",
+                                                3.14, 0.0, 10.0, 2, &ok);
+        if (ok) {
+            ElaMessageBox::information(this, "输入结果", QString("您输入的小数是：%1").arg(value));
+        }
+    });
+
+    ElaPushButton* getItemButton = new ElaPushButton("Item", this);
+    getItemButton->setFixedWidth(80);
+    connect(getItemButton, &ElaPushButton::clicked, this, [=]() {
+        QStringList items;
+        items << "春季" << "夏季" << "秋季" << "冬季";
+        bool ok;
+        QString item = ElaInputDialog::getItem(this, "选择项目", "请选择您喜欢的季节：",
+                                              items, 0, false, &ok);
+        if (ok && !item.isEmpty()) {
+            ElaMessageBox::information(this, "选择结果", QString("您选择的是：%1").arg(item));
+        }
+    });
+
+    ElaPushButton* getMultiLineButton = new ElaPushButton("MultiLine", this);
+    getMultiLineButton->setFixedWidth(80);
+    connect(getMultiLineButton, &ElaPushButton::clicked, this, [=]() {
+        bool ok;
+        QString text = ElaInputDialog::getMultiLineText(this, "输入多行文本", "请输入您的留言：",
+                                                       "在此输入多行文本...", &ok);
+        if (ok && !text.isEmpty()) {
+            ElaMessageBox::information(this, "输入结果", QString("您输入的文本是：\n%1").arg(text));
+        }
+    });
+
+    ElaPushButton* getPasswordButton = new ElaPushButton("Password", this);
+    getPasswordButton->setFixedWidth(80);
+    connect(getPasswordButton, &ElaPushButton::clicked, this, [=]() {
+        bool ok;
+        QString password = ElaInputDialog::getText(this, "输入密码", "请输入您的密码：",
+                                                  QLineEdit::Password, "", &ok);
+        if (ok && !password.isEmpty()) {
+            ElaMessageBox::information(this, "输入结果", QString("密码长度：%1 位").arg(password.length()));
+        }
+    });
+
+    ElaScrollPageArea* inputDialogArea = new ElaScrollPageArea(this);
+    QHBoxLayout* inputDialogLayout = new QHBoxLayout(inputDialogArea);
+    ElaText* inputDialogText = new ElaText("ElaInputDialog", this);
+    inputDialogText->setTextPixelSize(15);
+    inputDialogLayout->addWidget(inputDialogText);
+    inputDialogLayout->addWidget(getTextButton);
+    inputDialogLayout->addWidget(getIntButton);
+    inputDialogLayout->addWidget(getDoubleButton);
+    inputDialogLayout->addWidget(getItemButton);
+    inputDialogLayout->addWidget(getMultiLineButton);
+    inputDialogLayout->addWidget(getPasswordButton);
+    inputDialogLayout->addStretch();
+    ElaToggleSwitch* inputDialogDisableSwitch = new ElaToggleSwitch(this);
+    ElaText* inputDialogDisableText = new ElaText("禁用", this);
+    inputDialogDisableText->setTextPixelSize(15);
+    connect(inputDialogDisableSwitch, &ElaToggleSwitch::toggled, this, [=](bool checked) {
+        getTextButton->setDisabled(checked);
+        getIntButton->setDisabled(checked);
+        getDoubleButton->setDisabled(checked);
+        getItemButton->setDisabled(checked);
+        getMultiLineButton->setDisabled(checked);
+        getPasswordButton->setDisabled(checked);
+    });
+    inputDialogLayout->addWidget(inputDialogDisableSwitch);
+    inputDialogLayout->addWidget(inputDialogDisableText);
+    inputDialogLayout->addSpacing(10);
+
     _checkBox = new ElaCheckBox("CheckBox", this);
     ElaScrollPageArea* checkBoxArea = new ElaScrollPageArea(this);
     QHBoxLayout* checkBoxLayout = new QHBoxLayout(checkBoxArea);
@@ -399,6 +496,7 @@ T_BaseComponents::T_BaseComponents(QWidget* parent)
     centerLayout->addWidget(multiSelectComboBoxArea);
     centerLayout->addWidget(messageButtonArea);
     centerLayout->addWidget(messageBoxArea);
+    centerLayout->addWidget(inputDialogArea);
     centerLayout->addWidget(checkBoxArea);
     centerLayout->addWidget(spinBoxArea);
     centerLayout->addWidget(sliderArea);

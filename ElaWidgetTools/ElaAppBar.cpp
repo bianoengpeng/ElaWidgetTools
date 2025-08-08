@@ -672,6 +672,9 @@ int ElaAppBar::takeOverNativeEvent(const QByteArray& eventType, void* message, l
 bool ElaAppBar::eventFilter(QObject* obj, QEvent* event)
 {
     Q_D(ElaAppBar);
+    if (!parentWidget()) {
+        return QWidget::eventFilter(obj, event);
+    }
     switch (event->type())
     {
     case QEvent::Resize:

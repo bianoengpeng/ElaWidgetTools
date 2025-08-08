@@ -227,6 +227,9 @@ bool ElaMessageBar::eventFilter(QObject* watched, QEvent* event)
     Q_D(ElaMessageBar);
     if (watched == parentWidget())
     {
+        if (!parentWidget()) {
+            return false;
+        }
         switch (event->type())
         {
         case QEvent::Resize:
