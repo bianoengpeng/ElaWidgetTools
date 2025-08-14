@@ -1,14 +1,11 @@
 # .github/workflows/build-windows.yml
 # 这个工作流用于在 Windows 上编译、安装并打包一个使用 CMake 的 Qt 项目。
 # 它执行完整的 configure -> build -> install 流程。
-
 name: Build and Package Qt/CMake Project on Windows
-
 on:
   workflow_dispatch:
   pull_request:
     branches: [ "main" ]
-
 jobs:
   build:
     # 将 env 块移动到 job 内部，以解决 runner 上下文的可用性问题
@@ -28,7 +25,6 @@ jobs:
       # 第一步：检出代码
       - name: Checkout code
         uses: actions/checkout@v4
-
       # 第二步：缓存 Qt 安装
       - name: Cache Qt
         id: cache-qt
@@ -37,7 +33,6 @@ jobs:
           # 使用我们预定义的路径。这可以确保 'path' 总是有值。
           path: ${{ env.QT_INSTALL_PATH }}
           key: ${{ runner.os }}-qt-6.8.3-msvc2022_64
-
       # 第三步：安装 Qt 6.8.3
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -47,14 +42,12 @@ jobs:
           # 指定精确的架构，确保使用 MSVC 2022 64-bit
           arch: 'win64_msvc2022_64'
           # 告诉 action 安装到我们预定义的路径
-          install-dir: ${{ env.QT_INSTALL_PATH }}
+          dir: ${{ env.QT_INSTALL_PATH }}
           # 如果上一步的缓存命中 (cache-hit)，则跳过下载，直接使用缓存
-          cached: ${{ steps.cache-qt.outputs.cache-hit }}
-
+          cache: ${{ steps.cache-qt.outputs.cache-hit }}
       # 第四步：设置MSVC环境
       - name: Setup MSVC Environment
         uses: ilammy/msvc-dev-cmd@v1
-
       # 第五步：配置、构建和安装
       - name: Configure, Build, and Install
         shell: cmd
@@ -63,14 +56,11 @@ jobs:
           REM    -DCMAKE_INSTALL_PREFIX=./Install: 指定安装目录为工作区下的 'Install' 文件夹
           REM    -DBUILD_ELAPACKETIO=ON: 启用ElaPacketIO模块构建
           cmake -B build -S . -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE_INSTALL_PREFIX=./Install -DBUILD_ELAPACKETIO=OFF
-
           REM 2. 执行编译 (Build)
           cmake --build build --config ${{ env.BUILD_TYPE }} --parallel
-
           REM 3. 执行安装 (Install)
           REM    这一步会运行所有 install() 命令，包括我们添加的 windeployqt 脚本
           cmake --install build --config ${{ env.BUILD_TYPE }}
-
       # 第六步：打包并上传最终产物
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

@@ -13,7 +13,14 @@
 **Fork 目的：** 基于原项目进行个人定制和功能扩展
 
 **主要修改：** 
-- xxx
+- 新增 ElaDialog 无边框对话框组件
+- 新增 ElaMessageBox 自定义消息框（完全兼容 QMessageBox API）
+- 新增 ElaInputDialog 输入对话框（支持多种输入模式）
+- 优化 ElaAppBar 窗口拖动体验和自定义菜单功能
+- 改进 ElaMessageBar 消息数量限制机制
+- 增强 ElaWindow 多屏和全屏支持
+- 修复多个组件的稳定性问题
+- 优化 Visual Studio 调试体验
 
 ## 致谢
 
@@ -47,7 +54,7 @@
 | 目录                     | 说明           | 备注                         |
 |------------------------|--------------|----------------------------|
 | ElaApplication         | 程序初始化        |                            |
-| ElaAppBar              | 窗口顶部标题栏      | 支持拖动窗口，最小化、最大化、关闭窗口、调整窗口尺寸 |
+| ElaAppBar              | 窗口顶部标题栏      | 支持拖动窗口，最小化、最大化、关闭窗口、调整窗口尺寸、自定义菜单 |
 | ElaAcrylicUrlCard      | 带图片的交互式亚克力卡片 | 支持URL跳转                    |
 | ElaBreadcrumbBar       | 面包屑组件        | 自动处理点击事件                   |
 | ElaCheckBox            | 勾选框          |                            |
@@ -57,6 +64,9 @@
 | ElaCalendarPicker      | 日期选择器        |                            |
 | ElaMultiSelectComboBox | 多选下拉框        |                            |
 | ElaContentDialog       | 带遮罩的对话框      |                            |
+| ElaDialog              | 无边框对话框       | 支持自定义标题栏按钮                |
+| ElaMessageBox          | 自定义消息框       | 完全兼容 QMessageBox API        |
+| ElaInputDialog         | 输入对话框        | 支持文本、整数、浮点数、列表和多行文本输入    |
 | ElaDockWidget          | 停靠窗口         |                            |
 | ElaSpinBox             | 微调框          |                            |
 | ElaDoubleSpinBox       | 微调框          | 浮点数                        |
@@ -73,7 +83,7 @@
 | ElaLog                 | 消息日志         |                            |
 | ElaMenu                | 菜单           |                            |
 | ElaMenuBar             | 菜单栏          |                            |
-| ElaMessageBar          | 弹出式信息栏       | 支持八方向，锚定位置                 |
+| ElaMessageBar          | 弹出式信息栏       | 支持八方向，锚定位置，自动限制消息数量       |
 | ElaMessageButton       | 弹出信息按钮       |                            |
 | ElaPivot               | 轴转导航         |                            |
 | ElaPlainTextEdit       | 文本编辑框        |                            |
@@ -106,7 +116,7 @@
 | ElaGraphicsScene       | 高级场景         | 大量实用API                    |
 | ElaGraphicsView        | 高级视图         | 按键缩放、拖动                    |
 | ElaGraphicsItem        | 高级图元         | 大量实用API                    |
-| ElaWindow              | 带导航栏的无边框窗口   |                            |
+| ElaWindow              | 带导航栏的无边框窗口   | 增强多屏和全屏支持                  |
 | ElaWidget              | 无边框模态窗口      |                            |
 
 ## 许可证
