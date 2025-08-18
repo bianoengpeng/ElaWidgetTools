@@ -6,8 +6,7 @@
 #include <QObject>
 #include <QFrame>
 
-#include "Def.h"
-#include "stdafx.h"
+#include "ElaDef.h"
 class ElaEvent;
 class ElaWindow;
 class ElaNavigationBar;
