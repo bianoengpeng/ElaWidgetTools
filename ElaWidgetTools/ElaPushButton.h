@@ -2,7 +2,7 @@
 #define ELAPUSHBUTTON_H
 
 #include <QPushButton>
-
+#include "ElaDef.h"
 #include "ElaProperty.h"
 class ElaPushButtonPrivate;
 class ELA_EXPORT ElaPushButton : public QPushButton

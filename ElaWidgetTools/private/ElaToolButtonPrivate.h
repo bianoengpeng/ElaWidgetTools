@@ -2,7 +2,7 @@
 #define ELATOOLBUTTONPRIVATE_H
 
 #include <QObject>
-
+#include "ElaDef.h"
 #include "ElaProperty.h"
 class ElaToolButton;
 class ElaToolButtonStyle;

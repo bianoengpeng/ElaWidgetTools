@@ -5,7 +5,7 @@
 #include <QMessageBox>
 #include <QCheckBox>
 
-#include "stdafx.h"
+#include "ElaProperty.h"
 
 class ElaText;
 class ElaPushButton;

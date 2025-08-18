@@ -5,7 +5,7 @@
 #include <QLineEdit>
 #include <QStringList>
 
-#include "stdafx.h"
+#include "ElaProperty.h"
 
 class ElaLineEdit;
 class ElaComboBox;

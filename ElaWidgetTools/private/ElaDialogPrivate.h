@@ -3,8 +3,8 @@
 
 #include <QObject>
 
-#include "Def.h"
-#include "stdafx.h"
+#include "ElaDef.h"
+#include "ElaProperty.h"
 class QVBoxLayout;
 class ElaDialog;
 class ElaAppBar;

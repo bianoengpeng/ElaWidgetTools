@@ -6,8 +6,8 @@
 #include <QMessageBox>
 #include <QPointer>
 
-#include "Def.h"
-#include "stdafx.h"
+#include "ElaDef.h"
+#include "ElaProperty.h"
 
 class QVBoxLayout;
 class QHBoxLayout;

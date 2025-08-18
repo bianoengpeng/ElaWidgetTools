@@ -14,7 +14,7 @@
 #include "ElaText.h"
 #include "ElaTheme.h"
 #include "ElaPushButton.h"
-#include "Def.h"
+#include "ElaDef.h"
 
 ElaMessageBoxPrivate::ElaMessageBoxPrivate(QObject* parent)
     : QObject{parent}

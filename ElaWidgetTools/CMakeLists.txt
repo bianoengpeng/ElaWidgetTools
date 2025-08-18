@@ -43,12 +43,10 @@ endif ()
 if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_library(${PROJECT_NAME} ${LIB_TYPE}
         ${PROJECT_SOURCES}
-        include/ElaWidgetTools.qrc
     )
 else ()
     add_library(${PROJECT_NAME} ${LIB_TYPE}
         ${PROJECT_SOURCES}
-        include/ElaWidgetTools.qrc
     )
 endif ()
 

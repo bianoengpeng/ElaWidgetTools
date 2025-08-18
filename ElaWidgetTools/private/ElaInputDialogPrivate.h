@@ -5,8 +5,8 @@
 #include <QPointer>
 #include <QLineEdit>
 
-#include "Def.h"
-#include "stdafx.h"
+#include "ElaDef.h"
+#include "ElaProperty.h"
 #include "ElaInputDialog.h"
 
 class QVBoxLayout;

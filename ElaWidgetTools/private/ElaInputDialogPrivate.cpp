@@ -17,7 +17,7 @@
 #include "ElaSpinBox.h"
 #include "ElaDoubleSpinBox.h"
 #include "ElaTextEdit.h"
-#include "Def.h"
+#include "ElaDef.h"
 
 ElaInputDialogPrivate::ElaInputDialogPrivate(QObject* parent)
     : QObject{parent}
