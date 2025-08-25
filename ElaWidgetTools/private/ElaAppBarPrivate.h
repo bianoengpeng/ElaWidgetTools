@@ -1,8 +1,7 @@
 #ifndef ELAAPPBARPRIVATE_H
 #define ELAAPPBARPRIVATE_H
-#include <QObject>
-
 #include "ElaDef.h"
+
 class QLabel;
 class QScreen;
 class QHBoxLayout;
@@ -35,6 +34,7 @@ public:
     Q_SLOT void onStayTopButtonClicked();
 
 private:
+    ElaThemeType::ThemeMode _themeMode;
     QHBoxLayout* _mainLayout{nullptr};
     QVBoxLayout* _iconLabelLayout{nullptr};
     QVBoxLayout* _titleLabelLayout{nullptr};
@@ -55,6 +55,7 @@ private:
     int _edges{0};
     int _margins{8};
     bool _isHoverMaxButton{false};
+    int _win7Margins{0};
     void _changeMaxButtonAwesome(bool isMaximized);
     void _showAppBarMenu(QPoint point);
     void _updateCursor(int edges);

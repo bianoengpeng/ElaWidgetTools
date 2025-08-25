@@ -1,14 +1,11 @@
-#ifndef ELADIALOGPRIVATE_H
-#define ELADIALOGPRIVATE_H
+#ifndef ELAFRAMEWORK_ELADIALOGPRIVATE_H
+#define ELAFRAMEWORK_ELADIALOGPRIVATE_H
 
 #include <QObject>
 
 #include "ElaDef.h"
-#include "ElaProperty.h"
-class QVBoxLayout;
-class ElaDialog;
 class ElaAppBar;
-class ElaMaskWidget;
+class ElaDialog;
 class ElaDialogPrivate : public QObject
 {
     Q_OBJECT
@@ -18,14 +15,9 @@ public:
     ~ElaDialogPrivate() override;
 
 private:
-    qint64 _currentWinID{0};
     ElaThemeType::ThemeMode _themeMode;
     ElaApplicationType::WindowDisplayMode _windowDisplayMode;
-    ElaMaskWidget* _maskWidget{nullptr};
-    QWidget* _centralWidget{nullptr};
-    QVBoxLayout* _mainLayout{nullptr};
     ElaAppBar* _appBar{nullptr};
-    void _doCloseAnimation(bool isAccept);
 };
 
-#endif // ELADIALOGPRIVATE_H 
+#endif //ELAFRAMEWORK_ELADIALOGPRIVATE_H

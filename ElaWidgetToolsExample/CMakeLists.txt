@@ -26,13 +26,6 @@ FILE(GLOB EAXMPLEPAGE ExamplePage/*.h ExamplePage/*.cpp)
 source_group(ModelView FILES ${MODELVIEW})
 source_group(ExamplePage FILES ${EAXMPLEPAGE})
 
-# 处理条件编译的ElaPacketIO相关文件
-if(NOT BUILD_ELAPACKETIO)
-    # 如果不构建ElaPacketIO，则跳过AutoMoc处理
-    set_property(SOURCE ExamplePage/T_ElaPacketIO.h PROPERTY SKIP_AUTOMOC ON)
-    set_property(SOURCE ExamplePage/T_ElaPacketIO.cpp PROPERTY SKIP_AUTOMOC ON)
-endif()
-
 set(PROJECT_SOURCES
     ${ORIGIN}
     ${MODELVIEW}
@@ -122,51 +115,31 @@ if (QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(${PROJECT_NAME})
 endif ()
 
+include(GNUInstallDirs)
+install(TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
+)
+if (MSVC)
+    install(
+        FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME} OPTIONAL)
+endif ()
+find_program(WINDEPLOYQT_EXECUTABLE windeployqt HINTS "${QT_SDK_DIR}/bin")
 if (WIN32)
-    include(GNUInstallDirs)
-    install(TARGETS ${PROJECT_NAME}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
+    install(CODE "
+    if(EXISTS \"${WINDEPLOYQT_EXECUTABLE}\" AND NOT EXISTS \"${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/platforms\")
+        execute_process(
+            COMMAND \"${CMAKE_COMMAND}\" -E env PATH=\"${QT_SDK_DIR}/bin\"
+                \"${WINDEPLOYQT_EXECUTABLE}\"
+                \"$<TARGET_FILE_DIR:${PROJECT_NAME}>/$<TARGET_FILE_NAME:${PROJECT_NAME}>\"
+                --dir \"${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}\"
+                --no-compiler-runtime
+                --no-system-d3d-compiler
+                --no-opengl-sw
+                --verbose 1
+        )
+    endif()"
     )
-    if (MSVC)
-        install(
-            FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
-            DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME} OPTIONAL)
-    endif ()
-    # QT依赖安装 只做Release安装 Debug自行打包
-    #install(FILES ${QT_SDK_DIR}/plugins/platforms/qwindows.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/platforms)
-    #install(FILES ${QT_SDK_DIR}/plugins/generic/qtuiotouchplugin.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/generic)
-    #install(
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qgif.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qicns.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qico.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qjpeg.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qtga.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qtiff.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qwbmp.dll
-    #    FILES ${QT_SDK_DIR}/plugins/imageformats/qwebp.dll
-    #    DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/imageformats
-    #)
-    #install(FILES ${QT_SDK_DIR}/plugins/styles/qwindowsvistastyle.dll DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/styles)
-    #FILE(GLOB TRANSLATIONS ${QT_SDK_DIR}/translations_install/*.qm)
-    #install(FILES ${TRANSLATIONS} DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/translations)
-    #install(
-    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Widgets.dll
-    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Core.dll
-    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Gui.dll
-    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Network.dll
-    #    FILES ${QT_SDK_DIR}/bin/Qt${QT_VERSION_MAJOR}Xml.dll
-    #    DESTINATION ${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}
-    #)
-
-    # [ADD THIS] 添加这个代码块来自动化部署
-    # 这会在 'cmake --install' 步骤中，为我们的可执行文件运行 windeployqt
-    if(WIN32)
-        install(CODE "
-            # windeployqt 会由 install-qt-action 添加到系统 PATH 中，所以可以直接调用
-            execute_process(COMMAND windeployqt --release --no-translations --dir \"\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}\" \"\${CMAKE_INSTALL_PREFIX}/${PROJECT_NAME}/${PROJECT_NAME}.exe\")
-        ")
-    endif()
-
 endif ()
 

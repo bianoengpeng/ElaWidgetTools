@@ -97,6 +97,9 @@ Q_SIGNALS:
 
 protected:
     virtual bool eventFilter(QObject* obj, QEvent* event) override;
+#ifdef Q_OS_WIN
+    virtual void paintEvent(QPaintEvent* event) override;
+#endif
 };
 
 #endif // ELAAPPBAR_H

@@ -15,7 +15,7 @@
 #include <QScreen>
 #include <QTimer>
 #include <QVBoxLayout>
-
+Q_TAKEOVER_NATIVEEVENT_CPP(ElaContentDialog, d_func()->_appBar);
 ElaContentDialog::ElaContentDialog(QWidget* parent)
     : QDialog{parent}, d_ptr(new ElaContentDialogPrivate())
 {
@@ -33,13 +33,14 @@ ElaContentDialog::ElaContentDialog(QWidget* parent)
 
     resize(400, height());
     setWindowModality(Qt::ApplicationModal);
+
+    d->_appBar = new ElaAppBar(this);
+    d->_appBar->setWindowButtonFlags(ElaAppBarType::NoneButtonHint);
+    d->_appBar->setIsFixedSize(true);
+    d->_appBar->setAppBarHeight(0);
 #ifdef Q_OS_WIN
+    // 防止意外拉伸
     createWinId();
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 3) && QT_VERSION <= QT_VERSION_CHECK(6, 6, 1))
-    window()->setWindowFlags((window()->windowFlags()) | Qt::WindowMinimizeButtonHint | Qt::FramelessWindowHint);
-#endif
-#else
-    window()->setWindowFlags((window()->windowFlags()) | Qt::FramelessWindowHint);
 #endif
     d->_leftButton = new ElaPushButton(u8"取消", this);
     connect(d->_leftButton, &ElaPushButton::clicked, this, [=]() {
@@ -205,80 +206,3 @@ void ElaContentDialog::keyPressEvent(QKeyEvent* event)
 {
     event->accept();
 }
-
-#ifdef Q_OS_WIN
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-bool ElaContentDialog::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
-#else
-bool ElaContentDialog::nativeEvent(const QByteArray& eventType, void* message, long* result)
-#endif
-{
-    Q_D(ElaContentDialog);
-    if ((eventType != "windows_generic_MSG") || !message)
-    {
-        return false;
-    }
-    const auto msg = static_cast<const MSG*>(message);
-    const HWND hwnd = msg->hwnd;
-    if (!hwnd || !msg)
-    {
-        return false;
-    }
-    d->_currentWinID = (qint64)hwnd;
-    const UINT uMsg = msg->message;
-    const WPARAM wParam = msg->wParam;
-    const LPARAM lParam = msg->lParam;
-    switch (uMsg)
-    {
-    case WM_WINDOWPOSCHANGING:
-    {
-        WINDOWPOS* wp = reinterpret_cast<WINDOWPOS*>(lParam);
-        if (wp != nullptr && (wp->flags & SWP_NOSIZE) == 0)
-        {
-            wp->flags |= SWP_NOCOPYBITS;
-            *result = ::DefWindowProcW(hwnd, uMsg, wParam, lParam);
-            return true;
-        }
-        return false;
-    }
-    case WM_NCACTIVATE:
-    {
-        *result = TRUE;
-        return true;
-    }
-    case WM_NCCALCSIZE:
-    {
-#if (QT_VERSION >= QT_VERSION_CHECK(6, 5, 3) && QT_VERSION <= QT_VERSION_CHECK(6, 6, 1))
-        if (wParam == FALSE)
-        {
-            return false;
-        }
-        if (::IsZoomed(hwnd))
-        {
-            setContentsMargins(8, 8, 8, 8);
-        }
-        else
-        {
-            setContentsMargins(0, 0, 0, 0);
-        }
-        *result = 0;
-        return true;
-#else
-        if (wParam == FALSE)
-        {
-            return false;
-        }
-        RECT* clientRect = &((NCCALCSIZE_PARAMS*)(lParam))->rgrc[0];
-        if (!::IsZoomed(hwnd))
-        {
-            clientRect->top -= 1;
-            clientRect->bottom -= 1;
-        }
-        *result = WVR_REDRAW;
-        return true;
-#endif
-    }
-    }
-    return QDialog::nativeEvent(eventType, message, result);
-}
-#endif
