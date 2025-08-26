@@ -62,12 +62,9 @@ T_About::T_About(QWidget* parent)
     contentLayout->addSpacing(30);
     contentLayout->addLayout(textLayout);
 
-    QWidget* centralWidget = new QWidget();
-    QVBoxLayout* mainLayout = new QVBoxLayout(centralWidget);
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(0, 25, 0, 0);
     mainLayout->addLayout(contentLayout);
-    
-    setCentralWidget(centralWidget);
 }
 
 T_About::~T_About()

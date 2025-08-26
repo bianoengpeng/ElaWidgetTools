@@ -464,7 +464,7 @@ enum ThemeColor
     colorStatusDangerBorder1,
     colorStatusDangerBorder2,
     colorStatusDangerBackground3Hover,
-    colorStatusDangerBackground3Pressed
+    colorStatusDangerBackground3Pressed,
     Win10BorderActive,
     Win10BorderInactive
 };
