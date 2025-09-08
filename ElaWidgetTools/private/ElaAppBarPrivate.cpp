@@ -8,7 +8,7 @@
 #include "ElaIconButton.h"
 #include "ElaNavigationBar.h"
 #include "ElaText.h"
-
+#include <QDebug>
 #include <QGuiApplication>
 #include <QLabel>
 #include <QMenu>
@@ -44,14 +44,11 @@ void ElaAppBarPrivate::onMaxButtonClicked()
     Q_Q(ElaAppBar);
     if (_pIsDefaultMaximized)
     {
-        if (q->window()->isMaximized())
-        {
-            q->window()->showNormal();
-        }
-        else
-        {
-            q->window()->showMaximized();
-        }
+        bool isMaximized = q->window()->isMaximized();
+        isMaximized ? q->window()->showNormal() : q->window()->showMaximized();
+    #ifndef Q_OS_WIM
+        _changeMaxButtonAwesome(!isMaximized);
+    #endif
     }
     else
     {

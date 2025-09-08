@@ -21,6 +21,7 @@ protected:
     void paintEvent(QPaintEvent* e) override;
     virtual void showPopup() override;
     virtual void hidePopup() override;
+    virtual void paintEvent(QPaintEvent* event) override;
 };
 
 #endif // ELACOMBOBOX_H

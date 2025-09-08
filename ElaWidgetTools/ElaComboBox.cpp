@@ -259,3 +259,13 @@ void ElaComboBox::hidePopup()
 	    }
 	}
 }
+
+void ElaComboBox::paintEvent(QPaintEvent* event)
+{
+    Q_D(ElaComboBox);
+    if (lineEdit() && lineEdit()->palette().color(QPalette::Text) != ElaThemeColor(d->_themeMode, BasicText))
+    {
+        d->onThemeChanged(d->_themeMode);
+    }
+    QComboBox::paintEvent(event);
+}

@@ -53,7 +53,6 @@ ElaAppBar::ElaAppBar(QWidget* parent)
     d->_pCustomWidgetMaximumWidth = 550;
     window()->installEventFilter(this);
 #ifdef Q_OS_WIN
-    eWinHelper->initWinAPI();
     if (!eWinHelper->getIsWinVersionGreater10())
     {
         d->_win7Margins = 8;
@@ -62,7 +61,7 @@ ElaAppBar::ElaAppBar(QWidget* parent)
     window()->setWindowFlags((window()->windowFlags()) | Qt::WindowMinimizeButtonHint | Qt::FramelessWindowHint);
 #endif
 #else
-    window()->setWindowFlags((window()->windowFlags()) | Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint);
+    window()->setWindowFlags(Qt::Window | Qt::WindowTitleHint | Qt::FramelessWindowHint | Qt::WindowMinMaxButtonsHint | Qt::WindowCloseButtonHint | Qt::WindowSystemMenuHint | Qt::WindowFullscreenButtonHint | Qt::WindowSystemMenuHint);
 #endif
     setMouseTracking(true);
     setObjectName("ElaAppBar");
@@ -106,7 +105,7 @@ ElaAppBar::ElaAppBar(QWidget* parent)
     }
     connect(parent, &QWidget::windowIconChanged, this, [=](const QIcon& icon) {
         d->_iconLabel->setPixmap(icon.pixmap(18, 18));
-        d->_iconLabel->setVisible(icon.isNull() ? false : true);
+        d->_iconLabel->setVisible(!icon.isNull());
         d->_iconLabelLayout->setContentsMargins(icon.isNull() ? 0 : 10, 0, 0, 0);
     });
 
@@ -126,7 +125,7 @@ ElaAppBar::ElaAppBar(QWidget* parent)
     }
     connect(parent, &QWidget::windowTitleChanged, this, [=](const QString& title) {
         d->_titleLabel->setText(title);
-        d->_titleLabel->setVisible(title.isEmpty() ? false : true);
+        d->_titleLabel->setVisible(!title.isEmpty());
         d->_titleLabelLayout->setContentsMargins(title.isEmpty() ? 0 : 10, 0, 0, 0);
     });
 
