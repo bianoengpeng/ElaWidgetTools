@@ -371,7 +371,7 @@ ElaNavigationType::NodeOperateReturnType ElaNavigationBar::addFooterNode(QString
 
 ElaNavigationType::NodeOperateReturnType ElaNavigationBar::addFooterNode(QString footerTitle, QWidget* page, QString& footerKey, int keyPoints, ElaIconType::IconName awesome)
 {
-    ElaNavigationType::NodeOperateReturnType returnType = d_ptr->_footerModel->addFooterNode(footerTitle, footerKey, page ? true : false, keyPoints, awesome);
+    ElaNavigationType::NodeOperateReturnType returnType = d_ptr->_footerModel->addFooterNode(footerTitle, footerKey, page != nullptr, keyPoints, awesome);
     if (returnType == ElaNavigationType::Success)
     {
         d_ptr->_addFooterPage(page, footerKey);
@@ -398,11 +398,11 @@ void ElaNavigationBar::expandNavigationNode(QString expanderKey)
     {
         return;
     }
-    d->_expandOrCollpaseExpanderNode(node, true);
+    d->_expandOrCollapseExpanderNode(node, true);
     d->_resetNodeSelected();
 }
 
-void ElaNavigationBar::collpaseNavigationNode(QString expanderKey)
+void ElaNavigationBar::collapseNavigationNode(QString expanderKey)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(expanderKey);
@@ -410,7 +410,7 @@ void ElaNavigationBar::collpaseNavigationNode(QString expanderKey)
     {
         return;
     }
-    d->_expandOrCollpaseExpanderNode(node, false);
+    d->_expandOrCollapseExpanderNode(node, false);
     d->_resetNodeSelected();
 }
 
@@ -490,6 +490,37 @@ int ElaNavigationBar::getNodeKeyPoints(QString nodeKey) const
         return -1;
     }
     return node->getKeyPoints();
+}
+
+void ElaNavigationBar::setNavigationNodeTitle(QString nodeKey, QString nodeTitle)
+{
+    Q_D(ElaNavigationBar);
+    ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
+    if (!node)
+    {
+        node = d->_footerModel->getNavigationNode(nodeKey);
+    }
+    if (!node)
+    {
+        return;
+    }
+    node->setNodeTitle(nodeTitle);
+    update();
+}
+
+QString ElaNavigationBar::getNavigationNodeTitle(QString nodeKey) const
+{
+    Q_D(const ElaNavigationBar);
+    ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
+    if (!node)
+    {
+        node = d->_footerModel->getNavigationNode(nodeKey);
+    }
+    if (!node)
+    {
+        return {};
+    }
+    return node->getNodeTitle();
 }
 
 void ElaNavigationBar::navigation(QString pageKey, bool isLogClicked, bool isRouteBack)

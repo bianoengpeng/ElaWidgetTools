@@ -60,7 +60,7 @@ private:
     bool _isWMClickedAnimationFinished{true};
     ElaThemeAnimationWidget* _animationWidget{nullptr};
     ElaNavigationType::NavigationDisplayMode _currentNavigationBarDisplayMode{ElaNavigationType::Maximal};
-
+    QMap<QString, const QMetaObject*> _pageMetaMap;
     QMap<QString, QWidget*> _routeMap; // key__nodeKey title可以一致  value__Page
     int _centralStackTargetIndex{0};
     int _navigationTargetIndex{0};
