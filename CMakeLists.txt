@@ -28,6 +28,12 @@ option(BUILD_ELAPACKETIO "Build ElaPacketIO" OFF)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+if (NOT WIN32)
+    add_link_options(-Wl,--disable-new-dtags)
+    set(CMAKE_SKIP_INSTALL_RPATH FALSE)
+    set(CMAKE_INSTALL_RPATH "${QT_SDK_DIR}/lib:${CMAKE_INSTALL_PREFIX}/ElaWidgetTools/lib")
+endif ()
+
 add_subdirectory(ElaWidgetTools)
 if (WIN32 AND BUILD_ELAPACKETIO)
     add_definitions(-DBUILD_WITH_ELAPACKETIO)

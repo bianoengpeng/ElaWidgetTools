@@ -28,7 +28,7 @@
 
 ## 支持平台
 
-| [Windows][win-link] | [Ubuntu][ubuntu-link] 
+| [Windows][win-link] | [Ubuntu/Kylin][ubuntu-link] |
 |---------------------|-----------------------|
 | ![win-badge]        | ![ubuntu-badge]       |
 

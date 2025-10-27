@@ -40,18 +40,13 @@ else ()
     set(LIB_TYPE "SHARED")
 endif ()
 
-if (${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_library(${PROJECT_NAME} ${LIB_TYPE}
-        ${PROJECT_SOURCES}
-    )
-else ()
-    add_library(${PROJECT_NAME} ${LIB_TYPE}
-        ${PROJECT_SOURCES}
-    )
-endif ()
+add_library(${PROJECT_NAME} ${LIB_TYPE}
+    ${PROJECT_SOURCES}
+)
 
 FILE(GLOB EXPORT_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
 target_include_directories(${PROJECT_NAME} PUBLIC
+    ${Qt${QT_VERSION_MAJOR}Widgets_PRIVATE_INCLUDE_DIRS}
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/private>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/DeveloperComponents>
@@ -77,13 +72,8 @@ foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
 endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 if (WIN32)
     target_link_libraries(${PROJECT_NAME} PUBLIC
-        Qt${QT_VERSION_MAJOR}::Widgets
         D3D11
         DXGI
-    )
-else ()
-    target_link_libraries(${PROJECT_NAME} PUBLIC
-        Qt${QT_VERSION_MAJOR}::Widgets
     )
 endif ()
 
@@ -102,7 +92,8 @@ install(TARGETS ${PROJECT_NAME}
 if (MSVC AND NOT LIB_TYPE STREQUAL "STATIC")
     install(
         FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
-        DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample OPTIONAL)
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample
+    )
 endif ()
 
 install(FILES ${EXPORT_HEADERS} DESTINATION ${PROJECT_NAME}/include)
