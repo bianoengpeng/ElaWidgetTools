@@ -60,13 +60,12 @@ class ELA_EXPORT ElaAppBar : public QWidget
     Q_PROPERTY_CREATE_Q_H(bool, IsDefaultMaximized)
     Q_PROPERTY_CREATE_Q_H(bool, IsOnlyAllowMinAndClose)
     Q_PROPERTY_CREATE_Q_H(int, AppBarHeight)
-    Q_PROPERTY_CREATE_Q_H(int, CustomWidgetMaximumWidth)
 public:
     explicit ElaAppBar(QWidget* parent = nullptr);
     ~ElaAppBar() override;
 
-    void setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* customWidget);
-    QWidget* getCustomWidget() const;
+    void setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* customWidget, QObject* hitTestObject = nullptr, const QString& hitTestFunctionName = "");
+    QWidget* getCustomWidget(ElaAppBarType::CustomArea customArea) const;
 
     void setCustomMenu(QMenu* customMenu);
     QMenu* getCustomMenu() const;
