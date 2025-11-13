@@ -202,13 +202,14 @@ void MainWindow::initEdgeLayout()
     ElaMenuBar* menuBar = new ElaMenuBar(this);
     menuBar->setFixedHeight(30);
     QWidget* customWidget = new QWidget(this);
-    customWidget->setFixedWidth(500);
+    
     QVBoxLayout* customLayout = new QVBoxLayout(customWidget);
     customLayout->setContentsMargins(0, 0, 0, 0);
     customLayout->addWidget(menuBar);
     customLayout->addStretch();
-    // this->setMenuBar(menuBar);
-    this->setCustomWidget(ElaAppBarType::MiddleArea, customWidget);
+
+    this->setCustomWidget(ElaAppBarType::LeftArea, customWidget);
+    customWidget->setMaximumWidth(200);
 
     menuBar->addElaIconAction(ElaIconType::AtomSimple, "动作菜单");
     ElaMenu* iconMenu = menuBar->addMenu(ElaIconType::Aperture, "图标菜单");

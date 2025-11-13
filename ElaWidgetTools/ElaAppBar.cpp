@@ -181,9 +181,11 @@ ElaAppBar::ElaAppBar(QWidget* parent)
     d->_customAreaWidgetList[0] = leftAreaWidget;
     d->_customAreaWidgetList[1] = middleAreaWidget;
     d->_customAreaWidgetList[2] = rightAreaWidget;
-    d->_mainLayout->addWidget(leftAreaWidget);
-    d->_mainLayout->addWidget(middleAreaWidget);
-    d->_mainLayout->addWidget(rightAreaWidget);
+    d->_mainLayout->addWidget(leftAreaWidget, 0);
+    d->_mainLayout->addWidget(middleAreaWidget, 0);
+    d->_mainLayout->addWidget(rightAreaWidget, 0);
+    // 在自定义区域后添加弹性空间，确保中间留白可拖拽，且自定义控件不会过度扩展
+    d->_mainLayout->addStretch(1);
 
     QHBoxLayout* rightLayout = new QHBoxLayout();
     rightLayout->setSpacing(0);
@@ -261,12 +263,33 @@ void ElaAppBar::setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* w
     widget->setMinimumHeight(0);
     widget->setMaximumHeight(height());
     widget->setParent(this);
+    
+    // 限制控件的水平尺寸策略，防止过度扩展占据拖拽区域
+    QSizePolicy sp = widget->sizePolicy();
+    sp.setHorizontalPolicy(QSizePolicy::Maximum);
+    widget->setSizePolicy(sp);
+    
     int customAreaIndex = (int)customArea - 1;
     d->_mainLayout->removeWidget(d->_customAreaWidgetList[customAreaIndex]);
-    d->_mainLayout->insertWidget(customAreaIndex + 1, widget);
+    d->_mainLayout->insertWidget(customAreaIndex + 1, widget, 0);  // stretch=0，不参与空间分配
     d->_customAreaWidgetList[customAreaIndex] = widget;
     d->_customAreaHitTestObjectList[customAreaIndex] = hitTestObject;
     d->_customAreaHitTestFunctionNameList[customAreaIndex] = hitTestFunctionName;
+    
+    // 根据区域类型设置对齐，确保各区域控件位置符合预期
+    switch (customArea)
+    {
+    case ElaAppBarType::LeftArea:
+        d->_mainLayout->setAlignment(widget, Qt::AlignLeft | Qt::AlignVCenter);
+        break;
+    case ElaAppBarType::MiddleArea:
+        d->_mainLayout->setAlignment(widget, Qt::AlignHCenter | Qt::AlignVCenter);
+        break;
+    case ElaAppBarType::RightArea:
+        d->_mainLayout->setAlignment(widget, Qt::AlignRight | Qt::AlignVCenter);
+        break;
+    }
+    
     Q_EMIT customWidgetChanged();
 }
 
