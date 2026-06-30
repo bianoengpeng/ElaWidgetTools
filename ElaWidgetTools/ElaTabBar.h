@@ -10,7 +10,7 @@ class ELA_EXPORT ElaTabBar : public QTabBar
 {
     Q_OBJECT
     Q_Q_CREATE(ElaTabBar)
-    Q_PROPERTY_CREATE_Q_H(QSize, TabSize)
+    Q_PROPERTY_REF_CREATE_Q_H(QSize, TabSize)
 public:
     explicit ElaTabBar(QWidget* parent = nullptr);
     ~ElaTabBar() override;

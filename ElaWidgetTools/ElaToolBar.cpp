@@ -14,7 +14,8 @@ ElaToolBar::ElaToolBar(QWidget* parent)
     Q_D(ElaToolBar);
     d->q_ptr = this;
     setObjectName("ElaToolBar");
-    setStyle(new ElaToolBarStyle(style()));
+    d->_toolBarStyle = new ElaToolBarStyle(style());
+    setStyle(d->_toolBarStyle);
     layout()->setSpacing(10);
     layout()->setContentsMargins(3, 3, 3, 3);
 
@@ -48,7 +49,8 @@ ElaToolBar::ElaToolBar(const QString& title, QWidget* parent)
 
 ElaToolBar::~ElaToolBar()
 {
-    delete this->style();
+    Q_D(ElaToolBar);
+    delete d->_toolBarStyle;
 }
 
 void ElaToolBar::setToolBarSpacing(int spacing)
@@ -61,10 +63,22 @@ int ElaToolBar::getToolBarSpacing() const
     return layout()->spacing();
 }
 
+void ElaToolBar::setToolButtonSize(const QSize& size)
+{
+    Q_D(ElaToolBar);
+    d->_toolBarStyle->setToolButtonSize(size);
+}
+
+const QSize& ElaToolBar::getToolButtonSize() const
+{
+    Q_D(const ElaToolBar);
+    return d->_toolBarStyle->getToolButtonSize();
+}
+
 QAction* ElaToolBar::addElaIconAction(ElaIconType::IconName icon, const QString& text)
 {
     QAction* action = new QAction(text, this);
-    action->setProperty("ElaIconType", QChar((unsigned short)icon));
+    action->setProperty("ElaIconType", QChar(icon));
     action->setIcon(ElaIcon::getInstance()->getElaIcon(ElaIconType::Broom, 1));
     addAction(action);
     return action;
@@ -74,7 +88,7 @@ QAction* ElaToolBar::addElaIconAction(ElaIconType::IconName icon, const QString&
 {
     QAction* action = new QAction(text, this);
     action->setShortcut(shortcut);
-    action->setProperty("ElaIconType", QChar((unsigned short)icon));
+    action->setProperty("ElaIconType", QChar(icon));
     action->setIcon(ElaIcon::getInstance()->getElaIcon(ElaIconType::Broom, 1));
     addAction(action);
     return action;

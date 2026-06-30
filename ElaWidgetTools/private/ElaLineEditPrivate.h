@@ -1,9 +1,9 @@
 #ifndef ELALINEEDITPRIVATE_H
 #define ELALINEEDITPRIVATE_H
 
-#include <QObject>
-
 #include "ElaDef.h"
+#include <QObject>
+#include <QVariantMap>
 class ElaEvent;
 class ElaLineEdit;
 class ElaLineEditPrivate : public QObject
@@ -16,7 +16,7 @@ class ElaLineEditPrivate : public QObject
 public:
     explicit ElaLineEditPrivate(QObject* parent = nullptr);
     ~ElaLineEditPrivate() override;
-    Q_INVOKABLE void onWMWindowClickedEvent(QVariantMap data);
+    Q_INVOKABLE void onWMWindowClickedEvent(const QVariantMap& data);
     Q_SLOT void onThemeChanged(ElaThemeType::ThemeMode themeMode);
 
 private:

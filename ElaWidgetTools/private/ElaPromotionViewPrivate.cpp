@@ -96,7 +96,7 @@ void ElaPromotionViewPrivate::onPromotionCardClicked(ElaPromotionCard* clickedCa
     Q_EMIT q->pCurrentIndexChanged();
 }
 
-void ElaPromotionViewPrivate::_startCardGeometryAnimation(ElaPromotionCard* card, QRect start, QRect end)
+void ElaPromotionViewPrivate::_startCardGeometryAnimation(ElaPromotionCard* card, const QRect& start, const QRect& end)
 {
     QPropertyAnimation* geometryAnimation = new QPropertyAnimation(card, "geometry");
     geometryAnimation->setEasingCurve(QEasingCurve::OutCubic);

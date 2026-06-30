@@ -12,10 +12,10 @@ class ElaFooterModel : public QAbstractListModel
 public:
     explicit ElaFooterModel(QObject* parent = nullptr);
     ~ElaFooterModel();
-    ElaNavigationType::NodeResult addFooterNode(QString footerTitle, QString& footerKey, bool isHasFooterPage, int keyPoints = 0, ElaIconType::IconName awesome = ElaIconType::None);
+    ElaNavigationType::NodeResult addFooterNode(const QString& footerTitle, QString& footerKey, bool isHasFooterPage, int keyPoints = 0, ElaIconType::IconName awesome = ElaIconType::None);
     int getFooterNodeCount() const;
-    ElaNavigationNode* getNavigationNode(QString footerKey);
-    void removeNavigationNode(QString footerKey);
+    ElaNavigationNode* getNavigationNode(const QString& footerKey);
+    void removeNavigationNode(const QString& footerKey);
 
 protected:
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;

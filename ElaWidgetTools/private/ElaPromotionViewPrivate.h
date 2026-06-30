@@ -30,7 +30,7 @@ private:
     int _indicatorSpacing{12};
     bool _isAllowSwitch{true};
     QList<ElaPromotionCard*> _promotionCardList;
-    void _startCardGeometryAnimation(ElaPromotionCard* card, QRect start, QRect end);
+    void _startCardGeometryAnimation(ElaPromotionCard* card, const QRect& start, const QRect& end);
     void _startHorizontalCardPixmapRatioAnimation(ElaPromotionCard* card, qreal start, qreal end);
     void _updatePromotionCardGeometry();
     int _getAdjacentIndex(Qt::LayoutDirection direction, int index);

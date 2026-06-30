@@ -31,13 +31,13 @@ ElaTabBar::~ElaTabBar()
     delete d->_style;
 }
 
-void ElaTabBar::setTabSize(QSize tabSize)
+void ElaTabBar::setTabSize(const QSize& tabSize)
 {
     Q_D(ElaTabBar);
     d->_style->setTabSize(tabSize);
 }
 
-QSize ElaTabBar::getTabSize() const
+const QSize& ElaTabBar::getTabSize() const
 {
     Q_D(const ElaTabBar);
     return d->_style->getTabSize();

@@ -8,7 +8,6 @@ class T_Home;
 class T_Icon;
 class T_ElaScreen;
 class T_BaseComponents;
-class T_Graphics;
 class T_Navigation;
 class T_Popup;
 class T_Card;
@@ -43,7 +42,6 @@ private:
 #endif
     T_Icon* _iconPage{nullptr};
     T_BaseComponents* _baseComponentsPage{nullptr};
-    T_Graphics* _graphicsPage{nullptr};
     T_Navigation* _navigationPage{nullptr};
     T_Popup* _popupPage{nullptr};
     T_Card* _cardPage{nullptr};

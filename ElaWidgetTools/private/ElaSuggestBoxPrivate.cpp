@@ -87,20 +87,20 @@ void ElaSuggestBoxPrivate::onSearchEditTextEdit(const QString& searchText)
 void ElaSuggestBoxPrivate::onSearchViewClicked(const QModelIndex& index)
 {
     Q_Q(ElaSuggestBox);
-    _searchEdit->clear();
     _searchView->clearSelection();
     if (!index.isValid())
     {
         return;
     }
     ElaSuggestion* suggest = _searchModel->getSearchSuggestion(index.row());
+    _searchEdit->setText(suggest->getSuggestText());
     ElaSuggestBox::SuggestData data(suggest->getElaIcon(), suggest->getSuggestText(), suggest->getSuggestData());
     data.setSuggestKey(suggest->getSuggestKey());
     Q_EMIT q->suggestionClicked(data);
     _startCloseAnimation();
 }
 
-void ElaSuggestBoxPrivate::_startSizeAnimation(QSize oldSize, QSize newSize)
+void ElaSuggestBoxPrivate::_startSizeAnimation(const QSize& oldSize, const QSize& newSize)
 {
     if (_lastSize.isValid() && _lastSize == newSize)
     {

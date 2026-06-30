@@ -29,17 +29,17 @@ public:
     explicit ElaWindowPrivate(QObject* parent = nullptr);
     ~ElaWindowPrivate() override;
     Q_SLOT void onNavigationButtonClicked();
-    Q_INVOKABLE void onWMWindowClickedEvent(QVariantMap data);
+    Q_INVOKABLE void onWMWindowClickedEvent(const QVariantMap& data);
     Q_SLOT void onThemeReadyChange();
     Q_SLOT void onThemeModeChanged(ElaThemeType::ThemeMode themeMode);
     Q_SLOT void onWindowDisplayModeChanged();
     Q_SLOT void onNavigationNodeClicked(ElaNavigationType::NavigationNodeType nodeType, QString nodeKey, bool isRouteBack);
     Q_SLOT void onNavigationNodeAdded(ElaNavigationType::NavigationNodeType nodeType, QString nodeKey, QWidget* page);
     Q_SLOT void onNavigationNodeRemoved(ElaNavigationType::NavigationNodeType nodeType, QString nodeKey);
-    Q_SLOT void onNavigationRouterStateChanged(ElaNavigationRouterType::RouteMode routeMode);
-    Q_INVOKABLE void onNavigationRoute(QVariantMap routeData);
+    Q_SLOT void onNavigationRouterStateChanged(const QString& domainName, ElaActionCommanderType::CommanderState state);
 
 private:
+    friend class ElaWindowStackChangeCommand;
     ElaThemeType::ThemeMode _themeMode;
     ElaApplicationType::WindowDisplayMode _windowDisplayMode;
     QMovie* _windowPaintMovie{nullptr};
@@ -47,8 +47,6 @@ private:
     QString _darkWindowMoviePath{""};
     QPixmap* _lightWindowPix;
     QPixmap* _darkWindowPix;
-
-    bool _isWindowClosing{false};
 
     bool _isInitFinished{false};
     ElaEvent* _focusEvent{nullptr};
@@ -70,9 +68,8 @@ private:
     ElaNavigationType::NavigationDisplayMode _currentNavigationBarDisplayMode{ElaNavigationType::Maximal};
     QMap<QString, const QMetaObject*> _pageMetaMap;
     QMap<QString, QWidget*> _routeMap; // key__nodeKey title可以一致  value__Page
-    int _centralStackTargetIndex{0};
     int _navigationTargetIndex{0};
-    qreal _distance(QPoint point1, QPoint point2);
+    qreal _distance(const QPoint& point1, const QPoint& point2);
     void _resetWindowLayout(bool isAnimation);
     void _doNavigationDisplayModeChange();
 };

@@ -10,7 +10,7 @@ class ELA_EXPORT ElaRoller : public QWidget
     Q_OBJECT
     Q_Q_CREATE(ElaRoller)
     Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
-    Q_PROPERTY_CREATE_Q_H(QStringList, ItemList)
+    Q_PROPERTY_REF_CREATE_Q_H(QStringList, ItemList)
     Q_PROPERTY_CREATE_Q_H(int, ItemHeight)
     Q_PROPERTY_CREATE_Q_H(int, MaxVisibleItems)
     Q_PROPERTY_CREATE_Q_H(int, CurrentIndex)

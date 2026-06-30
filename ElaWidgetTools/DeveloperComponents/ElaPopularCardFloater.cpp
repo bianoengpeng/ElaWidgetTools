@@ -223,7 +223,7 @@ void ElaPopularCardFloater::paintEvent(QPaintEvent* event)
     painter.restore();
 }
 
-QRect ElaPopularCardFloater::_calculateTargetGeometry(QRect cardGeometry)
+QRect ElaPopularCardFloater::_calculateTargetGeometry(const QRect& cardGeometry)
 {
     QRect targetGeometry = cardGeometry;
     targetGeometry.adjust(-_floatGeometryOffset, -_floatGeometryOffset, _floatGeometryOffset, 90);

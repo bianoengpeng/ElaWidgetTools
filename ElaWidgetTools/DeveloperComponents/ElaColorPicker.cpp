@@ -31,14 +31,14 @@ ElaColorPicker::~ElaColorPicker()
 {
 }
 
-void ElaColorPicker::setSelectedColor(QColor color)
+void ElaColorPicker::setSelectedColor(const QColor& color)
 {
-    _selectedColor = std::move(color);
+    _selectedColor = color;
     _selectedPoint = QPoint(qRound(3 + 254 * _selectedColor.hueF() + 0.5f), qRound(257 - 254 * _selectedColor.saturationF() + 0.5f));
     update();
 }
 
-QColor ElaColorPicker::getSelectedColor() const
+const QColor& ElaColorPicker::getSelectedColor() const
 {
     return _selectedColor;
 }

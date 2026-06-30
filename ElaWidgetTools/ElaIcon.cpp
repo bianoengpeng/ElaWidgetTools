@@ -23,12 +23,12 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome)
     // painter.setBrush(QColor("#1570A5"));
     iconFont.setPixelSize(25);
     painter.setFont(iconFont);
-    painter.drawText(pix.rect(), Qt::AlignCenter, QChar((unsigned short)awesome));
+    painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }
 
-QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, QColor iconColor)
+QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, const QColor& iconColor)
 {
     QFont iconFont = QFont("ElaAwesome");
     QPixmap pix(30, 30);
@@ -40,7 +40,7 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, QColor iconColor)
     // painter.setBrush(QColor("#1570A5"));
     iconFont.setPixelSize(25);
     painter.setFont(iconFont);
-    painter.drawText(pix.rect(), Qt::AlignCenter, QChar((unsigned short)awesome));
+    painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }
@@ -56,12 +56,12 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize)
     iconFont.setPixelSize(pixelSize);
     painter.setFont(iconFont);
     // 画图形字体
-    painter.drawText(pix.rect(), Qt::AlignCenter, QChar((unsigned short)awesome));
+    painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }
 
-QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, QColor iconColor)
+QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, const QColor& iconColor)
 {
     QFont iconFont = QFont("ElaAwesome");
     QPixmap pix(pixelSize, pixelSize);
@@ -73,7 +73,7 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, QColor i
     iconFont.setPixelSize(pixelSize);
     painter.setFont(iconFont);
     // 画图形字体
-    painter.drawText(pix.rect(), Qt::AlignCenter, QChar((unsigned short)awesome));
+    painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }
@@ -89,12 +89,12 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixe
     iconFont.setPixelSize(pixelSize);
     painter.setFont(iconFont);
     // 画图形字体
-    painter.drawText(pix.rect(), Qt::AlignCenter, QChar((unsigned short)awesome));
+    painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }
 
-QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight, QColor iconColor)
+QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight, const QColor& iconColor)
 {
     QFont iconFont = QFont("ElaAwesome");
     QPixmap pix(fixedWidth, fixedHeight);
@@ -106,7 +106,7 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixe
     iconFont.setPixelSize(pixelSize);
     painter.setFont(iconFont);
     // 画图形字体
-    painter.drawText(pix.rect(), Qt::AlignCenter, QChar((unsigned short)awesome));
+    painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }

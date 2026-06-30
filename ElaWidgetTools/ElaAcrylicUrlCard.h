@@ -15,8 +15,8 @@ class ELA_EXPORT ElaAcrylicUrlCard : public QPushButton
     Q_PROPERTY_CREATE_Q_H(qreal, MainOpacity)
     Q_PROPERTY_CREATE_Q_H(qreal, NoiseOpacity)
     Q_PROPERTY_CREATE_Q_H(int, BrushAlpha)
-    Q_PROPERTY_CREATE_Q_H(QString, Title);
-    Q_PROPERTY_CREATE_Q_H(QString, SubTitle);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, Title);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, SubTitle);
     Q_PROPERTY_CREATE_Q_H(int, TitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, SubTitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, TitleSpacing);
@@ -25,7 +25,7 @@ class ELA_EXPORT ElaAcrylicUrlCard : public QPushButton
     Q_PROPERTY_CREATE_Q_H(QSize, CardPixmapSize);
     Q_PROPERTY_CREATE_Q_H(int, CardPixmapBorderRadius)
     Q_PROPERTY_CREATE_Q_H(ElaCardPixType::PixMode, CardPixMode);
-    Q_PROPERTY_CREATE_Q_H(QString, Url);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, Url);
 
 public:
     explicit ElaAcrylicUrlCard(QWidget* parent = nullptr);

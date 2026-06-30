@@ -18,8 +18,8 @@ private:
     ~ElaDxgiManager() override;
 
 public:
-    QStringList getDxDeviceList() const;
-    QStringList getOutputDeviceList() const;
+    const QStringList& getDxDeviceList() const;
+    const QStringList& getOutputDeviceList() const;
     QImage grabScreenToImage() const;
     void startGrabScreen();
     void stopGrabScreen();
@@ -30,7 +30,7 @@ public:
     int getOutputDeviceID() const;
     void setGrabArea(int width, int height); //从屏幕中心向外延伸
     void setGrabArea(int x, int y, int width, int height);
-    QRect getGrabArea() const;
+    const QRect& getGrabArea() const;
     void setGrabFrameRate(int frameRateValue);
     int getGrabFrameRate() const;
     void setTimeoutMsValue(int timeoutValue);

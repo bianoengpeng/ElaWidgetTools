@@ -15,7 +15,7 @@ class ElaNavigationView : public QTreeView
 public:
     explicit ElaNavigationView(QWidget* parent = nullptr);
     ~ElaNavigationView() override;
-    void navigationNodeStateChange(QVariantMap data);
+    void navigationNodeStateChange(const QVariantMap& data);
 
     Q_SLOT void onCustomContextMenuRequested(const QPoint& pos);
 Q_SIGNALS:

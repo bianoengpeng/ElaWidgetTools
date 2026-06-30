@@ -13,7 +13,7 @@ ElaLineEditPrivate::~ElaLineEditPrivate()
 {
 }
 
-void ElaLineEditPrivate::onWMWindowClickedEvent(QVariantMap data)
+void ElaLineEditPrivate::onWMWindowClickedEvent(const QVariantMap& data)
 {
     Q_Q(ElaLineEdit);
     ElaAppBarType::WMMouseActionType actionType = data.value("WMClickType").value<ElaAppBarType::WMMouseActionType>();

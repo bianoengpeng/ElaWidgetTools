@@ -61,7 +61,7 @@ void ElaColorDialogPrivate::onColorModeChanged(int index)
     _updateEditValue();
 }
 
-void ElaColorDialogPrivate::onHtmlEditFocusOut(QString text)
+void ElaColorDialogPrivate::onHtmlEditFocusOut(const QString& text)
 {
     // 自动补全
     if (text == "#")

@@ -12,10 +12,10 @@
 #include "ElaTheme.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, int, BorderRadius)
 Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QPixmap, CardPixmap)
-Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QString, Title)
-Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QString, SubTitle)
-Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QString, InteractiveTips)
-Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QString, DetailedText)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, Title)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, SubTitle)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, InteractiveTips)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, DetailedText)
 Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QPixmap, CardFloatPixmap)
 ElaPopularCard::ElaPopularCard(QWidget* parent)
     : QWidget{parent}, d_ptr(new ElaPopularCardPrivate())
@@ -45,7 +45,7 @@ ElaPopularCard::~ElaPopularCard()
 {
 }
 
-void ElaPopularCard::setCardButtonText(QString cardButtonText)
+void ElaPopularCard::setCardButtonText(const QString& cardButtonText)
 {
     Q_D(ElaPopularCard);
     if (cardButtonText.isEmpty())
@@ -57,7 +57,7 @@ void ElaPopularCard::setCardButtonText(QString cardButtonText)
     Q_EMIT pCardButtonTextChanged();
 }
 
-QString ElaPopularCard::getCardButtonText() const
+const QString& ElaPopularCard::getCardButtonText() const
 {
     Q_D(const ElaPopularCard);
     return d->_pCardButtonText;

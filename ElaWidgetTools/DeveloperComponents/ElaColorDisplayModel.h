@@ -10,11 +10,11 @@ public:
     explicit ElaColorDisplayModel(QObject* parent = nullptr);
     ~ElaColorDisplayModel();
     void appendDisplayColor(QList<QColor> colorList);
-    void appendDisplayColor(QColor color);
+    void appendDisplayColor(const QColor& color);
     void removeDisplayColor(int index);
-    void replaceDisplayColor(QColor color, int index);
+    void replaceDisplayColor(const QColor& color, int index);
 
-    QList<QColor> getDisplayColorList() const;
+    const QList<QColor>& getDisplayColorList() const;
     QColor getDisplayColor(int index) const;
 
 protected:

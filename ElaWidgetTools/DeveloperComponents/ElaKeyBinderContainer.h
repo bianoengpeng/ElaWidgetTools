@@ -7,7 +7,7 @@ class ElaKeyBinder;
 class ElaKeyBinderContainer : public QWidget
 {
     Q_OBJECT
-    Q_PRIVATE_CREATE(QString, BinderKeyText)
+    Q_PRIVATE_REF_CREATE(QString, BinderKeyText)
     Q_PRIVATE_CREATE(quint32, NativeVirtualBinderKey)
 public:
     explicit ElaKeyBinderContainer(QWidget* parent = nullptr);

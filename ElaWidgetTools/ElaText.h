@@ -17,8 +17,8 @@ class ELA_EXPORT ElaText : public QLabel
     Q_PROPERTY_CREATE_Q_H(ElaIconType::IconName, ElaIcon)
 public:
     explicit ElaText(QWidget* parent = nullptr);
-    explicit ElaText(QString text, QWidget* parent = nullptr);
-    explicit ElaText(QString text, int pixelSize, QWidget* parent = nullptr);
+    explicit ElaText(const QString& text, QWidget* parent = nullptr);
+    explicit ElaText(const QString& text, int pixelSize, QWidget* parent = nullptr);
     ~ElaText() override;
 
 protected:

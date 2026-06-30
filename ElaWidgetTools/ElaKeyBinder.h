@@ -10,7 +10,7 @@ class ELA_EXPORT ElaKeyBinder : public QLabel
     Q_OBJECT
     Q_Q_CREATE(ElaKeyBinder)
     Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
-    Q_PROPERTY_CREATE_Q_H(QString, BinderKeyText)
+    Q_PROPERTY_REF_CREATE_Q_H(QString, BinderKeyText)
     Q_PROPERTY_CREATE_Q_H(quint32, NativeVirtualBinderKey)
 public:
     explicit ElaKeyBinder(QWidget* parent = nullptr);

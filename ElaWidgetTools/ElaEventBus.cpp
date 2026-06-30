@@ -4,8 +4,8 @@
 
 #include "ElaEventBusPrivate.h"
 Q_SINGLETON_CREATE_CPP(ElaEventBus);
-Q_PROPERTY_CREATE_Q_CPP(ElaEvent, QString, EventName);
-Q_PROPERTY_CREATE_Q_CPP(ElaEvent, QString, FunctionName);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaEvent, QString, EventName);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaEvent, QString, FunctionName);
 Q_PROPERTY_CREATE_Q_CPP(ElaEvent, Qt::ConnectionType, ConnectionType);
 ElaEvent::ElaEvent(QObject* parent)
     : QObject{parent}, d_ptr(new ElaEventPrivate())
@@ -17,7 +17,7 @@ ElaEvent::ElaEvent(QObject* parent)
     d->_pEventName = "";
 }
 
-ElaEvent::ElaEvent(QString eventName, QString functionName, QObject* parent)
+ElaEvent::ElaEvent(const QString& eventName, const QString& functionName, QObject* parent)
     : QObject{parent}, d_ptr(new ElaEventPrivate())
 {
     Q_D(ElaEvent);

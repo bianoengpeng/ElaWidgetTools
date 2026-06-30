@@ -30,7 +30,7 @@ ElaThemeType::ThemeMode ElaTheme::getThemeMode() const
     return d->_themeMode;
 }
 
-void ElaTheme::drawEffectShadow(QPainter* painter, QRect widgetRect, int shadowBorderWidth, int borderRadius)
+void ElaTheme::drawEffectShadow(QPainter* painter, const QRect& widgetRect, int shadowBorderWidth, int borderRadius)
 {
     Q_D(ElaTheme);
     painter->save();
@@ -49,7 +49,7 @@ void ElaTheme::drawEffectShadow(QPainter* painter, QRect widgetRect, int shadowB
     painter->restore();
 }
 
-void ElaTheme::setThemeColor(ElaThemeType::ThemeMode themeMode, ElaThemeType::ThemeColor themeColor, QColor newColor)
+void ElaTheme::setThemeColor(ElaThemeType::ThemeMode themeMode, ElaThemeType::ThemeColor themeColor, const QColor& newColor)
 {
     Q_D(ElaTheme);
     if (themeMode == ElaThemeType::Light)

@@ -24,8 +24,8 @@ public:
 
     struct ELA_EXPORT SuggestData {
         Q_PRIVATE_CREATE(ElaIconType::IconName, ElaIcon)
-        Q_PRIVATE_CREATE(QString, SuggestText)
-        Q_PRIVATE_CREATE(QString, SuggestKey)
+        Q_PRIVATE_REF_CREATE(QString, SuggestText)
+        Q_PRIVATE_REF_CREATE(QString, SuggestKey)
         Q_PRIVATE_CREATE(QVariantMap, SuggestData)
     public:
         explicit SuggestData();

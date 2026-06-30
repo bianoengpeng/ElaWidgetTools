@@ -263,13 +263,13 @@ void ElaAppBar::setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* w
     widget->setMinimumHeight(0);
     widget->setMaximumHeight(height());
     widget->setParent(this);
-    
+
     // 限制控件的水平尺寸策略，防止过度扩展占据拖拽区域
     QSizePolicy sp = widget->sizePolicy();
     sp.setHorizontalPolicy(QSizePolicy::Maximum);
     widget->setSizePolicy(sp);
-    
-    int customAreaIndex = (int)customArea - 1;
+
+    int customAreaIndex = (int)customArea;
     d->_mainLayout->removeWidget(d->_customAreaWidgetList[customAreaIndex]);
     d->_mainLayout->insertWidget(customAreaIndex + 1, widget, 0);  // stretch=0，不参与空间分配
     d->_customAreaWidgetList[customAreaIndex] = widget;
@@ -296,7 +296,7 @@ void ElaAppBar::setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* w
 QWidget* ElaAppBar::getCustomWidget(ElaAppBarType::CustomArea customArea) const
 {
     Q_D(const ElaAppBar);
-    int customAreaIndex = (int)customArea - 1;
+    int customAreaIndex = (int)customArea;
     return d->_customAreaWidgetList[customAreaIndex];
 }
 
@@ -407,31 +407,6 @@ void ElaAppBar::setRouteForwardButtonEnable(bool isEnable)
 {
     Q_D(ElaAppBar);
     d->_routeForwardButton->setEnabled(isEnable);
-}
-
-void ElaAppBar::closeWindow()
-{
-    Q_D(ElaAppBar);
-    QPropertyAnimation* closeOpacityAnimation = new QPropertyAnimation(window(), "windowOpacity");
-    connect(closeOpacityAnimation, &QPropertyAnimation::finished, this, [=]() {
-        window()->close();
-    });
-    closeOpacityAnimation->setStartValue(1);
-    closeOpacityAnimation->setEndValue(0);
-    closeOpacityAnimation->setEasingCurve(QEasingCurve::InOutSine);
-    closeOpacityAnimation->start(QAbstractAnimation::DeleteWhenStopped);
-    if (window()->isMaximized() || window()->isFullScreen() || d->_pIsFixedSize)
-    {
-        return;
-    }
-    QPropertyAnimation* geometryAnimation = new QPropertyAnimation(window(), "geometry");
-    QRect geometry = window()->geometry();
-    geometryAnimation->setStartValue(geometry);
-    qreal targetWidth = (geometry.width() - d->_lastMinTrackWidth) * 0.7 + d->_lastMinTrackWidth;
-    qreal targetHeight = (geometry.height() - window()->minimumHeight()) * 0.7 + window()->minimumHeight();
-    geometryAnimation->setEndValue(QRectF(geometry.center().x() - targetWidth / 2, geometry.center().y() - targetHeight / 2, targetWidth, targetHeight));
-    geometryAnimation->setEasingCurve(QEasingCurve::InOutSine);
-    geometryAnimation->start(QAbstractAnimation::DeleteWhenStopped);
 }
 
 #ifdef Q_OS_WIN

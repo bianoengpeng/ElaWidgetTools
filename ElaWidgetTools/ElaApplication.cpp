@@ -73,15 +73,15 @@ ElaApplicationType::WindowDisplayMode ElaApplication::getWindowDisplayMode() con
     return d->_pWindowDisplayMode;
 }
 
-void ElaApplication::setElaMicaImagePath(QString micaImagePath)
+void ElaApplication::setElaMicaImagePath(const QString& micaImagePath)
 {
     Q_D(ElaApplication);
-    d->_pElaMicaImagePath = std::move(micaImagePath);
+    d->_pElaMicaImagePath = micaImagePath;
     d->_initMicaBaseImage(QImage(d->_pElaMicaImagePath));
     Q_EMIT pElaMicaImagePathChanged();
 }
 
-QString ElaApplication::getElaMicaImagePath() const
+const QString& ElaApplication::getElaMicaImagePath() const
 {
     Q_D(const ElaApplication);
     return d->_pElaMicaImagePath;
@@ -159,9 +159,8 @@ bool ElaApplication::containsCursorToItem(QWidget* item)
     {
         return false;
     }
-    auto point = item->window()->mapFromGlobal(QCursor::pos());
-    QRectF rect = QRectF(item->mapTo(item->window(), QPoint(0, 0)), item->size());
-    if (rect.contains(point))
+    auto itemRect = QRect(item->mapToGlobal(QPoint(0, 0)), item->size());
+    if (itemRect.contains(QCursor::pos()))
     {
         return true;
     }

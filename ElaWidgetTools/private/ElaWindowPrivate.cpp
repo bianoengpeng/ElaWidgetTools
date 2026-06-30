@@ -60,7 +60,7 @@ void ElaWindowPrivate::onNavigationButtonClicked()
     }
 }
 
-void ElaWindowPrivate::onWMWindowClickedEvent(QVariantMap data)
+void ElaWindowPrivate::onWMWindowClickedEvent(const QVariantMap& data)
 {
     ElaAppBarType::WMMouseActionType actionType = data.value("WMClickType").value<ElaAppBarType::WMMouseActionType>();
     if (actionType == ElaAppBarType::WMLBUTTONDBLCLK || actionType == ElaAppBarType::WMLBUTTONUP)
@@ -235,26 +235,30 @@ void ElaWindowPrivate::onNavigationNodeRemoved(ElaNavigationType::NavigationNode
     }
 }
 
-void ElaWindowPrivate::onNavigationRouterStateChanged(ElaNavigationRouterType::RouteMode routeMode)
+void ElaWindowPrivate::onNavigationRouterStateChanged(const QString& domainName, ElaActionCommanderType::CommanderState state)
 {
-    switch (routeMode)
+    if (domainName != "ElaWidgetToolsAction")
     {
-    case ElaNavigationRouterType::BackValid:
+        return;
+    }
+    switch (state)
+    {
+    case ElaActionCommanderType::UndoValid:
     {
         _appBar->setRouteBackButtonEnable(true);
         break;
     }
-    case ElaNavigationRouterType::BackInvalid:
+    case ElaActionCommanderType::UndoInvalid:
     {
         _appBar->setRouteBackButtonEnable(false);
         break;
     }
-    case ElaNavigationRouterType::ForwardValid:
+    case ElaActionCommanderType::RedoValid:
     {
         _appBar->setRouteForwardButtonEnable(true);
         break;
     }
-    case ElaNavigationRouterType::ForwardInvalid:
+    case ElaActionCommanderType::RedoInvalid:
     {
         _appBar->setRouteForwardButtonEnable(false);
         break;
@@ -262,27 +266,7 @@ void ElaWindowPrivate::onNavigationRouterStateChanged(ElaNavigationRouterType::R
     }
 }
 
-void ElaWindowPrivate::onNavigationRoute(QVariantMap routeData)
-{
-    Q_Q(ElaWindow);
-    int routeIndex = -1;
-    _centralStackTargetIndex = routeIndex;
-    bool isRouteBack = routeData.value("ElaRouteBackMode").toBool();
-    if (isRouteBack)
-    {
-        routeIndex = routeData.value("ElaBackCentralStackIndex").toUInt();
-    }
-    else
-    {
-        routeIndex = routeData.value("ElaForwardCentralStackIndex").toUInt();
-    }
-    if (routeIndex != _centerStackedWidget->getContainerStackedWidget()->currentIndex())
-    {
-        _centerStackedWidget->doWindowStackSwitch(_pStackSwitchMode, routeIndex, isRouteBack);
-    }
-}
-
-qreal ElaWindowPrivate::_distance(QPoint point1, QPoint point2)
+qreal ElaWindowPrivate::_distance(const QPoint& point1, const QPoint& point2)
 {
     return std::sqrt((point1.x() - point2.x()) * (point1.x() - point2.x()) + (point1.y() - point2.y()) * (point1.y() - point2.y()));
 }
@@ -311,7 +295,7 @@ void ElaWindowPrivate::_resetWindowLayout(bool isAnimation)
 void ElaWindowPrivate::_doNavigationDisplayModeChange()
 {
     Q_Q(ElaWindow);
-    if (_isWindowClosing || !_isNavigationEnable || !_isInitFinished)
+    if (!_isNavigationEnable || !_isInitFinished)
     {
         return;
     }

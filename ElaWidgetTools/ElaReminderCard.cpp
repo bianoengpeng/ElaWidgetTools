@@ -7,8 +7,8 @@
 #include "ElaTheme.h"
 #include "private/ElaReminderCardPrivate.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaReminderCard, int, BorderRadius)
-Q_PROPERTY_CREATE_Q_CPP(ElaReminderCard, QString, Title);
-Q_PROPERTY_CREATE_Q_CPP(ElaReminderCard, QString, SubTitle);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaReminderCard, QString, Title);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaReminderCard, QString, SubTitle);
 Q_PROPERTY_CREATE_Q_CPP(ElaReminderCard, int, TitlePixelSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaReminderCard, int, SubTitlePixelSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaReminderCard, int, TitleSpacing);

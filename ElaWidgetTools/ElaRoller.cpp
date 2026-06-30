@@ -115,15 +115,15 @@ QString ElaRoller::getCurrentData() const
     return d->_pItemList[d->_pCurrentIndex];
 }
 
-void ElaRoller::setItemList(QStringList itemList)
+void ElaRoller::setItemList(const QStringList& itemList)
 {
     Q_D(ElaRoller);
-    d->_pItemList = std::move(itemList);
+    d->_pItemList = itemList;
     update();
     Q_EMIT pItemListChanged();
 }
 
-QStringList ElaRoller::getItemList() const
+const QStringList& ElaRoller::getItemList() const
 {
     Q_D(const ElaRoller);
     return d->_pItemList;

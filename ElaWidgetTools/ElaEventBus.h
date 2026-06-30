@@ -12,13 +12,13 @@ class ELA_EXPORT ElaEvent : public QObject
 {
     Q_OBJECT
     Q_Q_CREATE(ElaEvent)
-    Q_PROPERTY_CREATE_Q_H(QString, EventName);
-    Q_PROPERTY_CREATE_Q_H(QString, FunctionName);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, EventName);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, FunctionName);
     Q_PROPERTY_CREATE_Q_H(Qt::ConnectionType, ConnectionType);
 
 public:
     explicit ElaEvent(QObject* parent = nullptr);
-    explicit ElaEvent(QString eventName, QString functionName, QObject* parent = nullptr);
+    explicit ElaEvent(const QString& eventName, const QString& functionName, QObject* parent = nullptr);
     ~ElaEvent() override;
     ElaEventBusType::EventBusReturnType registerAndInit();
 };

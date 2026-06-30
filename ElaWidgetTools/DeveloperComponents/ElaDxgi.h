@@ -13,13 +13,13 @@
 class ElaDxgi : public QObject
 {
     Q_OBJECT
-    Q_PRIVATE_CREATE(QStringList, DxDeviceList)
-    Q_PRIVATE_CREATE(QStringList, OutputDeviceList)
+    Q_PRIVATE_REF_CREATE(QStringList, DxDeviceList)
+    Q_PRIVATE_REF_CREATE(QStringList, OutputDeviceList)
     Q_PRIVATE_CREATE(int, DxDeviceID);
     Q_PRIVATE_CREATE(int, OutputDeviceID);
-    Q_PRIVATE_CREATE(QString, LastError)
+    Q_PRIVATE_REF_CREATE(QString, LastError)
     Q_PRIVATE_CREATE(bool, IsGrabActive)
-    Q_PRIVATE_CREATE(QRect, GrabArea);
+    Q_PRIVATE_REF_CREATE(QRect, GrabArea);
     Q_PRIVATE_CREATE(int, GrabFrameRate);  // 截图帧数
     Q_PRIVATE_CREATE(int, TimeoutMsValue); // 超时等待
     Q_PRIVATE_CREATE(bool, IsInitSuccess);

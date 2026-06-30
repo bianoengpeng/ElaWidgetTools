@@ -10,11 +10,11 @@ public:
     explicit ElaBreadcrumbBarModel(QObject* parent = nullptr);
     ~ElaBreadcrumbBarModel();
 
-    void appendBreadcrumb(QString breadcrumb);
-    void removeBreadcrumb(QString breadcrumb);
+    void appendBreadcrumb(const QString& breadcrumb);
+    void removeBreadcrumb(const QString& breadcrumb);
     void removeBreadcrumb(int index);
 
-    void setBreadcrumbList(QStringList breadcrumbList);
+    void setBreadcrumbList(const QStringList& breadcrumbList);
 
     int getBreadcrumbListCount();
     QStringList getBreadcrumbList();

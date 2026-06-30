@@ -12,11 +12,11 @@ class ELA_EXPORT ElaMultiSelectComboBox : public QComboBox
 public:
     explicit ElaMultiSelectComboBox(QWidget* parent = nullptr);
     ~ElaMultiSelectComboBox();
-    void setCurrentSelection(QString selection);
-    void setCurrentSelection(QStringList selection);
+    void setCurrentSelection(const QString& selection);
+    void setCurrentSelection(const QStringList& selection);
     void setCurrentSelection(int index);
     void setCurrentSelection(QList<int> selectionIndex);
-    QStringList getCurrentSelection() const;
+    const QStringList& getCurrentSelection() const;
     QList<int> getCurrentSelectionIndex() const;
 Q_SIGNALS:
     Q_SIGNAL void itemSelectionChanged(QVector<bool> itemSelection);

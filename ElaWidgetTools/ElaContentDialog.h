@@ -19,9 +19,9 @@ public:
     Q_SLOT virtual void onRightButtonClicked();
     void setCentralWidget(QWidget* centralWidget);
 
-    void setLeftButtonText(QString text);
-    void setMiddleButtonText(QString text);
-    void setRightButtonText(QString text);
+    void setLeftButtonText(const QString& text);
+    void setMiddleButtonText(const QString& text);
+    void setRightButtonText(const QString& text);
 
     void close();
 Q_SIGNALS:

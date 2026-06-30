@@ -123,7 +123,7 @@ void ElaNavigationStyle::drawPrimitive(PrimitiveElement element, const QStyleOpt
                 if (index == _pPressIndex)
                 {
                     // 点击时颜色
-                    painter->fillPath(path, ElaThemeColor(_themeMode, BasicSelectedHoverAlpha));
+                    painter->fillPath(path, ElaThemeColor(_themeMode, BasicPressAlpha));
                 }
                 else
                 {
@@ -206,7 +206,7 @@ void ElaNavigationStyle::drawControl(ControlElement element, const QStyleOption*
                 QFont iconFont = QFont("ElaAwesome");
                 iconFont.setPixelSize(17);
                 painter->setFont(iconFont);
-                painter->drawText(QRect(itemRect.x(), itemRect.y(), _iconAreaWidth, itemRect.height()), Qt::AlignCenter, QChar((unsigned short)node->getAwesome()));
+                painter->drawText(QRect(itemRect.x(), itemRect.y(), _iconAreaWidth, itemRect.height()), Qt::AlignCenter, QChar(node->getAwesome()));
                 painter->restore();
             }
 
@@ -266,7 +266,7 @@ void ElaNavigationStyle::drawControl(ControlElement element, const QStyleOption*
                             }
                         }
                         painter->translate(-expandIconRect.x() - (qreal)expandIconRect.width() / 2 + 1, -expandIconRect.y() - (qreal)expandIconRect.height() / 2);
-                        painter->drawText(expandIconRect, Qt::AlignVCenter, QChar((unsigned short)ElaIconType::AngleDown));
+                        painter->drawText(expandIconRect, Qt::AlignVCenter, QChar(ElaIconType::AngleDown));
                         painter->restore();
                     }
                     if (node->getIsChildHasKeyPoints())
@@ -341,7 +341,7 @@ QSize ElaNavigationStyle::sizeFromContents(ContentsType type, const QStyleOption
     return QProxyStyle::sizeFromContents(type, option, size, widget);
 }
 
-void ElaNavigationStyle::navigationNodeStateChange(QVariantMap data)
+void ElaNavigationStyle::navigationNodeStateChange(const QVariantMap& data)
 {
     if (data.contains("Expand"))
     {

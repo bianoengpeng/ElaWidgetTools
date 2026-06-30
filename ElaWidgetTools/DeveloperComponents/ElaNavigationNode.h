@@ -21,12 +21,12 @@ class ElaNavigationNode : public QObject
     Q_PRIVATE_CREATE(bool, IsExpanderNode)
     Q_PRIVATE_CREATE(bool, IsCategoryNode)
     Q_PRIVATE_CREATE(bool, IsVisible)
-    Q_PRIVATE_CREATE(QString, NodeTitle)
+    Q_PRIVATE_REF_CREATE(QString, NodeTitle)
 public:
     explicit ElaNavigationNode(const QString& nodeTitle, ElaNavigationNode* parent = nullptr);
     ~ElaNavigationNode() override;
 
-    QString getNodeKey() const;
+    const QString& getNodeKey() const;
 
     void setIsExpanded(bool isExpanded);
     bool getIsExpanded() const;
@@ -44,6 +44,7 @@ public:
     bool getIsChildNode(ElaNavigationNode* node);
 
     int getRow() const;
+    int getRowExceptCategoryNodes() const;
 
     QList<ElaNavigationNode*> getExceptCategoryNodes();
 

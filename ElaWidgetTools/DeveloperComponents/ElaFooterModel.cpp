@@ -31,7 +31,7 @@ QVariant ElaFooterModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-ElaNavigationType::NodeResult ElaFooterModel::addFooterNode(QString footerTitle, QString& footerKey, bool isHasFooterPage, int keyPoints, ElaIconType::IconName awesome)
+ElaNavigationType::NodeResult ElaFooterModel::addFooterNode(const QString& footerTitle, QString& footerKey, bool isHasFooterPage, int keyPoints, ElaIconType::IconName awesome)
 {
     if (_footerNodeList.count() >= 3)
     {
@@ -55,7 +55,7 @@ int ElaFooterModel::getFooterNodeCount() const
     return _footerNodeList.count();
 }
 
-ElaNavigationNode* ElaFooterModel::getNavigationNode(QString footerKey)
+ElaNavigationNode* ElaFooterModel::getNavigationNode(const QString& footerKey)
 {
     for (auto node: _footerNodeList)
     {
@@ -67,7 +67,7 @@ ElaNavigationNode* ElaFooterModel::getNavigationNode(QString footerKey)
     return nullptr;
 }
 
-void ElaFooterModel::removeNavigationNode(QString footerKey)
+void ElaFooterModel::removeNavigationNode(const QString& footerKey)
 {
     for (auto node: _footerNodeList)
     {

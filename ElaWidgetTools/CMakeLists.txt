@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.16)
+﻿cmake_minimum_required(VERSION 3.12)
 
 project(ElaWidgetTools VERSION 2.0.0 LANGUAGES CXX)
 
@@ -19,18 +19,21 @@ endif()
 add_definitions(-DELAWIDGETTOOLS_LIBRARY)
 option(ELAWIDGETTOOLS_BUILD_STATIC_LIB "Build static library." OFF)
 
-FILE(GLOB ORIGIN *.h *.cpp)
-FILE(GLOB PRIVATE private/*.h private/*.cpp)
-FILE(GLOB DEVELOPER DeveloperComponents/*.h DeveloperComponents/*.cpp)
+FILE(GLOB ORIGIN CONFIGURE_DEPENDS *.h *.cpp)
+FILE(GLOB PRIVATE CONFIGURE_DEPENDS private/*.h private/*.cpp)
+FILE(GLOB DEVELOPER CONFIGURE_DEPENDS DeveloperComponents/*.h DeveloperComponents/*.cpp)
+FILE(GLOB DEVELOPER_COMMAND CONFIGURE_DEPENDS DeveloperComponents/Command/*.h DeveloperComponents/Command/*.cpp)
 
 source_group(include FILES ${INCLUDE})
 source_group(private FILES ${PRIVATE})
 source_group(DeveloperComponents FILES ${DEVELOPER})
+source_group(DeveloperComponents/Command FILES ${DEVELOPER_COMMAND})
 
 set(PROJECT_SOURCES
     ${ORIGIN}
     ${PRIVATE}
     ${DEVELOPER}
+    ${DEVELOPER_COMMAND}
     ${CMAKE_CURRENT_SOURCE_DIR}/ElaWidgetTools.qrc
 )
 
@@ -44,11 +47,15 @@ add_library(${PROJECT_NAME} ${LIB_TYPE}
     ${PROJECT_SOURCES}
 )
 
-FILE(GLOB EXPORT_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
+set_target_properties(${PROJECT_NAME} PROPERTIES EXPORT_NAME WidgetTools)
+add_library(Ela::WidgetTools ALIAS ${PROJECT_NAME})
+
+FILE(GLOB EXPORT_HEADERS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.h)
 target_include_directories(${PROJECT_NAME} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/private>
     $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/DeveloperComponents>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/DeveloperComponents/Command>
     $<INSTALL_INTERFACE:${PROJECT_NAME}/include>
 )
 
@@ -84,15 +91,12 @@ endif ()
 
 install(
     TARGETS ${PROJECT_NAME}
-    EXPORT ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
     ARCHIVE DESTINATION ${PROJECT_NAME}/lib
     LIBRARY DESTINATION ${PROJECT_NAME}/lib
     RUNTIME DESTINATION ${PROJECT_NAME}/bin
 )
-install(TARGETS ${PROJECT_NAME}
-    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample
-    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/ElaWidgetToolsExample
-)
+
 #if (MSVC AND NOT LIB_TYPE STREQUAL "STATIC")
 #    install(
 #        FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
@@ -107,7 +111,8 @@ set(LIBRARIES ${PROJECT_NAME})
 set(LIB_DIR lib)
 
 install(
-    EXPORT ${PROJECT_NAME}
+    EXPORT ${PROJECT_NAME}Targets
+    NAMESPACE Ela::
     FILE ${PROJECT_NAME}Targets.cmake
     DESTINATION ${PROJECT_NAME}/lib/cmake
 )

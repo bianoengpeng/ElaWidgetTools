@@ -17,7 +17,7 @@ class ElaFooterDelegate : public QStyledItemDelegate
 public:
     explicit ElaFooterDelegate(QObject* parent = nullptr);
     ~ElaFooterDelegate();
-    void navigationNodeStateChange(QVariantMap data);
+    void navigationNodeStateChange(const QVariantMap& data);
 
 protected:
     void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;

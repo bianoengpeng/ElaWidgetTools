@@ -18,9 +18,9 @@ public:
     explicit ElaNavigationBar(QWidget* parent = nullptr);
     ~ElaNavigationBar() override;
     void setUserInfoCardVisible(bool isVisible);
-    void setUserInfoCardPixmap(QPixmap pix);
-    void setUserInfoCardTitle(QString title);
-    void setUserInfoCardSubTitle(QString subTitle);
+    void setUserInfoCardPixmap(const QPixmap& pix);
+    void setUserInfoCardTitle(const QString& title);
+    void setUserInfoCardSubTitle(const QString& subTitle);
 
     ElaNavigationType::NodeResult addExpanderNode(const QString& expanderTitle, QString& expanderKey, ElaIconType::IconName awesome = ElaIconType::None);
     ElaNavigationType::NodeResult addExpanderNode(const QString& expanderTitle, QString& expanderKey, const QString& targetExpanderKey, ElaIconType::IconName awesome = ElaIconType::None);
@@ -33,24 +33,24 @@ public:
     ElaNavigationType::NodeResult addCategoryNode(const QString& categoryTitle, QString& categoryKey);
     ElaNavigationType::NodeResult addCategoryNode(const QString& categoryTitle, QString& categoryKey, const QString& targetExpanderKey);
 
-    bool getNodeIsExpanded(QString expanderKey) const;
-    void expandNode(QString expanderKey);
-    void collapseNode(QString expanderKey);
-    void removeNode(QString nodeKey);
+    bool getNodeIsExpanded(const QString& expanderKey) const;
+    void expandNode(const QString& expanderKey);
+    void collapseNode(const QString& expanderKey);
+    void removeNode(const QString& nodeKey);
 
-    void setNodeKeyPoints(QString nodeKey, int keyPoints);
-    int getNodeKeyPoints(QString nodeKey) const;
+    void setNodeKeyPoints(const QString& nodeKey, int keyPoints);
+    int getNodeKeyPoints(const QString& nodeKey) const;
 
-    void setNodeTitle(QString nodeKey, QString nodeTitle);
-    QString getNodeTitle(QString nodeKey) const;
+    void setNodeTitle(const QString& nodeKey, const QString& nodeTitle);
+    QString getNodeTitle(const QString& nodeKey) const;
 
-    void navigation(QString pageKey, bool isLogClicked = true, bool isRouteBack = false);
+    void navigation(const QString& pageKey, bool isLogClicked = true, bool isRouteBack = false);
     void setDisplayMode(ElaNavigationType::NavigationDisplayMode displayMode, bool isAnimation = true);
     ElaNavigationType::NavigationDisplayMode getDisplayMode() const;
 
-    int getPageOpenInNewWindowCount(QString nodeKey) const;
+    int getPageOpenInNewWindowCount(const QString& nodeKey) const;
 
-    QList<ElaSuggestBox::SuggestData> getSuggestDataList() const;
+    const QList<ElaSuggestBox::SuggestData>& getSuggestDataList() const;
 
 Q_SIGNALS:
     Q_SIGNAL void pageOpenInNewWindow(QString nodeKey);

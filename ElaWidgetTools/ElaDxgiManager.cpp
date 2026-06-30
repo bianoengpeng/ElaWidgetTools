@@ -60,13 +60,13 @@ ElaDxgiManager::~ElaDxgiManager()
     delete d->_dxgi;
 }
 
-QStringList ElaDxgiManager::getDxDeviceList() const
+const QStringList& ElaDxgiManager::getDxDeviceList() const
 {
     Q_D(const ElaDxgiManager);
     return d->_dxgi->getDxDeviceList();
 }
 
-QStringList ElaDxgiManager::getOutputDeviceList() const
+const QStringList& ElaDxgiManager::getOutputDeviceList() const
 {
     Q_D(const ElaDxgiManager);
     return d->_dxgi->getOutputDeviceList();
@@ -203,7 +203,7 @@ void ElaDxgiManager::setGrabArea(int x, int y, int width, int height)
     d->_dxgi->setGrabArea(QRect(x, y, width, height));
 }
 
-QRect ElaDxgiManager::getGrabArea() const
+const QRect& ElaDxgiManager::getGrabArea() const
 {
     Q_D(const ElaDxgiManager);
     return d->_dxgi->getGrabArea();

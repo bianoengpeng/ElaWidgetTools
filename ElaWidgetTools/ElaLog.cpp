@@ -5,8 +5,8 @@
 #include "ElaLogPrivate.h"
 
 Q_SINGLETON_CREATE_CPP(ElaLog)
-Q_PROPERTY_CREATE_Q_CPP(ElaLog, QString, LogSavePath)
-Q_PROPERTY_CREATE_Q_CPP(ElaLog, QString, LogFileName)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaLog, QString, LogSavePath)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaLog, QString, LogFileName)
 Q_PROPERTY_CREATE_Q_CPP(ElaLog, bool, IsLogFileNameWithTime)
 ElaLog::ElaLog(QObject* parent)
     : QObject{parent}, d_ptr(new ElaLogPrivate())

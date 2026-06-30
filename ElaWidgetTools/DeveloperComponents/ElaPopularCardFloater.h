@@ -32,7 +32,7 @@ private:
     bool _isHideAnimationFinished{true};
     ElaPopularCard* _card{nullptr};
     ElaPopularCardPrivate* _cardPrivate{nullptr};
-    QRect _calculateTargetGeometry(QRect cardGeometry);
+    QRect _calculateTargetGeometry(const QRect& cardGeometry);
     int _floatGeometryOffset{25};
 };
 

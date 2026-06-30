@@ -17,8 +17,8 @@ public:
     explicit ElaPivot(QWidget* parent = nullptr);
     ~ElaPivot();
 
-    void appendPivot(QString pivotTitle);
-    void removePivot(QString pivotTitle);
+    void appendPivot(const QString& pivotTitle);
+    void removePivot(const QString& pivotTitle);
 
 Q_SIGNALS:
     Q_SIGNAL void pivotClicked(int index);

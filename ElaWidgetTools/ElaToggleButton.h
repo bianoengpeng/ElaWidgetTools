@@ -10,10 +10,10 @@ class ELA_EXPORT ElaToggleButton : public QWidget
     Q_OBJECT
     Q_Q_CREATE(ElaToggleButton)
     Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
-    Q_PROPERTY_CREATE_Q_H(QString, Text)
+    Q_PROPERTY_REF_CREATE_Q_H(QString, Text)
 public:
     explicit ElaToggleButton(QWidget* parent = nullptr);
-    explicit ElaToggleButton(QString text, QWidget* parent = nullptr);
+    explicit ElaToggleButton(const QString& text, QWidget* parent = nullptr);
     ~ElaToggleButton();
 
     void setIsToggled(bool isToggled);

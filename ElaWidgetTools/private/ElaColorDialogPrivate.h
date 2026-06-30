@@ -33,7 +33,7 @@ public:
     Q_SLOT void onColorValueSliderChanged(int value);
 
     Q_SLOT void onColorModeChanged(int index);
-    Q_SLOT void onHtmlEditFocusOut(QString text);
+    Q_SLOT void onHtmlEditFocusOut(const QString& text);
     Q_SLOT void onHtmlEditChanged(const QString& text);
     Q_SLOT void onColorEditChanged(const QString& text);
 

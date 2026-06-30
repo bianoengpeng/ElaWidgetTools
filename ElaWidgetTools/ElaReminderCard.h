@@ -10,8 +10,8 @@ class ELA_EXPORT ElaReminderCard : public QPushButton
     Q_OBJECT
     Q_Q_CREATE(ElaReminderCard)
     Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
-    Q_PROPERTY_CREATE_Q_H(QString, Title);
-    Q_PROPERTY_CREATE_Q_H(QString, SubTitle);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, Title);
+    Q_PROPERTY_REF_CREATE_Q_H(QString, SubTitle);
     Q_PROPERTY_CREATE_Q_H(int, TitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, SubTitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, TitleSpacing);

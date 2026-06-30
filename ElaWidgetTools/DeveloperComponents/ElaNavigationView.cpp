@@ -76,7 +76,7 @@ ElaNavigationView::~ElaNavigationView()
 {
 }
 
-void ElaNavigationView::navigationNodeStateChange(QVariantMap data)
+void ElaNavigationView::navigationNodeStateChange(const QVariantMap& data)
 {
     this->_navigationStyle->navigationNodeStateChange(data);
 }

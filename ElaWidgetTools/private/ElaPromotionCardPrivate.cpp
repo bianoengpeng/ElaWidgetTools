@@ -14,7 +14,7 @@ ElaPromotionCardPrivate::~ElaPromotionCardPrivate()
 {
 }
 
-qreal ElaPromotionCardPrivate::_getLongestDistance(QPoint point)
+qreal ElaPromotionCardPrivate::_getLongestDistance(const QPoint& point)
 {
     Q_Q(ElaPromotionCard);
     qreal topLeftDis = _distance(point, QPoint(0, 0));
@@ -26,7 +26,7 @@ qreal ElaPromotionCardPrivate::_getLongestDistance(QPoint point)
     return disList[3];
 }
 
-qreal ElaPromotionCardPrivate::_distance(QPoint point1, QPoint point2)
+qreal ElaPromotionCardPrivate::_distance(const QPoint& point1, const QPoint& point2)
 {
     return std::sqrt((point1.x() - point2.x()) * (point1.x() - point2.x()) + (point1.y() - point2.y()) * (point1.y() - point2.y()));
 }

@@ -41,8 +41,8 @@ private:
     QRadialGradient* _hoverGradient{nullptr};
     QRadialGradient* _pressGradient{nullptr};
     bool _isPressAnimationFinished{true};
-    qreal _getLongestDistance(QPoint point);
-    qreal _distance(QPoint point1, QPoint point2);
+    qreal _getLongestDistance(const QPoint& point);
+    qreal _distance(const QPoint& point1, const QPoint& point2);
     void _startHoverOpacityAnimation(bool isVisible);
 };
 

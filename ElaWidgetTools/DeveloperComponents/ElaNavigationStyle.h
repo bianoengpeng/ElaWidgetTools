@@ -26,7 +26,7 @@ public:
     void drawControl(ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget = nullptr) const override;
     QSize sizeFromContents(ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const override;
 
-    void navigationNodeStateChange(QVariantMap data);
+    void navigationNodeStateChange(const QVariantMap& data);
 
 private:
     ElaThemeType::ThemeMode _themeMode;

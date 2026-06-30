@@ -41,9 +41,9 @@ public:
     QMenu* getCustomMenu() const;
 
     void setUserInfoCardVisible(bool isVisible);
-    void setUserInfoCardPixmap(QPixmap pix);
-    void setUserInfoCardTitle(QString title);
-    void setUserInfoCardSubTitle(QString subTitle);
+    void setUserInfoCardPixmap(const QPixmap& pix);
+    void setUserInfoCardTitle(const QString& title);
+    void setUserInfoCardSubTitle(const QString& subTitle);
     ElaNavigationType::NodeResult addExpanderNode(const QString& expanderTitle, QString& expanderKey, ElaIconType::IconName awesome = ElaIconType::None) const;
     ElaNavigationType::NodeResult addExpanderNode(const QString& expanderTitle, QString& expanderKey, const QString& targetExpanderKey, ElaIconType::IconName awesome = ElaIconType::None) const;
     ElaNavigationType::NodeResult addPageNode(const QString& pageTitle, QWidget* page, ElaIconType::IconName awesome = ElaIconType::None);
@@ -58,24 +58,24 @@ public:
     void addCentralWidget(QWidget* centralWidget);
     QWidget* getCentralWidget(int index) const;
 
-    bool getNavigationNodeIsExpanded(QString expanderKey) const;
-    void expandNavigationNode(QString expanderKey);
-    void collapseNavigationNode(QString expanderKey);
-    void removeNavigationNode(QString nodeKey) const;
-    int getPageOpenInNewWindowCount(QString nodeKey) const;
-    void backtrackNavigationNode(QString nodeKey);
+    bool getNavigationNodeIsExpanded(const QString& expanderKey) const;
+    void expandNavigationNode(const QString& expanderKey);
+    void collapseNavigationNode(const QString& expanderKey);
+    void removeNavigationNode(const QString& nodeKey) const;
+    int getPageOpenInNewWindowCount(const QString& nodeKey) const;
+    void backtrackNavigationNode(const QString& nodeKey);
 
-    void setNodeKeyPoints(QString nodeKey, int keyPoints);
-    int getNodeKeyPoints(QString nodeKey) const;
+    void setNodeKeyPoints(const QString& nodeKey, int keyPoints);
+    int getNodeKeyPoints(const QString& nodeKey) const;
 
-    void setNavigationNodeTitle(QString nodeKey, QString nodeTitle);
-    QString getNavigationNodeTitle(QString nodeKey) const;
+    void setNavigationNodeTitle(const QString& nodeKey, const QString& nodeTitle);
+    QString getNavigationNodeTitle(const QString& nodeKey) const;
 
-    void navigation(QString pageKey);
+    void navigation(const QString& pageKey);
     int getCurrentNavigationIndex() const;
     QString getCurrentNavigationPageKey() const;
 
-    QList<ElaSuggestBox::SuggestData> getNavigationSuggestDataList() const;
+    const QList<ElaSuggestBox::SuggestData>& getNavigationSuggestDataList() const;
 
     void setWindowButtonFlag(ElaAppBarType::ButtonType buttonFlag, bool isEnable = true);
     void setWindowButtonFlags(ElaAppBarType::ButtonFlags buttonFlags);
@@ -90,7 +90,9 @@ public:
     void setWindowMovieRate(qreal rate);
     qreal getWindowMovieRate() const;
 
-    void closeWindow();
+    void tabifyDockWidget(QDockWidget* targetDockWidget, QDockWidget* dockWidget);
+    void tabifyDockWidget(Qt::DockWidgetArea area, const QString& targetDockTitle, QDockWidget* dockWidget);
+
 Q_SIGNALS:
     Q_SIGNAL void userInfoCardClicked();
     Q_SIGNAL void closeButtonClicked();
@@ -104,6 +106,10 @@ protected:
     virtual bool eventFilter(QObject* watched, QEvent* event) override;
     virtual QMenu* createPopupMenu() override;
     virtual void paintEvent(QPaintEvent* event) override;
+
+private:
+    QWidget* centralWidget() const;
+    void setCentralWidget(QWidget* widget);
 };
 
 #endif // ELAWINDOW_H

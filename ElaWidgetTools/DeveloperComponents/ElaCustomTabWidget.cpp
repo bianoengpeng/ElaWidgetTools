@@ -78,7 +78,7 @@ ElaCustomTabWidget::~ElaCustomTabWidget()
     }
 }
 
-void ElaCustomTabWidget::addTab(QWidget* widget, QIcon tabIcon, const QString& tabTitle)
+void ElaCustomTabWidget::addTab(QWidget* widget, const QIcon& tabIcon, const QString& tabTitle)
 {
     _customTabBar->addTab(tabIcon, tabTitle);
     _customTabWidget->addTab(widget, tabIcon, tabTitle);

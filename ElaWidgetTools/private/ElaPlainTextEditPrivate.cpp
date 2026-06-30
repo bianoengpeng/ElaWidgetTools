@@ -11,7 +11,7 @@ ElaPlainTextEditPrivate::~ElaPlainTextEditPrivate()
 {
 }
 
-void ElaPlainTextEditPrivate::onWMWindowClickedEvent(QVariantMap data)
+void ElaPlainTextEditPrivate::onWMWindowClickedEvent(const QVariantMap& data)
 {
     Q_Q(ElaPlainTextEdit);
     ElaAppBarType::WMMouseActionType actionType = data.value("WMClickType").value<ElaAppBarType::WMMouseActionType>();

@@ -8,7 +8,7 @@
 #include "ElaTheme.h"
 #include "private/ElaToggleButtonPrivate.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaToggleButton, int, BorderRadius)
-Q_PROPERTY_CREATE_Q_CPP(ElaToggleButton, QString, Text)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaToggleButton, QString, Text)
 ElaToggleButton::ElaToggleButton(QWidget* parent)
     : QWidget(parent), d_ptr(new ElaToggleButtonPrivate())
 {
@@ -29,7 +29,7 @@ ElaToggleButton::ElaToggleButton(QWidget* parent)
     });
 }
 
-ElaToggleButton::ElaToggleButton(QString text, QWidget* parent)
+ElaToggleButton::ElaToggleButton(const QString& text, QWidget* parent)
     : ElaToggleButton(parent)
 {
     Q_D(ElaToggleButton);

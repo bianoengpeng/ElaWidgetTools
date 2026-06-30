@@ -14,8 +14,8 @@ public:
     explicit ElaColorPicker(QWidget* parent = nullptr);
     ~ElaColorPicker();
 
-    void setSelectedColor(QColor color);
-    QColor getSelectedColor() const;
+    void setSelectedColor(const QColor& color);
+    const QColor& getSelectedColor() const;
 
 Q_SIGNALS:
     Q_SIGNAL void selectedColorChanged(QColor selectedColor);

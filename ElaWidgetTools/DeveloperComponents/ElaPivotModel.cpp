@@ -9,7 +9,7 @@ ElaPivotModel::~ElaPivotModel()
 {
 }
 
-void ElaPivotModel::appendPivot(QString pivot)
+void ElaPivotModel::appendPivot(const QString& pivot)
 {
     if (!pivot.isEmpty())
     {
@@ -20,7 +20,7 @@ void ElaPivotModel::appendPivot(QString pivot)
     }
 }
 
-void ElaPivotModel::removePivot(QString pivot)
+void ElaPivotModel::removePivot(const QString& pivot)
 {
     if (_pivotList.contains(pivot))
     {

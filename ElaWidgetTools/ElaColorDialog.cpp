@@ -288,7 +288,7 @@ ElaColorDialog::~ElaColorDialog()
     delete d->_colorValueSlider->style();
 }
 
-void ElaColorDialog::setCurrentColor(QColor currentColor)
+void ElaColorDialog::setCurrentColor(const QColor& currentColor)
 {
     Q_D(ElaColorDialog);
     d->_pCurrentColor = currentColor.toHsv();
@@ -300,13 +300,13 @@ void ElaColorDialog::setCurrentColor(QColor currentColor)
     Q_EMIT pCurrentColorChanged();
 }
 
-QColor ElaColorDialog::getCurrentColor() const
+const QColor& ElaColorDialog::getCurrentColor() const
 {
     Q_D(const ElaColorDialog);
     return d->_pCurrentColor;
 }
 
-QList<QColor> ElaColorDialog::getCustomColorList() const
+const QList<QColor>& ElaColorDialog::getCustomColorList() const
 {
     Q_D(const ElaColorDialog);
     return d->_customColorModel->getDisplayColorList();

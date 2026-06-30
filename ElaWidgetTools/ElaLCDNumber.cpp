@@ -63,7 +63,7 @@ bool ElaLCDNumber::getIsUseAutoClock() const
     return d->_pIsUseAutoClock;
 }
 
-void ElaLCDNumber::setAutoClockFormat(QString autoClockFormat)
+void ElaLCDNumber::setAutoClockFormat(const QString& autoClockFormat)
 {
     Q_D(ElaLCDNumber);
     d->_pAutoClockFormat = autoClockFormat;
@@ -71,7 +71,7 @@ void ElaLCDNumber::setAutoClockFormat(QString autoClockFormat)
     Q_EMIT pAutoClockFormatChanged();
 }
 
-QString ElaLCDNumber::getAutoClockFormat() const
+const QString& ElaLCDNumber::getAutoClockFormat() const
 {
     Q_D(const ElaLCDNumber);
     return d->_pAutoClockFormat;

@@ -8,8 +8,8 @@
 #include "ElaTheme.h"
 #include "private/ElaMessageButtonPrivate.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaMessageButton, int, BorderRadius)
-Q_PROPERTY_CREATE_Q_CPP(ElaMessageButton, QString, BarTitle);
-Q_PROPERTY_CREATE_Q_CPP(ElaMessageButton, QString, BarText);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaMessageButton, QString, BarTitle);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaMessageButton, QString, BarText);
 Q_PROPERTY_CREATE_Q_CPP(ElaMessageButton, int, DisplayMsec);
 Q_PROPERTY_CREATE_Q_CPP(ElaMessageButton, QWidget*, MessageTargetWidget)
 Q_PROPERTY_CREATE_Q_CPP(ElaMessageButton, ElaMessageBarType::MessageMode, MessageMode);
@@ -63,7 +63,7 @@ ElaMessageButton::ElaMessageButton(QWidget* parent)
         } });
 }
 
-ElaMessageButton::ElaMessageButton(QString text, QWidget* parent)
+ElaMessageButton::ElaMessageButton(const QString& text, QWidget* parent)
     : ElaMessageButton(parent)
 {
     setText(text);

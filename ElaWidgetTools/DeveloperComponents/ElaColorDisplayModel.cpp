@@ -16,7 +16,7 @@ void ElaColorDisplayModel::appendDisplayColor(QList<QColor> colorList)
     endResetModel();
 }
 
-void ElaColorDisplayModel::appendDisplayColor(QColor color)
+void ElaColorDisplayModel::appendDisplayColor(const QColor& color)
 {
     beginResetModel();
     _displayColorList.append(color);
@@ -34,7 +34,7 @@ void ElaColorDisplayModel::removeDisplayColor(int index)
     endResetModel();
 }
 
-void ElaColorDisplayModel::replaceDisplayColor(QColor color, int index)
+void ElaColorDisplayModel::replaceDisplayColor(const QColor& color, int index)
 {
     if (index < 0 || index >= _displayColorList.count())
     {
@@ -45,7 +45,7 @@ void ElaColorDisplayModel::replaceDisplayColor(QColor color, int index)
     endResetModel();
 }
 
-QList<QColor> ElaColorDisplayModel::getDisplayColorList() const
+const QList<QColor>& ElaColorDisplayModel::getDisplayColorList() const
 {
     return _displayColorList;
 }

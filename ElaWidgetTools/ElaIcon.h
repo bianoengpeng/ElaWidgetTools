@@ -14,11 +14,11 @@ private:
 
 public:
     QIcon getElaIcon(ElaIconType::IconName awesome);
-    QIcon getElaIcon(ElaIconType::IconName awesome, QColor iconColor);
+    QIcon getElaIcon(ElaIconType::IconName awesome, const QColor& iconColor);
     QIcon getElaIcon(ElaIconType::IconName awesome, int pixelSize);
-    QIcon getElaIcon(ElaIconType::IconName awesome, int pixelSize, QColor iconColor);
+    QIcon getElaIcon(ElaIconType::IconName awesome, int pixelSize, const QColor& iconColor);
     QIcon getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight);
-    QIcon getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight, QColor iconColor);
+    QIcon getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight, const QColor& iconColor);
 };
 
 #endif // ELAICON_H

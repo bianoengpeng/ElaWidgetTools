@@ -60,7 +60,7 @@ private:
     bool _isHoverMaxButton{false};
     int _win7Margins{0};
     void _changeMaxButtonAwesome(bool isMaximized);
-    void _showAppBarMenu(QPoint point);
+    void _showAppBarMenu(const QPoint& point);
     void _updateCursor(int edges);
     bool _containsCursorToItem(QWidget* item);
     void _onThemeModeChange(ElaThemeType::ThemeMode themeMode);

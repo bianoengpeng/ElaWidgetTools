@@ -80,14 +80,14 @@ ElaPivot::~ElaPivot()
     delete d->_listStyle;
 }
 
-void ElaPivot::appendPivot(QString pivotTitle)
+void ElaPivot::appendPivot(const QString& pivotTitle)
 {
     Q_D(ElaPivot);
     d->_listModel->appendPivot(pivotTitle);
     d->_checkCurrentIndex();
 }
 
-void ElaPivot::removePivot(QString pivotTitle)
+void ElaPivot::removePivot(const QString& pivotTitle)
 {
     Q_D(ElaPivot);
     d->_listModel->removePivot(pivotTitle);

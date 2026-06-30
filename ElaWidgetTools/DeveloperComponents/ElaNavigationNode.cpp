@@ -3,7 +3,7 @@
 #include <QUuid>
 
 ElaNavigationNode::ElaNavigationNode(const QString& nodeTitle, ElaNavigationNode* parent)
-    : QObject(parent)
+    : QObject(nullptr)
 {
     _pDepth = 0;
     _pKeyPoints = 0;
@@ -21,9 +21,13 @@ ElaNavigationNode::ElaNavigationNode(const QString& nodeTitle, ElaNavigationNode
 
 ElaNavigationNode::~ElaNavigationNode()
 {
+    for (const auto childNode: _pChildrenNodes)
+    {
+        childNode->deleteLater();
+    }
 }
 
-QString ElaNavigationNode::getNodeKey() const
+const QString& ElaNavigationNode::getNodeKey() const
 {
     return _nodeKey;
 }
@@ -165,6 +169,15 @@ int ElaNavigationNode::getRow() const
     if (_pParentNode)
     {
         return _pParentNode->getChildrenNodes().indexOf(const_cast<ElaNavigationNode*>(this));
+    }
+    return 0;
+}
+
+int ElaNavigationNode::getRowExceptCategoryNodes() const
+{
+    if (_pParentNode)
+    {
+        return _pParentNode->getExceptCategoryNodes().indexOf(const_cast<ElaNavigationNode*>(this));
     }
     return 0;
 }

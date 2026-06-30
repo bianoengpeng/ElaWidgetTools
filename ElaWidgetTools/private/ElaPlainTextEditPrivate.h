@@ -1,9 +1,9 @@
 #ifndef ELAPLAINTEXTEDITPRIVATE_H
 #define ELAPLAINTEXTEDITPRIVATE_H
 
-#include <QObject>
-
 #include "ElaDef.h"
+#include <QObject>
+#include <QVariantMap>
 class ElaEvent;
 class ElaPlainTextEdit;
 class ElaPlainTextEditStyle;
@@ -15,7 +15,7 @@ class ElaPlainTextEditPrivate : public QObject
 public:
     explicit ElaPlainTextEditPrivate(QObject* parent = nullptr);
     ~ElaPlainTextEditPrivate() override;
-    Q_INVOKABLE void onWMWindowClickedEvent(QVariantMap data);
+    Q_INVOKABLE void onWMWindowClickedEvent(const QVariantMap& data);
     Q_SLOT void onThemeChanged(ElaThemeType::ThemeMode themeMode);
 
 private:

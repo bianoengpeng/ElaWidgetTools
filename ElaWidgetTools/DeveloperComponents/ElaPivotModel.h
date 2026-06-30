@@ -10,8 +10,8 @@ public:
     explicit ElaPivotModel(QObject* parent = nullptr);
     ~ElaPivotModel();
 
-    void appendPivot(QString pivot);
-    void removePivot(QString pivot);
+    void appendPivot(const QString& pivot);
+    void removePivot(const QString& pivot);
 
     int getPivotListCount() const;
 

@@ -12,7 +12,7 @@ class ElaCustomTabWidget : public ElaCustomWidget
 public:
     explicit ElaCustomTabWidget(QWidget* parent = nullptr);
     ~ElaCustomTabWidget() override;
-    void addTab(QWidget* widget, QIcon tabIcon, const QString& tabTitle);
+    void addTab(QWidget* widget, const QIcon& tabIcon, const QString& tabTitle);
     ElaTabBar* getCustomTabBar() const;
     ElaTabWidget* getCustomTabWidget() const;
 

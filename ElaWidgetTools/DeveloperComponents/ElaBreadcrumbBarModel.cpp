@@ -41,7 +41,7 @@ QVariant ElaBreadcrumbBarModel::data(const QModelIndex& index, int role) const
     return QVariant();
 }
 
-void ElaBreadcrumbBarModel::appendBreadcrumb(QString breadcrumb)
+void ElaBreadcrumbBarModel::appendBreadcrumb(const QString& breadcrumb)
 {
     if (!breadcrumb.isEmpty())
     {
@@ -62,7 +62,7 @@ void ElaBreadcrumbBarModel::appendBreadcrumb(QString breadcrumb)
     }
 }
 
-void ElaBreadcrumbBarModel::removeBreadcrumb(QString breadcrumb)
+void ElaBreadcrumbBarModel::removeBreadcrumb(const QString& breadcrumb)
 {
     if (_breadcrumbList.contains(breadcrumb))
     {
@@ -94,7 +94,7 @@ void ElaBreadcrumbBarModel::removeBreadcrumb(int index)
     endResetModel();
 }
 
-void ElaBreadcrumbBarModel::setBreadcrumbList(QStringList breadcrumbList)
+void ElaBreadcrumbBarModel::setBreadcrumbList(const QStringList& breadcrumbList)
 {
     beginResetModel();
     this->_breadcrumbList = breadcrumbList;

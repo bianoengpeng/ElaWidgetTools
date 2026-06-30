@@ -158,20 +158,20 @@ void ElaNavigationBar::setUserInfoCardVisible(bool isVisible)
     }
 }
 
-void ElaNavigationBar::setUserInfoCardPixmap(QPixmap pix)
+void ElaNavigationBar::setUserInfoCardPixmap(const QPixmap& pix)
 {
     Q_D(ElaNavigationBar);
     d->_userCard->setCardPixmap(pix);
     d->_userButton->setPixmap(pix);
 }
 
-void ElaNavigationBar::setUserInfoCardTitle(QString title)
+void ElaNavigationBar::setUserInfoCardTitle(const QString& title)
 {
     Q_D(ElaNavigationBar);
     d->_userCard->setTitle(title);
 }
 
-void ElaNavigationBar::setUserInfoCardSubTitle(QString subTitle)
+void ElaNavigationBar::setUserInfoCardSubTitle(const QString& subTitle)
 {
     Q_D(ElaNavigationBar);
     d->_userCard->setSubTitle(subTitle);
@@ -367,7 +367,7 @@ ElaNavigationType::NodeResult ElaNavigationBar::addCategoryNode(const QString& c
     return result;
 }
 
-bool ElaNavigationBar::getNodeIsExpanded(QString expanderKey) const
+bool ElaNavigationBar::getNodeIsExpanded(const QString& expanderKey) const
 {
     Q_D(const ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(expanderKey);
@@ -378,7 +378,7 @@ bool ElaNavigationBar::getNodeIsExpanded(QString expanderKey) const
     return d->_navigationView->isExpanded(node->getModelIndex());
 }
 
-void ElaNavigationBar::expandNode(QString expanderKey)
+void ElaNavigationBar::expandNode(const QString& expanderKey)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(expanderKey);
@@ -390,7 +390,7 @@ void ElaNavigationBar::expandNode(QString expanderKey)
     d->_resetNodeSelected();
 }
 
-void ElaNavigationBar::collapseNode(QString expanderKey)
+void ElaNavigationBar::collapseNode(const QString& expanderKey)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(expanderKey);
@@ -402,7 +402,7 @@ void ElaNavigationBar::collapseNode(QString expanderKey)
     d->_resetNodeSelected();
 }
 
-void ElaNavigationBar::removeNode(QString nodeKey)
+void ElaNavigationBar::removeNode(const QString& nodeKey)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
@@ -454,7 +454,7 @@ void ElaNavigationBar::removeNode(QString nodeKey)
     }
 }
 
-void ElaNavigationBar::setNodeKeyPoints(QString nodeKey, int keyPoints)
+void ElaNavigationBar::setNodeKeyPoints(const QString& nodeKey, int keyPoints)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
@@ -481,7 +481,7 @@ void ElaNavigationBar::setNodeKeyPoints(QString nodeKey, int keyPoints)
     }
 }
 
-int ElaNavigationBar::getNodeKeyPoints(QString nodeKey) const
+int ElaNavigationBar::getNodeKeyPoints(const QString& nodeKey) const
 {
     Q_D(const ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
@@ -500,7 +500,7 @@ int ElaNavigationBar::getNodeKeyPoints(QString nodeKey) const
     return node->getKeyPoints();
 }
 
-void ElaNavigationBar::setNodeTitle(QString nodeKey, QString nodeTitle)
+void ElaNavigationBar::setNodeTitle(const QString& nodeKey, const QString& nodeTitle)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
@@ -516,7 +516,7 @@ void ElaNavigationBar::setNodeTitle(QString nodeKey, QString nodeTitle)
     update();
 }
 
-QString ElaNavigationBar::getNodeTitle(QString nodeKey) const
+QString ElaNavigationBar::getNodeTitle(const QString& nodeKey) const
 {
     Q_D(const ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(nodeKey);
@@ -531,7 +531,7 @@ QString ElaNavigationBar::getNodeTitle(QString nodeKey) const
     return node->getNodeTitle();
 }
 
-void ElaNavigationBar::navigation(QString pageKey, bool isLogClicked, bool isRouteBack)
+void ElaNavigationBar::navigation(const QString& pageKey, bool isLogClicked, bool isRouteBack)
 {
     Q_D(ElaNavigationBar);
     ElaNavigationNode* node = d->_navigationModel->getNavigationNode(pageKey);
@@ -563,7 +563,14 @@ void ElaNavigationBar::setDisplayMode(ElaNavigationType::NavigationDisplayMode d
     {
         return;
     }
-    d->_navigationModel->setIsMaximalMode(displayMode == ElaNavigationType::Maximal);
+    if (displayMode == ElaNavigationType::Maximal)
+    {
+        d->_navigationModel->setIsMaximalMode(true);
+    }
+    else
+    {
+        d->_navigationModel->setIsMaximalMode(false);
+    }
     d->_doComponentAnimation(displayMode, isAnimation);
     d->_raiseNavigationBar();
 }
@@ -574,7 +581,7 @@ ElaNavigationType::NavigationDisplayMode ElaNavigationBar::getDisplayMode() cons
     return d->_currentDisplayMode;
 }
 
-int ElaNavigationBar::getPageOpenInNewWindowCount(QString nodeKey) const
+int ElaNavigationBar::getPageOpenInNewWindowCount(const QString& nodeKey) const
 {
     Q_D(const ElaNavigationBar);
     if (!d->_pageNewWindowCountMap.contains(nodeKey))
@@ -584,7 +591,7 @@ int ElaNavigationBar::getPageOpenInNewWindowCount(QString nodeKey) const
     return d->_pageNewWindowCountMap[nodeKey];
 }
 
-QList<ElaSuggestBox::SuggestData> ElaNavigationBar::getSuggestDataList() const
+const QList<ElaSuggestBox::SuggestData>& ElaNavigationBar::getSuggestDataList() const
 {
     Q_D(const ElaNavigationBar);
     return d->_suggestDataList;

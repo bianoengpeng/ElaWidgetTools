@@ -8,7 +8,7 @@
 class ElaColorValueSliderStyle : public QProxyStyle
 {
     Q_OBJECT
-    Q_PRIVATE_CREATE(QColor, BaseColor)
+    Q_PRIVATE_REF_CREATE(QColor, BaseColor)
 public:
     explicit ElaColorValueSliderStyle(QStyle* style = nullptr);
     ~ElaColorValueSliderStyle();

@@ -3,7 +3,7 @@
 #include <QObject>
 
 #include "ElaProperty.h"
-#define ElaDefVersion "2.0.2"
+#define ElaDefVersion "2.0.3"
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 14, 0)
 #define Q_BEGIN_ENUM_CREATE(CLASS) \
@@ -490,9 +490,9 @@ Q_DECLARE_FLAGS(ButtonFlags, ButtonType)
 
 enum CustomArea
 {
-    LeftArea = 0x0001,
-    MiddleArea = 0x0002,
-    RightArea = 0x0003,
+    LeftArea = 0x0000,
+    MiddleArea = 0x0001,
+    RightArea = 0x0002,
 };
 Q_ENUM_CREATE(CustomArea)
 
@@ -554,24 +554,16 @@ enum NavigationNodeType
 Q_ENUM_CREATE(NavigationNodeType)
 Q_END_ENUM_CREATE(ElaNavigationType)
 
-Q_BEGIN_ENUM_CREATE(ElaNavigationRouterType)
-enum NavigationRouteType
+Q_BEGIN_ENUM_CREATE(ElaActionCommanderType)
+enum CommanderState
 {
-    Success = 0x0000,
-    ObjectInvalid = 0x0001,
-    FunctionNameInvalid = 0x0002,
+    UndoValid = 0x0000,
+    UndoInvalid = 0x0001,
+    RedoValid = 0x0002,
+    RedoInvalid = 0x0003,
 };
-Q_ENUM_CREATE(NavigationRouteType)
-
-enum RouteMode
-{
-    BackValid = 0x0000,
-    BackInvalid = 0x0001,
-    ForwardValid = 0x0002,
-    ForwardInvalid = 0x0003,
-};
-Q_ENUM_CREATE(RouteMode)
-Q_END_ENUM_CREATE(ElaNavigationRouterType)
+Q_ENUM_CREATE(CommanderState)
+Q_END_ENUM_CREATE(ElaActionCommanderType)
 
 Q_BEGIN_ENUM_CREATE(ElaEventBusType)
 enum EventBusReturnType
