@@ -1,11 +1,11 @@
-#ifndef ELACALENDARPRIVATE_H
-#define ELACALENDARPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACALENDARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACALENDARPRIVATE_H_
 
 #include <QDate>
 #include <QObject>
 #include <QPixmap>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaCalendar;
 class ElaBaseListView;
 class ElaCalendarModel;
@@ -48,4 +48,5 @@ private:
     void _updateSwitchButtonText();
 };
 
-#endif // ELACALENDARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACALENDARPRIVATE_H_
+

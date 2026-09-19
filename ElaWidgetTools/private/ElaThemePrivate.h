@@ -1,11 +1,11 @@
-#ifndef ELATHEMEPRIVATE_H
-#define ELATHEMEPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATHEMEPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATHEMEPRIVATE_H_
 
 #include <QColor>
 #include <QMap>
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaTheme;
 class ElaThemePrivate : public QObject
 {
@@ -22,4 +22,5 @@ private:
     void _initThemeColor();
 };
 
-#endif // ELATHEMEPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATHEMEPRIVATE_H_
+

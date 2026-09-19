@@ -1,10 +1,10 @@
-#ifndef ELAPOPULARCARDPRIVATE_H
-#define ELAPOPULARCARDPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPOPULARCARDPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPOPULARCARDPRIVATE_H_
 
 #include <QObject>
 #include <QPixmap>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaPopularCard;
 class ElaPopularCardFloater;
 class ElaPopularCardPrivate : public QObject
@@ -42,4 +42,5 @@ private:
     void _showFloater();
 };
 
-#endif // ELAPOPULARCARDPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPOPULARCARDPRIVATE_H_
+

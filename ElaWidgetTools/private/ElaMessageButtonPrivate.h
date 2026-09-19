@@ -1,9 +1,9 @@
-#ifndef ELAMESSAGEBUTTONPRIVATE_H
-#define ELAMESSAGEBUTTONPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBUTTONPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBUTTONPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaMessageButton;
 class ElaMessageButtonPrivate : public QObject
 {
@@ -28,4 +28,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELAMESSAGEBUTTONPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBUTTONPRIVATE_H_
+

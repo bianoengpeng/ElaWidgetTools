@@ -1,10 +1,11 @@
-#ifndef ELALOG_H
-#define ELALOG_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELALOG_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELALOG_H_
 
 #include <QObject>
 
-#include "ElaProperty.h"
-#include "ElaSingleton.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
+#include "ElaSingletonMacro.h"
 
 class ElaLogPrivate;
 class ELA_EXPORT ElaLog : public QObject
@@ -23,7 +24,7 @@ private:
 public:
     void initMessageLog(bool isEnable);
 Q_SIGNALS:
-    void logMessage(QString log);
+    void logMessage(const QString& log);
 };
 
-#endif // ELALOG_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELALOG_H_

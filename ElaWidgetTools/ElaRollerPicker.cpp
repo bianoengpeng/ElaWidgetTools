@@ -1,5 +1,6 @@
 #include "ElaRollerPicker.h"
 
+#include "ElaApplication.h"
 #include "ElaRollerPickerPrivate.h"
 #include "ElaTheme.h"
 #include <QDebug>
@@ -18,7 +19,7 @@ ElaRollerPicker::ElaRollerPicker(QWidget* parent)
     setObjectName("ElaRollerPicker");
     setStyleSheet("#ElaRollerPicker{background-color:transparent;}");
     QFont font = this->font();
-    font.setPixelSize(16);
+    font.setPixelSize(eApp->getFontPixelSize() + 3);
     setFont(font);
 
     d->_rollerPickerContainer = new ElaRollerPickerContainer(this);

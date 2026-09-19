@@ -1,9 +1,10 @@
-#ifndef ELADOCKWIDGET_H
-#define ELADOCKWIDGET_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELADOCKWIDGET_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELADOCKWIDGET_H_
 
 #include <QDockWidget>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaDockWidgetPrivate;
 class ELA_EXPORT ElaDockWidget : public QDockWidget
 {
@@ -26,4 +27,4 @@ protected:
 #endif
 };
 
-#endif // ELADOCKWIDGET_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELADOCKWIDGET_H_

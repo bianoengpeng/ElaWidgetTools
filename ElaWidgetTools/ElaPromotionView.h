@@ -1,10 +1,11 @@
-#ifndef ELAPROMOTIONVIEW_H
-#define ELAPROMOTIONVIEW_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAPROMOTIONVIEW_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAPROMOTIONVIEW_H_
 
 #include <QPixmap>
 #include <QWidget>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaPromotionCard;
 class ElaPromotionViewPrivate;
 class ELA_EXPORT ElaPromotionView : public QWidget
@@ -27,4 +28,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAPROMOTIONVIEW_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAPROMOTIONVIEW_H_

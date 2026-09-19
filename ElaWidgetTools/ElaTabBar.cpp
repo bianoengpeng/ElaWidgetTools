@@ -22,7 +22,21 @@ ElaTabBar::ElaTabBar(QWidget* parent)
     setAcceptDrops(true);
     d->_style = new ElaTabBarStyle(style());
     setStyle(d->_style);
+
+    d->_pTargetScrollOffset = 0;
     d->_tabBarPrivate = dynamic_cast<QTabBarPrivate*>(this->QTabBar::d_ptr.data());
+    // 关闭自带滚动按钮，避免 layoutTabs 在 tab 溢出时重置 scrollOffset
+    setUsesScrollButtons(false);
+    connect(d, &ElaTabBarPrivate::pScrollOffsetChanged, this, [=]() {
+        // 动画每帧将偏移应用到 QTabBar 官方滚动机制
+        d->_tabBarPrivate->scrollOffset = qRound(d->getScrollOffset());
+        update();
+    });
+    // Qt 内部(refresh/makeVisible 等)修改 scrollOffset 时同步动画状态
+    connect(this, &QTabBar::currentChanged, this, [=]() {
+        d->setTargetScrollOffset(d->_tabBarPrivate->scrollOffset);
+        d->setScrollOffset(d->_tabBarPrivate->scrollOffset);
+    });
 }
 
 ElaTabBar::~ElaTabBar()
@@ -31,13 +45,19 @@ ElaTabBar::~ElaTabBar()
     delete d->_style;
 }
 
-void ElaTabBar::setTabSize(const QSize& tabSize)
+void ElaTabBar::setTabText(int index, const QString& text)
+{
+    QTabBar::setTabText(index, text);
+    Q_EMIT tabBarTextChanged(index, text);
+}
+
+void ElaTabBar::setTabSize(QSize tabSize)
 {
     Q_D(ElaTabBar);
     d->_style->setTabSize(tabSize);
 }
 
-const QSize& ElaTabBar::getTabSize() const
+QSize ElaTabBar::getTabSize() const
 {
     Q_D(const ElaTabBar);
     return d->_style->getTabSize();
@@ -49,6 +69,32 @@ QSize ElaTabBar::sizeHint() const
     QSize newSize = oldSize;
     newSize.setWidth(parentWidget()->maximumWidth());
     return oldSize.expandedTo(newSize);
+}
+
+QSize ElaTabBar::minimumSizeHint() const
+{
+    // useScrollButtons=false 时基类会返回全部 tab 宽度总和，会撑大窗口，宽度最小设为 0 由布局分配
+    return {0, QTabBar::minimumSizeHint().height()};
+}
+
+void ElaTabBar::tabInserted(int index)
+{
+    Q_D(ElaTabBar);
+    // 基类 addTab 内部先执行 refresh/makeVisible 再调用本虚函数，
+    // _tabBarPrivate->scrollOffset 已被重置，动画状态仍是插入前的值
+    qreal preScrollOffset = d->getScrollOffset();
+    QTabBar::tabInserted(index);
+    d->restoreScrollOffset(preScrollOffset);
+}
+
+void ElaTabBar::tabRemoved(int index)
+{
+    Q_D(ElaTabBar);
+    // 记录移除前的偏移，基类 removeTab 的 refresh/makeVisible 会把偏移重置回最左
+    qreal preScrollOffset = d->getScrollOffset();
+    QTabBar::tabRemoved(index);
+    // 保留拖出前的偏移，但不超过移除后的最大偏移
+    d->restoreScrollOffset(preScrollOffset);
 }
 
 void ElaTabBar::mouseMoveEvent(QMouseEvent* event)
@@ -185,8 +231,24 @@ void ElaTabBar::dropEvent(QDropEvent* event)
 
 void ElaTabBar::wheelEvent(QWheelEvent* event)
 {
-    QTabBar::wheelEvent(event);
+    Q_D(ElaTabBar);
+    // 滚轮平滑横向滚动，不切换 tab
+    int maxOffset = qMax(0, d->_tabBarPrivate->tabList.size() * d->_style->getTabSize().width() - width());
+    int step = qMax(1, d->_style->getTabSize().width() / 4);
+    d->setTargetScrollOffset(qBound(0.0, d->getTargetScrollOffset() - event->angleDelta().y() / 120.0 * step, qreal(maxOffset)));
+    d->startScrollAnimation();
     event->accept();
+}
+
+void ElaTabBar::resizeEvent(QResizeEvent* event)
+{
+    QTabBar::resizeEvent(event);
+    Q_D(ElaTabBar);
+    // 窗口变宽时收敛超出的滚动偏移
+    int maxOffset = qMax(0, d->_tabBarPrivate->tabList.size() * d->_style->getTabSize().width() - width());
+    d->setTargetScrollOffset(qMin(d->getTargetScrollOffset(), qreal(maxOffset)));
+    d->setScrollOffset(qMin(d->getScrollOffset(), qreal(maxOffset)));
+    d->_tabBarPrivate->scrollOffset = qRound(d->getScrollOffset());
 }
 
 void ElaTabBar::paintEvent(QPaintEvent* event)

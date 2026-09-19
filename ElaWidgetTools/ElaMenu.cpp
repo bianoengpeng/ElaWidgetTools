@@ -8,7 +8,7 @@
 #include <QPropertyAnimation>
 #include <QVBoxLayout>
 
-#include "DeveloperComponents/ElaMenuStyle.h"
+#include "ElaMenuStyle.h"
 #include "private/ElaMenuPrivate.h"
 ElaMenu::ElaMenu(QWidget* parent)
     : QMenu(parent), d_ptr(new ElaMenuPrivate())

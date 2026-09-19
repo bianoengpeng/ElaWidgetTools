@@ -9,12 +9,4 @@ ElaDxgiManagerPrivate::~ElaDxgiManagerPrivate()
 {
 }
 
-ElaDxgiScreenPrivate::ElaDxgiScreenPrivate(QObject* parent)
-    : QObject{parent}
-{
-}
-
-ElaDxgiScreenPrivate::~ElaDxgiScreenPrivate()
-{
-}
 #endif

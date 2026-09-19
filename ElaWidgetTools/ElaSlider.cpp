@@ -2,7 +2,7 @@
 
 #include <QEvent>
 
-#include "DeveloperComponents/ElaSliderStyle.h"
+#include "ElaSliderStyle.h"
 ElaSlider::ElaSlider(QWidget* parent)
     : QSlider(parent)
 {

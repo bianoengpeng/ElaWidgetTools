@@ -1,11 +1,12 @@
-#ifndef ELASCROLLBARPRIVATE_H
-#define ELASCROLLBARPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLBARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLBARPRIVATE_H_
 
 #include <QAbstractScrollArea>
 #include <QObject>
 #include <QScrollBar>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class QTimer;
 class QPropertyAnimation;
 class ElaScrollBar;
@@ -38,4 +39,5 @@ private:
     void _handleScrollBarGeometry();
 };
 
-#endif // ELASCROLLBARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLBARPRIVATE_H_
+

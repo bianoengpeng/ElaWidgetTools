@@ -1,9 +1,10 @@
-#ifndef ELAEXPONENTIALBLURPRIVATE_H
-#define ELAEXPONENTIALBLURPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAEXPONENTIALBLURPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAEXPONENTIALBLURPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaExponentialBlur;
 class ElaExponentialBlurPrivate : public QObject
@@ -23,4 +24,5 @@ private:
     static void _drawInnerBlur(unsigned char* bptr, int& zR, int& zG, int& zB, int& zA, int alpha);
 };
 
-#endif // ELAEXPONENTIALBLURPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAEXPONENTIALBLURPRIVATE_H_
+

@@ -1,9 +1,9 @@
-#ifndef ELATEXTEDITPRIVATE_H
-#define ELATEXTEDITPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATEXTEDITPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATEXTEDITPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaEvent;
 class ElaTextEdit;
 class ElaTextEditStyle;
@@ -25,4 +25,4 @@ private:
     void _changeTheme();
 };
 
-#endif // ELATEXTEDITPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATEXTEDITPRIVATE_H_

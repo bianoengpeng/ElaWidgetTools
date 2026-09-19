@@ -1,5 +1,6 @@
 #include "ElaMessageBar.h"
 
+#include "ElaApplication.h"
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QPainter>
@@ -168,6 +169,7 @@ void ElaMessageBar::error(ElaMessageBarType::PositionPolicy policy, QString titl
 void ElaMessageBar::paintEvent(QPaintEvent* event)
 {
     Q_D(ElaMessageBar);
+    int fontPixelSize = eApp->getFontPixelSize();
     QPainter painter(this);
     painter.setOpacity(d->_pOpacity);
     painter.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing | QPainter::TextAntialiasing);
@@ -204,7 +206,7 @@ void ElaMessageBar::paintEvent(QPaintEvent* event)
     // 标题
     QFont font = this->font();
     font.setWeight(QFont::Bold);
-    font.setPixelSize(16);
+    font.setPixelSize(fontPixelSize + 3);
     painter.setFont(font);
     int titleTextWidth = painter.fontMetrics().horizontalAdvance(d->_title) + 1;
     if (titleTextWidth > 100)
@@ -215,7 +217,7 @@ void ElaMessageBar::paintEvent(QPaintEvent* event)
     painter.drawText(QRect(d->_leftPadding + d->_titleLeftSpacing, -1, titleTextWidth, height()), textFlags, d->_title);
     // 正文
     font.setWeight(QFont::Light);
-    font.setPixelSize(15);
+    font.setPixelSize(fontPixelSize + 2);
     painter.setFont(font);
     painter.drawText(QRect(d->_leftPadding + d->_titleLeftSpacing + titleTextWidth + d->_textLeftSpacing, 0, width() - (d->_leftPadding + d->_titleLeftSpacing + titleTextWidth + d->_textLeftSpacing + d->_closeButtonWidth + d->_closeButtonLeftRightMargin / 2), height() - d->_timePercentHeight), textFlags, d->_text);
     int textHeight = painter.fontMetrics().boundingRect(QRect(d->_leftPadding + d->_titleLeftSpacing + titleTextWidth + d->_textLeftSpacing, 0, width() - (d->_leftPadding + d->_titleLeftSpacing + titleTextWidth + d->_textLeftSpacing + d->_closeButtonWidth + d->_closeButtonLeftRightMargin), height()), textFlags, d->_text).height();

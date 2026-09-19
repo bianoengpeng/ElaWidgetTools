@@ -1,10 +1,10 @@
-#ifndef ELAWIDGET_H
-#define ELAWIDGET_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAWIDGET_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAWIDGET_H_
 
 #include <QWidget>
 
 #include "ElaAppBar.h"
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaWidgetPrivate;
 class ELA_EXPORT ElaWidget : public QWidget
 {
@@ -33,4 +33,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAWIDGET_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAWIDGET_H_

@@ -5,8 +5,8 @@
 #ifdef Q_OS_WIN
 #include "T_BasePage.h"
 
-class ElaDxgiScreen;
 class ElaComboBox;
+class ElaImageCard;
 class T_ElaScreen : public T_BasePage
 {
     Q_OBJECT
@@ -15,7 +15,7 @@ public:
     ~T_ElaScreen() override;
 
 private:
-    ElaDxgiScreen* _dxgiScreen{nullptr};
+    ElaImageCard* _dxgiScreen{nullptr};
     ElaComboBox* _dxComboBox{nullptr};
     ElaComboBox* _outputComboBox{nullptr};
 };

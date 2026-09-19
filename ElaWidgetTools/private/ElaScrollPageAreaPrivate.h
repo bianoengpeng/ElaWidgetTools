@@ -1,9 +1,9 @@
-#ifndef ELASCROLLPAGEAREAPRIVATE_H
-#define ELASCROLLPAGEAREAPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLPAGEAREAPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLPAGEAREAPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaScrollPageArea;
 class ElaScrollPageAreaPrivate : public QObject
 {
@@ -18,4 +18,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELASCROLLPAGEAREAPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLPAGEAREAPRIVATE_H_
+

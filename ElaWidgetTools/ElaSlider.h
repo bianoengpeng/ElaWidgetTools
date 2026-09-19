@@ -1,9 +1,10 @@
-#ifndef ELASLIDER_H
-#define ELASLIDER_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELASLIDER_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELASLIDER_H_
 
 #include <QSlider>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ELA_EXPORT ElaSlider : public QSlider
 {
     Q_OBJECT
@@ -13,4 +14,4 @@ public:
     ~ElaSlider();
 };
 
-#endif // ELASLIDER_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELASLIDER_H_

@@ -11,7 +11,7 @@ Q_PROPERTY_REF_CREATE_Q_CPP(ElaInteractiveCard, QString, SubTitle);
 Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, int, TitlePixelSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, int, SubTitlePixelSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, int, TitleSpacing);
-Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, QPixmap, CardPixmap);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaInteractiveCard, QPixmap, CardPixmap);
 Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, QSize, CardPixmapSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, int, CardPixmapBorderRadius)
 Q_PROPERTY_CREATE_Q_CPP(ElaInteractiveCard, ElaCardPixType::PixMode, CardPixMode);

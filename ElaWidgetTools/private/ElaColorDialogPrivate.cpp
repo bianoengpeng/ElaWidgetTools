@@ -21,7 +21,7 @@ ElaColorDialogPrivate::~ElaColorDialogPrivate()
 {
 }
 
-void ElaColorDialogPrivate::onColorPickerColorChanged(QColor selectedColor)
+void ElaColorDialogPrivate::onColorPickerColorChanged(const QColor& selectedColor)
 {
     Q_Q(ElaColorDialog);
     QColor valueColor = selectedColor.toHsv();
@@ -234,15 +234,16 @@ void ElaColorDialogPrivate::_updateColorValueSlider()
     _colorValueSlider->update();
 }
 
-QString ElaColorDialogPrivate::_completeColorText(QString text) const
+QString ElaColorDialogPrivate::_completeColorText(const QString& text) const
 {
-    text.remove("#");
-    while (text.length() < 6)
+    auto tempText = text;
+    tempText.remove("#");
+    while (tempText.length() < 6)
     {
-        text.prepend("0");
+        tempText.prepend("0");
     }
-    text.prepend("#");
-    return text;
+    tempText.prepend("#");
+    return tempText;
 }
 
 QString ElaColorDialogPrivate::_getHexRgbValue() const

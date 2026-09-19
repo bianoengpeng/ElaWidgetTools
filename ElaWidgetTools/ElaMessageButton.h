@@ -1,11 +1,12 @@
-#ifndef ELAMESSAGEBUTTON_H
-#define ELAMESSAGEBUTTON_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAMESSAGEBUTTON_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAMESSAGEBUTTON_H_
 
 #include <QPushButton>
 #include <QWidget>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaMessageButtonPrivate;
 class ELA_EXPORT ElaMessageButton : public QPushButton
 {
@@ -30,4 +31,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAMESSAGEBUTTON_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAMESSAGEBUTTON_H_

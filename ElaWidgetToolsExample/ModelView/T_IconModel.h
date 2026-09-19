@@ -4,7 +4,7 @@
 #include <QAbstractListModel>
 #include <QMetaEnum>
 
-#include "ElaProperty.h"
+#include "ElaPropertyMacro.h"
 class T_IconModel : public QAbstractListModel
 {
     Q_OBJECT

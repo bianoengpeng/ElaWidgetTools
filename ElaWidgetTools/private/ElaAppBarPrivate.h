@@ -1,6 +1,6 @@
-#ifndef ELAAPPBARPRIVATE_H
-#define ELAAPPBARPRIVATE_H
-#include "ElaDef.h"
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAAPPBARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAAPPBARPRIVATE_H_
+#include "ElaWidgetToolsDef.h"
 
 class QLabel;
 class QScreen;
@@ -22,6 +22,7 @@ class ElaAppBarPrivate : public QObject
     Q_PROPERTY_CREATE_D(bool, IsDefaultMaximized)
     Q_PROPERTY_CREATE_D(bool, IsOnlyAllowMinAndClose)
     Q_PROPERTY_CREATE_D(int, AppBarHeight)
+    Q_PROPERTY_CREATE_D(int, RibbonHeight)
     Q_PRIVATE_CREATE_D(QMenu*, CustomMenu)
 public:
     explicit ElaAppBarPrivate(QObject* parent = nullptr);
@@ -60,7 +61,7 @@ private:
     bool _isHoverMaxButton{false};
     int _win7Margins{0};
     void _changeMaxButtonAwesome(bool isMaximized);
-    void _showAppBarMenu(const QPoint& point);
+    void _showAppBarMenu(QPoint point);
     void _updateCursor(int edges);
     bool _containsCursorToItem(QWidget* item);
     void _onThemeModeChange(ElaThemeType::ThemeMode themeMode);
@@ -68,4 +69,5 @@ private:
     QVBoxLayout* _createVLayout(QWidget* widget);
 };
 
-#endif // ELAAPPBARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAAPPBARPRIVATE_H_
+

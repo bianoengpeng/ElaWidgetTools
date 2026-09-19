@@ -1,16 +1,17 @@
-#ifndef ELAIMAGECARD_H
-#define ELAIMAGECARD_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAIMAGECARD_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAIMAGECARD_H_
 
 #include <QWidget>
 
-#include "ElaProperty.h"
+#include "ElaPropertyMacro.h"
+#include "ElaWidgetToolsExport.h"
 
 class ElaImageCardPrivate;
 class ELA_EXPORT ElaImageCard : public QWidget
 {
     Q_OBJECT
     Q_Q_CREATE(ElaImageCard)
-    Q_PROPERTY_CREATE_Q_H(QImage, CardImage);
+    Q_PROPERTY_REF_CREATE_Q_H(QImage, CardImage);
     Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
     Q_PROPERTY_CREATE_Q_H(bool, IsPreserveAspectCrop)
 public:
@@ -18,7 +19,7 @@ public:
     ~ElaImageCard() override;
 
 protected:
-    virtual void paintEvent(QPaintEvent* event) override;
+    void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAIMAGECARD_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAIMAGECARD_H_

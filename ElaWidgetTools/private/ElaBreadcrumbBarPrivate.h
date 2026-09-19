@@ -1,9 +1,10 @@
-#ifndef ELABREADCRUMBBARPRIVATE_H
-#define ELABREADCRUMBBARPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELABREADCRUMBBARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELABREADCRUMBBARPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaBaseListView;
 class ElaBreadcrumbBarModel;
 class ElaBreadcrumbBarDelegate;
@@ -25,4 +26,5 @@ private:
     ElaBaseListView* _listView{nullptr};
 };
 
-#endif // ELABREADCRUMBBARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELABREADCRUMBBARPRIVATE_H_
+

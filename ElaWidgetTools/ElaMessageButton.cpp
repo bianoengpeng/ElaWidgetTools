@@ -1,5 +1,6 @@
 #include "ElaMessageButton.h"
 
+#include "ElaApplication.h"
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
@@ -24,7 +25,7 @@ ElaMessageButton::ElaMessageButton(QWidget* parent)
     setMouseTracking(true);
     setFixedSize(80, 38);
     QFont font = this->font();
-    font.setPixelSize(15);
+    font.setPixelSize(eApp->getFontPixelSize() + 2);
     setFont(font);
     setText("Message");
     setObjectName("ElaMessageButton");

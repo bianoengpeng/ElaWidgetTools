@@ -1,7 +1,8 @@
-#ifndef ELACALENDAR_H
-#define ELACALENDAR_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELACALENDAR_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELACALENDAR_H_
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 #include <QDate>
 #include <QWidget>
 class ElaCalendarPrivate;
@@ -23,4 +24,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELACALENDAR_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELACALENDAR_H_

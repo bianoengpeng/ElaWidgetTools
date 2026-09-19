@@ -1,9 +1,9 @@
-#ifndef ELACALENDARPICKERPRIVATE_H
-#define ELACALENDARPICKERPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACALENDARPICKERPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACALENDARPICKERPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaCalendar;
 class ElaCalendarPicker;
 class ElaCalendarPickerContainer;
@@ -24,4 +24,5 @@ private:
     ElaCalendarPickerContainer* _calendarPickerContainer{nullptr};
 };
 
-#endif // ELACALENDARPICKERPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACALENDARPICKERPRIVATE_H_
+

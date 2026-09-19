@@ -1,10 +1,11 @@
-#ifndef ELAICONBUTTON_H
-#define ELAICONBUTTON_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAICONBUTTON_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAICONBUTTON_H_
 
 #include <QPushButton>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaIconButtonPrivate;
 class ELA_EXPORT ElaIconButton : public QPushButton
 {
@@ -36,4 +37,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAICONBUTTON_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAICONBUTTON_H_

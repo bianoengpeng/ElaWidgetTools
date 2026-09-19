@@ -6,15 +6,17 @@
 #include <QMouseEvent>
 #include <QPropertyAnimation>
 
-#include "DeveloperComponents/ElaToolButtonStyle.h"
 #include "ElaIcon.h"
 #include "ElaMenu.h"
 #include "ElaToolButtonPrivate.h"
+#include "ElaToolButtonStyle.h"
 ElaToolButton::ElaToolButton(QWidget* parent)
     : QToolButton(parent), d_ptr(new ElaToolButtonPrivate())
 {
     Q_D(ElaToolButton);
     d->q_ptr = this;
+    setObjectName("ElaToolButton");
+    setStyleSheet("#ElaToolButton{background-color:transparent;}");
     setIconSize(QSize(22, 22));
     setPopupMode(QToolButton::InstantPopup);
     d->_toolButtonStyle = new ElaToolButtonStyle(style());

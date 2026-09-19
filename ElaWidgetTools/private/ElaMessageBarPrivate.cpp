@@ -1,5 +1,6 @@
 #include "ElaMessageBarPrivate.h"
 
+#include "ElaApplication.h"
 #include "ElaIconButton.h"
 #include "ElaMessageBar.h"
 #include <QDateTime>
@@ -77,13 +78,14 @@ void ElaMessageBarPrivate::messageBarEnd()
 void ElaMessageBarPrivate::_messageBarCreate(int displayMsec)
 {
     Q_Q(ElaMessageBar);
+    int fontPixelSize = eApp->getFontPixelSize();
     q->show();
     QFont font = q->font();
-    font.setPixelSize(16);
+    font.setPixelSize(fontPixelSize + 3);
     font.setWeight(QFont::Bold);
     q->setFont(font);
     int titleWidth = q->fontMetrics().horizontalAdvance(_title);
-    font.setPixelSize(14);
+    font.setPixelSize(fontPixelSize + 1);
     font.setWeight(QFont::Medium);
     q->setFont(font);
     int textWidth = q->fontMetrics().horizontalAdvance(_text);
@@ -337,7 +339,7 @@ void ElaMessageBarPrivate::_drawSuccess(QPainter* painter)
     painter->setClipPath(textPath);
     painter->fillPath(textPath, QColor(0x11, 0x77, 0x10));
     QFont iconFont = QFont("ElaAwesome");
-    iconFont.setPixelSize(12);
+    iconFont.setPixelSize(eApp->getFontPixelSize() - 1);
     painter->setFont(iconFont);
     painter->drawText(_leftPadding, 0, q->width(), q->height(), Qt::AlignVCenter, QChar(ElaIconType::Check));
     // 时间进度条绘制
@@ -419,7 +421,7 @@ void ElaMessageBarPrivate::_drawError(QPainter* painter)
     painter->setClipPath(textPath);
     painter->fillPath(textPath, QColor(0xBA, 0x2D, 0x20));
     QFont iconFont = QFont("ElaAwesome");
-    iconFont.setPixelSize(13);
+    iconFont.setPixelSize(eApp->getFontPixelSize());
     painter->setFont(iconFont);
     painter->drawText(_leftPadding + 1, 0, q->width(), q->height(), Qt::AlignVCenter, QChar(ElaIconType::Xmark));
     // 时间进度条绘制

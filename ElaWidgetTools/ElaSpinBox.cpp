@@ -1,6 +1,6 @@
 #include "ElaSpinBox.h"
 
-#include "DeveloperComponents/ElaSpinBoxStyle.h"
+#include "ElaSpinBoxStyle.h"
 #include "ElaMenu.h"
 #include "ElaSpinBoxPrivate.h"
 #include "ElaTheme.h"

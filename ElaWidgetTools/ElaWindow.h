@@ -1,10 +1,10 @@
-﻿#ifndef ELAWINDOW_H
-#define ELAWINDOW_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAWINDOW_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAWINDOW_H_
 
 #include <QMainWindow>
 
 #include "ElaAppBar.h"
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 #include "ElaSuggestBox.h"
 class ElaWindowPrivate;
 class ELA_EXPORT ElaWindow : public QMainWindow
@@ -15,6 +15,7 @@ class ELA_EXPORT ElaWindow : public QMainWindow
     Q_PROPERTY_CREATE_Q_H(bool, IsFixedSize)
     Q_PROPERTY_CREATE_Q_H(bool, IsDefaultClosed)
     Q_PROPERTY_CREATE_Q_H(int, AppBarHeight)
+    Q_PROPERTY_CREATE_Q_H(int, RibbonHeight)
     Q_PROPERTY_CREATE_Q_H(int, ThemeChangeTime)
     Q_PROPERTY_CREATE_Q_H(bool, IsCentralStackedWidgetTransparent)
     Q_PROPERTY_CREATE_Q_H(bool, IsAllowPageOpenInNewWindow)
@@ -85,7 +86,7 @@ public:
     QString getWindowMoviePath(ElaThemeType::ThemeMode themeMode) const;
 
     void setWindowPixmap(ElaThemeType::ThemeMode themeMode, const QPixmap& pixmap);
-    QPixmap getWindowPixmap(ElaThemeType::ThemeMode themeMode) const;
+    const QPixmap& getWindowPixmap(ElaThemeType::ThemeMode themeMode) const;
 
     void setWindowMovieRate(qreal rate);
     qreal getWindowMovieRate() const;
@@ -112,4 +113,5 @@ private:
     void setCentralWidget(QWidget* widget);
 };
 
-#endif // ELAWINDOW_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAWINDOW_H_
+

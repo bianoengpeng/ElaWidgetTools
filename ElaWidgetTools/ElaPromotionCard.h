@@ -1,15 +1,16 @@
-#ifndef ELAPROMOTIONCARD_H
-#define ELAPROMOTIONCARD_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAPROMOTIONCARD_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAPROMOTIONCARD_H_
 #include <QWidget>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaPromotionCardPrivate;
 class ELA_EXPORT ElaPromotionCard : public QWidget
 {
     Q_OBJECT
     Q_Q_CREATE(ElaPromotionCard)
     Q_PROPERTY_CREATE_Q_H(int, BorderRadius)
-    Q_PROPERTY_CREATE_Q_H(QPixmap, CardPixmap)
+    Q_PROPERTY_REF_CREATE_Q_H(QPixmap, CardPixmap)
     Q_PROPERTY_REF_CREATE_Q_H(QString, CardTitle)
     Q_PROPERTY_REF_CREATE_Q_H(QString, PromotionTitle)
     Q_PROPERTY_REF_CREATE_Q_H(QString, Title)
@@ -36,4 +37,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAPROMOTIONCARD_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAPROMOTIONCARD_H_

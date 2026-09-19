@@ -30,19 +30,21 @@ ElaThemeType::ThemeMode ElaTheme::getThemeMode() const
     return d->_themeMode;
 }
 
-void ElaTheme::drawEffectShadow(QPainter* painter, const QRect& widgetRect, int shadowBorderWidth, int borderRadius)
+void ElaTheme::drawEffectShadow(QPainter* painter, QRect widgetRect, int shadowBorderWidth, int borderRadius, qreal alphaRatio, const QColor& shadowColor)
 {
     Q_D(ElaTheme);
     painter->save();
     painter->setRenderHints(QPainter::Antialiasing);
+    painter->setBrush(Qt::NoBrush);
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
-    QColor color = d->_themeMode == ElaThemeType::Light ? QColor(0x70, 0x70, 0x70) : QColor(0x9C, 0x9B, 0x9E);
+    QColor color = shadowColor.isValid() ? shadowColor : d->_themeMode == ElaThemeType::Light ? QColor(0x70, 0x70, 0x70)
+                                                                                              : QColor(0x9C, 0x9B, 0x9E);
     for (int i = 0; i < shadowBorderWidth; i++)
     {
         path.addRoundedRect(widgetRect.x() + shadowBorderWidth - i, widgetRect.y() + shadowBorderWidth - i, widgetRect.width() - (shadowBorderWidth - i) * 2, widgetRect.height() - (shadowBorderWidth - i) * 2, borderRadius + i, borderRadius + i);
-        int alpha = 1 * (shadowBorderWidth - i + 1);
-        color.setAlpha(alpha > 255 ? 255 : alpha);
+        qreal alpha = alphaRatio * (shadowBorderWidth - i + 1);
+        color.setAlpha(alpha > 255 ? 255 : static_cast<int>(alpha));
         painter->setPen(color);
         painter->drawPath(path);
     }

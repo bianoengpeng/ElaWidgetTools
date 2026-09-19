@@ -1,11 +1,12 @@
-#ifndef ELAMENUPRIVATE_H
-#define ELAMENUPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMENUPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMENUPRIVATE_H_
 
 #include <QObject>
 #include <QPixmap>
 #include <QPoint>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaMenu;
 class ElaMenuStyle;
 class ElaMenuPrivate : public QObject
@@ -24,4 +25,5 @@ private:
     ElaMenuStyle* _menuStyle{nullptr};
 };
 
-#endif // ELAMENUPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMENUPRIVATE_H_
+

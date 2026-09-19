@@ -1,9 +1,10 @@
-#ifndef ELATEXTEDIT_H
-#define ELATEXTEDIT_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELATEXTEDIT_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELATEXTEDIT_H_
 
 #include <QTextEdit>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaTextEditPrivate;
 class ELA_EXPORT ElaTextEdit : public QTextEdit
@@ -21,4 +22,4 @@ protected:
     virtual void contextMenuEvent(QContextMenuEvent* event) override;
 };
 
-#endif // ELAPLAINTEXTEDIT_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELATEXTEDIT_H_

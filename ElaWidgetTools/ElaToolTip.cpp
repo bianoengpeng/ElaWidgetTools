@@ -51,8 +51,9 @@ ElaToolTip::~ElaToolTip()
 void ElaToolTip::setToolTip(QString toolTip)
 {
     Q_D(ElaToolTip);
-    resize(fontMetrics().horizontalAdvance(toolTip), height());
-    d->_toolTipText->setText(toolTip);
+    const QString tempToolTip = std::move(toolTip);
+    resize(fontMetrics().horizontalAdvance(tempToolTip), height());
+    d->_toolTipText->setText(tempToolTip);
     Q_EMIT pToolTipChanged();
 }
 

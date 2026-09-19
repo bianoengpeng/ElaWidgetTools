@@ -21,10 +21,10 @@
 #include <QTimer>
 #include <QVBoxLayout>
 
-#include "ElaDef.h"
 #include "ElaEventBus.h"
 #include "ElaIconButton.h"
 #include "ElaTheme.h"
+#include "ElaWidgetToolsDef.h"
 #include "private/ElaAppBarPrivate.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaAppBar, bool, IsStayTop)
 Q_PROPERTY_CREATE_Q_CPP(ElaAppBar, bool, IsDefaultClosed)
@@ -39,6 +39,7 @@ ElaAppBar::ElaAppBar(QWidget* parent)
     d->_buttonFlags = ElaAppBarType::RouteBackButtonHint | ElaAppBarType::RouteForwardButtonHint | ElaAppBarType::StayTopButtonHint | ElaAppBarType::ThemeChangeButtonHint | ElaAppBarType::MinimizeButtonHint | ElaAppBarType::MaximizeButtonHint | ElaAppBarType::CloseButtonHint;
     window()->setAttribute(Qt::WA_Mapped);
     d->_pAppBarHeight = 45;
+    d->_pRibbonHeight = 0;
     setFixedHeight(d->_pAppBarHeight);
     window()->setContentsMargins(0, this->height(), 0, 0);
     d->q_ptr = this;
@@ -243,7 +244,7 @@ void ElaAppBar::setAppBarHeight(int height)
     Q_D(ElaAppBar);
     d->_pAppBarHeight = height;
     setFixedHeight(d->_pAppBarHeight);
-    window()->setContentsMargins(0, this->height(), 0, 0);
+    window()->setContentsMargins(0, d->_pAppBarHeight + d->_pRibbonHeight, 0, 0);
     Q_EMIT pAppBarHeightChanged();
 }
 
@@ -251,6 +252,20 @@ int ElaAppBar::getAppBarHeight() const
 {
     Q_D(const ElaAppBar);
     return d->_pAppBarHeight;
+}
+
+void ElaAppBar::setRibbonHeight(int height)
+{
+    Q_D(ElaAppBar);
+    d->_pRibbonHeight = height;
+    window()->setContentsMargins(0, d->_pAppBarHeight + d->_pRibbonHeight, 0, 0);
+    Q_EMIT pAppBarHeightChanged();
+}
+
+int ElaAppBar::getRibbonHeight() const
+{
+    Q_D(const ElaAppBar);
+    return d->_pRibbonHeight;
 }
 
 void ElaAppBar::setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* widget, QObject* hitTestObject, const QString& hitTestFunctionName)
@@ -507,12 +522,12 @@ int ElaAppBar::takeOverNativeEvent(const QByteArray& eventType, void* message, l
         if (::IsZoomed(hwnd))
         {
             this->move(7, 7);
-            window()->setContentsMargins(8, 8 + height(), 8, 8);
+            window()->setContentsMargins(8, 8 + height() + d->_pRibbonHeight, 8, 8);
         }
         else
         {
             this->move(0, 0);
-            window()->setContentsMargins(0, height(), 0, 0);
+            window()->setContentsMargins(0, height() + d->_pRibbonHeight, 0, 0);
         }
         *result = 0;
         return 1;

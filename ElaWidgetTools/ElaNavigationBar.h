@@ -1,10 +1,11 @@
-#ifndef ELANAVIGATIONBAR_H
-#define ELANAVIGATIONBAR_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELANAVIGATIONBAR_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELANAVIGATIONBAR_H_
 
 #include <QWidget>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 #include "ElaSuggestBox.h"
 class ElaNavigationBarPrivate;
 class ELA_EXPORT ElaNavigationBar : public QWidget
@@ -63,4 +64,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELANAVIGATIONBAR_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELANAVIGATIONBAR_H_

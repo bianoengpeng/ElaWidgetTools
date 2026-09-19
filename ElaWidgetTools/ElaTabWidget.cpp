@@ -9,6 +9,7 @@
 #include <QPainter>
 Q_PROPERTY_CREATE_Q_CPP(ElaTabWidget, bool, IsTabTransparent);
 Q_PROPERTY_CREATE_Q_CPP(ElaTabWidget, bool, IsContainerAcceptDrops);
+Q_PROPERTY_CREATE_Q_CPP(ElaTabWidget, QSize, FloatWidgetSize)
 ElaTabWidget::ElaTabWidget(QWidget* parent)
     : QTabWidget(parent), d_ptr(new ElaTabWidgetPrivate())
 {
@@ -16,6 +17,7 @@ ElaTabWidget::ElaTabWidget(QWidget* parent)
     d->q_ptr = this;
     d->_pIsContainerAcceptDrops = false;
     d->_pIsTabTransparent = false;
+    d->_pFloatWidgetSize = QSize(700, 500);
     setObjectName("ElaTabWidget");
     setAcceptDrops(true);
     d->_tabBar = new ElaTabBar(this);
@@ -25,6 +27,13 @@ ElaTabWidget::ElaTabWidget(QWidget* parent)
     connect(d->_tabBar, &ElaTabBar::tabDragLeave, d, &ElaTabWidgetPrivate::onTabDragLeave);
     connect(d->_tabBar, &ElaTabBar::tabDragDrop, d, &ElaTabWidgetPrivate::onTabDragDrop);
     connect(d->_tabBar, &ElaTabBar::tabCloseRequested, d, &ElaTabWidgetPrivate::onTabCloseRequested);
+    connect(d->_tabBar, &ElaTabBar::currentChanged, this, [=](int index) {
+        if (index < 0)
+        {
+            return;
+        }
+        Q_EMIT currentWidgetChanged(widget(index));
+    });
 }
 
 ElaTabWidget::~ElaTabWidget()

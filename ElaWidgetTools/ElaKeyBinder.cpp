@@ -1,4 +1,5 @@
 #include "ElaKeyBinder.h"
+#include "ElaApplication.h"
 #include "ElaContentDialog.h"
 #include "ElaKeyBinderContainer.h"
 #include "ElaKeyBinderPrivate.h"
@@ -18,7 +19,7 @@ ElaKeyBinder::ElaKeyBinder(QWidget* parent)
     setStyleSheet("#ElaKeyBinder{background-color:transparent;}");
     QFont textFont = font();
     textFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.5);
-    textFont.setPixelSize(15);
+    textFont.setPixelSize(eApp->getFontPixelSize() + 2);
     setFont(textFont);
     d->_binderContainer = new ElaKeyBinderContainer(this);
     setText(u8"  按键: " + QString(u8"未绑定") + "      ");
@@ -113,7 +114,7 @@ void ElaKeyBinder::paintEvent(QPaintEvent* event)
     painter.drawRoundedRect(borderRect, d->_pBorderRadius, d->_pBorderRadius);
     // 图标绘制
     QFont iconFont = QFont("ElaAwesome");
-    iconFont.setPixelSize(16);
+    iconFont.setPixelSize(eApp->getFontPixelSize() + 3);
     painter.setFont(iconFont);
     painter.setPen(ElaThemeColor(d->_themeMode, BasicText));
     QRect iconRect = rect();

@@ -1,11 +1,12 @@
-#ifndef ELAMESSAGEBOX_H
-#define ELAMESSAGEBOX_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAMESSAGEBOX_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAMESSAGEBOX_H_
 
 #include <QDialog>
 #include <QMessageBox>
 #include <QCheckBox>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaText;
 class ElaPushButton;
@@ -79,4 +80,4 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
 };
 
-#endif // ELAMESSAGEBOX_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAMESSAGEBOX_H_

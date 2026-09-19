@@ -1,9 +1,9 @@
-#ifndef ELACONTENTDIALOGPRIVATE_H
-#define ELACONTENTDIALOGPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACONTENTDIALOGPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACONTENTDIALOGPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class QVBoxLayout;
 class ElaPushButton;
 class ElaContentDialog;
@@ -35,4 +35,5 @@ private:
     void _moveToCenter();
 };
 
-#endif // ELACONTENTDIALOGPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELACONTENTDIALOGPRIVATE_H_
+

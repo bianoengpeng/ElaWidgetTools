@@ -1,5 +1,6 @@
 #include "ElaToggleButton.h"
 
+#include "ElaApplication.h"
 #include <QEvent>
 #include <QPainter>
 #include <QPainterPath>
@@ -20,7 +21,7 @@ ElaToggleButton::ElaToggleButton(QWidget* parent)
     setMouseTracking(true);
     setFixedSize(80, 32);
     QFont font = this->font();
-    font.setPixelSize(15);
+    font.setPixelSize(eApp->getFontPixelSize() + 2);
     setFont(font);
     setObjectName("ElaToggleButton");
     setStyleSheet("#ElaToggleButton{background-color:transparent;}");

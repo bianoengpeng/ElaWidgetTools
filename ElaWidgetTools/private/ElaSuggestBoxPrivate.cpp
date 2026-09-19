@@ -100,7 +100,7 @@ void ElaSuggestBoxPrivate::onSearchViewClicked(const QModelIndex& index)
     _startCloseAnimation();
 }
 
-void ElaSuggestBoxPrivate::_startSizeAnimation(const QSize& oldSize, const QSize& newSize)
+void ElaSuggestBoxPrivate::_startSizeAnimation(QSize oldSize, QSize newSize)
 {
     if (_lastSize.isValid() && _lastSize == newSize)
     {

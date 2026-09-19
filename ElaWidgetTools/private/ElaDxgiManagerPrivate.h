@@ -1,8 +1,9 @@
-#ifndef ELADXGIMANAGERPRIVATE_H
-#define ELADXGIMANAGERPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELADXGIMANAGERPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELADXGIMANAGERPRIVATE_H_
 #include <QObject>
 #ifdef Q_OS_WIN
-#include "ElaProperty.h"
+#include "ElaPropertyMacro.h"
+#include "ElaWidgetToolsExport.h"
 #include <QImage>
 class ElaDxgi;
 class ElaDxgiManager;
@@ -12,7 +13,7 @@ class ElaDxgiManagerPrivate : public QObject
     Q_D_CREATE(ElaDxgiManager)
 public:
     explicit ElaDxgiManagerPrivate(QObject* parent = nullptr);
-    ~ElaDxgiManagerPrivate();
+    ~ElaDxgiManagerPrivate() override;
 
 private:
     Q_SIGNAL void grabScreen();
@@ -21,20 +22,6 @@ private:
     QThread* _dxgiThread{nullptr};
 };
 
-class ElaDxgiScreen;
-class ElaDxgiScreenPrivate : public QObject
-{
-    Q_OBJECT
-    Q_D_CREATE(ElaDxgiScreen)
-    Q_PROPERTY_CREATE_D(int, BorderRadius)
-public:
-    explicit ElaDxgiScreenPrivate(QObject* parent = nullptr);
-    ~ElaDxgiScreenPrivate();
-
-private:
-    ElaDxgiManager* _dxgiManager{nullptr};
-    bool _isSyncGrabSize{false};
-    QImage _img;
-};
 #endif
-#endif // ELADXGIMANAGERPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELADXGIMANAGERPRIVATE_H_
+

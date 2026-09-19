@@ -14,6 +14,7 @@ ElaApplication::ElaApplication(QObject* parent)
 {
     Q_D(ElaApplication);
     d->q_ptr = this;
+    d->_pFontPixelSize = 13;
     d->_pElaMicaImagePath = ":/include/Image/MicaBase.png";
     d->_pWindowDisplayMode = ElaApplicationType::Normal;
     d->_themeMode = eTheme->getThemeMode();
@@ -87,14 +88,31 @@ const QString& ElaApplication::getElaMicaImagePath() const
     return d->_pElaMicaImagePath;
 }
 
+void ElaApplication::setFontPixelSize(int fontPixelSize)
+{
+    Q_D(ElaApplication);
+    d->_pFontPixelSize = fontPixelSize;
+    QFont font = qApp->font();
+    font.setPixelSize(fontPixelSize);
+    qApp->setFont(font);
+    Q_EMIT pFontPixelSizeChanged();
+}
+
+int ElaApplication::getFontPixelSize() const
+{
+    Q_D(const ElaApplication);
+    return d->_pFontPixelSize;
+}
+
 void ElaApplication::init()
 {
+    Q_D(ElaApplication);
     Q_INIT_RESOURCE(ElaWidgetTools);
     QApplication::setAttribute(Qt::AA_DontCreateNativeWidgetSiblings);
     QFontDatabase::addApplicationFont(":/include/Font/ElaAwesome.ttf");
     //默认字体
     QFont font = qApp->font();
-    font.setPixelSize(13);
+    font.setPixelSize(d->_pFontPixelSize);
     font.setFamily("Microsoft YaHei");
     font.setHintingPreference(QFont::PreferNoHinting);
     qApp->setFont(font);

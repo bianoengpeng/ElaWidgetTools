@@ -1,9 +1,10 @@
-#ifndef ELATREEVIEW_H
-#define ELATREEVIEW_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELATREEVIEW_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELATREEVIEW_H_
 
 #include <QTreeView>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaTreeViewPrivate;
 class ELA_EXPORT ElaTreeView : public QTreeView
@@ -17,4 +18,4 @@ public:
     ~ElaTreeView();
 };
 
-#endif // ELATREEVIEW_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELATREEVIEW_H_

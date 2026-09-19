@@ -1,8 +1,8 @@
-#ifndef ELATOOLBARPRIVATE_H
-#define ELATOOLBARPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLBARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLBARPRIVATE_H_
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaToolBarStyle;
 class ElaToolBar;
 class ElaToolBarPrivate : public QObject
@@ -19,4 +19,5 @@ private:
     int _shadowBorderWidth{6};
 };
 
-#endif // ELATOOLBARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLBARPRIVATE_H_
+

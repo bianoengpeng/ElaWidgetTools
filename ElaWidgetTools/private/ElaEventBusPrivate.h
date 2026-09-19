@@ -1,11 +1,12 @@
-#ifndef ELAEVENTBUSPRIVATE_H
-#define ELAEVENTBUSPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAEVENTBUSPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAEVENTBUSPRIVATE_H_
 
 #include <QMap>
 #include <QObject>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaEvent;
 class ElaEventPrivate : public QObject
 {
@@ -35,4 +36,5 @@ private:
     QMap<QString, QList<ElaEvent*>> _eventMap;
 };
 
-#endif // ELAEVENTBUSPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAEVENTBUSPRIVATE_H_
+

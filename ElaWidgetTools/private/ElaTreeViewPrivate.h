@@ -1,9 +1,10 @@
-#ifndef ELATREEVIEWPRIVATE_H
-#define ELATREEVIEWPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATREEVIEWPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATREEVIEWPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaTreeView;
 class ElaTreeViewStyle;
@@ -19,4 +20,5 @@ private:
     ElaTreeViewStyle* _treeViewStyle{nullptr};
 };
 
-#endif // ELATREEVIEWPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATREEVIEWPRIVATE_H_
+

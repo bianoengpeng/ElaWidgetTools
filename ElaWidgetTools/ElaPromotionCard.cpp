@@ -10,7 +10,7 @@
 #include "ElaPromotionCardPrivate.h"
 #include "ElaTheme.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaPromotionCard, int, BorderRadius)
-Q_PROPERTY_CREATE_Q_CPP(ElaPromotionCard, QPixmap, CardPixmap)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPromotionCard, QPixmap, CardPixmap)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPromotionCard, QString, CardTitle)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPromotionCard, QString, PromotionTitle)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPromotionCard, QString, Title)

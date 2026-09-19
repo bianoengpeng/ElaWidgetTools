@@ -1,9 +1,10 @@
-#ifndef ELASTATUSBAR_H
-#define ELASTATUSBAR_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELASTATUSBAR_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELASTATUSBAR_H_
 
 #include <QStatusBar>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ELA_EXPORT ElaStatusBar : public QStatusBar
 {
     Q_OBJECT
@@ -12,4 +13,4 @@ public:
     ~ElaStatusBar() override;
 };
 
-#endif // ELASTATUSBAR_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELASTATUSBAR_H_

@@ -1,12 +1,12 @@
-#ifndef ELAREMINDERCARDPRIVATE_H
-#define ELAREMINDERCARDPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAREMINDERCARDPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAREMINDERCARDPRIVATE_H_
 
 #include <QImage>
 #include <QObject>
 #include <QPixmap>
 #include <QSize>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaReminderCard;
 class ElaReminderCardPrivate : public QObject
 {
@@ -32,4 +32,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELAREMINDERCARDPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAREMINDERCARDPRIVATE_H_
+

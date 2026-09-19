@@ -1,9 +1,9 @@
-#ifndef ELAREMINDERCARD_H
-#define ELAREMINDERCARD_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAREMINDERCARD_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAREMINDERCARD_H_
 
 #include <QPushButton>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaReminderCardPrivate;
 class ELA_EXPORT ElaReminderCard : public QPushButton
 {
@@ -15,7 +15,7 @@ class ELA_EXPORT ElaReminderCard : public QPushButton
     Q_PROPERTY_CREATE_Q_H(int, TitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, SubTitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, TitleSpacing);
-    Q_PROPERTY_CREATE_Q_H(QPixmap, CardPixmap);
+    Q_PROPERTY_REF_CREATE_Q_H(QPixmap, CardPixmap);
     Q_PROPERTY_CREATE_Q_H(QSize, CardPixmapSize);
     Q_PROPERTY_CREATE_Q_H(int, CardPixmapBorderRadius)
     Q_PROPERTY_CREATE_Q_H(ElaCardPixType::PixMode, CardPixMode);
@@ -29,4 +29,4 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAREMINDERCARD_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAREMINDERCARD_H_

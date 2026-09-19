@@ -1,9 +1,9 @@
-#ifndef ELAFRAMEWORK_ELADIALOGPRIVATE_H
-#define ELAFRAMEWORK_ELADIALOGPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELADIALOGPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELADIALOGPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaAppBar;
 class ElaDialog;
 class ElaDialogPrivate : public QObject
@@ -20,4 +20,5 @@ private:
     ElaAppBar* _appBar{nullptr};
 };
 
-#endif //ELAFRAMEWORK_ELADIALOGPRIVATE_H
+#endif //ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELADIALOGPRIVATE_H_
+

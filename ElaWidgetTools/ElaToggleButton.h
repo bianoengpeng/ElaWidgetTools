@@ -1,9 +1,10 @@
-#ifndef ELATOGGLEBUTTON_H
-#define ELATOGGLEBUTTON_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELATOGGLEBUTTON_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELATOGGLEBUTTON_H_
 
 #include <QPushButton>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaToggleButtonPrivate;
 class ELA_EXPORT ElaToggleButton : public QWidget
 {
@@ -28,4 +29,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELATOGGLEBUTTON_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELATOGGLEBUTTON_H_

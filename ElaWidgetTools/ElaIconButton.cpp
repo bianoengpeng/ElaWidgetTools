@@ -1,5 +1,6 @@
 #include "ElaIconButton.h"
 
+#include "ElaApplication.h"
 #include <QEvent>
 #include <QFont>
 #include <QPainter>
@@ -59,7 +60,7 @@ ElaIconButton::ElaIconButton(ElaIconType::IconName awesome, QWidget* parent)
     d->_pBorderRadius = 0;
     d->_themeMode = eTheme->getThemeMode();
     QFont iconFont = QFont("ElaAwesome");
-    iconFont.setPixelSize(15);
+    iconFont.setPixelSize(eApp->getFontPixelSize() + 2);
     this->setFont(iconFont);
     d->_pAwesome = awesome;
     this->setText(QChar(awesome));

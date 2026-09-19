@@ -1,11 +1,11 @@
-#ifndef ELAACRYLICURLCARDPRIVATE_H
-#define ELAACRYLICURLCARDPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAACRYLICURLCARDPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAACRYLICURLCARDPRIVATE_H_
 
 #include <QMap>
 #include <QObject>
 #include <QPixmap>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaAcrylicUrlCard;
 class ElaAcrylicUrlCardPrivate : public QObject
 {
@@ -37,4 +37,5 @@ private:
     qreal _borderWidth{1.5};
 };
 
-#endif // ELAACRYLICURLCARDPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAACRYLICURLCARDPRIVATE_H_
+

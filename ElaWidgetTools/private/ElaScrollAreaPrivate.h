@@ -1,10 +1,11 @@
-#ifndef ELASCROLLAREAPRIVATE_H
-#define ELASCROLLAREAPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLAREAPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLAREAPRIVATE_H_
 
 #include <QObject>
 #include <QScrollBar>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaScrollBar;
 class ElaScrollArea;
 class ElaScrollAreaPrivate : public QObject
@@ -16,4 +17,5 @@ public:
     ~ElaScrollAreaPrivate();
 };
 
-#endif // ELASCROLLAREAPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLAREAPRIVATE_H_
+

@@ -1,5 +1,6 @@
 #include "ElaIcon.h"
 
+#include "ElaApplication.h"
 #include <QPainter>
 #include <QPixmap>
 Q_SINGLETON_CREATE_CPP(ElaIcon)
@@ -21,14 +22,14 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome)
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
     // painter.setPen(QColor("#1570A5"));
     // painter.setBrush(QColor("#1570A5"));
-    iconFont.setPixelSize(25);
+    iconFont.setPixelSize(eApp->getFontPixelSize() + 12);
     painter.setFont(iconFont);
     painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
     return QIcon(pix);
 }
 
-QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, const QColor& iconColor)
+QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, QColor iconColor)
 {
     QFont iconFont = QFont("ElaAwesome");
     QPixmap pix(30, 30);
@@ -38,7 +39,7 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, const QColor& iconColor
     painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing | QPainter::SmoothPixmapTransform);
     painter.setPen(iconColor);
     // painter.setBrush(QColor("#1570A5"));
-    iconFont.setPixelSize(25);
+    iconFont.setPixelSize(eApp->getFontPixelSize() + 12);
     painter.setFont(iconFont);
     painter.drawText(pix.rect(), Qt::AlignCenter, QChar(awesome));
     painter.end();
@@ -61,7 +62,7 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize)
     return QIcon(pix);
 }
 
-QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, const QColor& iconColor)
+QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, QColor iconColor)
 {
     QFont iconFont = QFont("ElaAwesome");
     QPixmap pix(pixelSize, pixelSize);
@@ -94,7 +95,7 @@ QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixe
     return QIcon(pix);
 }
 
-QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight, const QColor& iconColor)
+QIcon ElaIcon::getElaIcon(ElaIconType::IconName awesome, int pixelSize, int fixedWidth, int fixedHeight, QColor iconColor)
 {
     QFont iconFont = QFont("ElaAwesome");
     QPixmap pix(fixedWidth, fixedHeight);

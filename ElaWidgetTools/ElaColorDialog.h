@@ -1,10 +1,11 @@
-#ifndef ELACOLORDIALOG_H
-#define ELACOLORDIALOG_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELACOLORDIALOG_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELACOLORDIALOG_H_
 
 #include <QDialog>
 
 #include "ElaAppBar.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaColorDialogPrivate;
 class ELA_EXPORT ElaColorDialog : public QDialog
 {
@@ -23,7 +24,7 @@ Q_SIGNALS:
     Q_SIGNAL void colorSelected(const QColor& color);
 
 protected:
-    void paintEvent(QPaintEvent* event) override;
+    virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELACOLORDIALOG_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELACOLORDIALOG_H_

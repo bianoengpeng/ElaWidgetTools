@@ -1,12 +1,12 @@
-#ifndef ELAINTERACTIVECARDPRIVATE_H
-#define ELAINTERACTIVECARDPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAINTERACTIVECARDPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAINTERACTIVECARDPRIVATE_H_
 
 #include <QImage>
 #include <QObject>
 #include <QPixmap>
 #include <QSize>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaInteractiveCard;
 class ElaInteractiveCardPrivate : public QObject
 {
@@ -31,4 +31,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELAINTERACTIVECARDPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAINTERACTIVECARDPRIVATE_H_
+

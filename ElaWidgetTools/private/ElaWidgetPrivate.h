@@ -1,9 +1,9 @@
-#ifndef ELAWIDGETPRIVATE_H
-#define ELAWIDGETPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAWIDGETPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAWIDGETPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaWidget;
 class ElaAppBar;
 class ElaWidgetPrivate : public QObject
@@ -20,4 +20,5 @@ private:
     ElaAppBar* _appBar{nullptr};
 };
 
-#endif // ELAWIDGETPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAWIDGETPRIVATE_H_
+

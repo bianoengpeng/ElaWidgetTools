@@ -1,13 +1,12 @@
-#ifndef ELAMESSAGEBOXPRIVATE_H
-#define ELAMESSAGEBOXPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBOXPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBOXPRIVATE_H_
 
 #include <QObject>
 #include <QMap>
 #include <QMessageBox>
 #include <QPointer>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -72,6 +71,6 @@ public:
     void updateIcon();
 };
 
-#endif // ELAMESSAGEBOXPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBOXPRIVATE_H_
 
 

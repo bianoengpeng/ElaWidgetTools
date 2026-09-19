@@ -1,10 +1,10 @@
-#ifndef ELAIMAGECARDPRIVATE_H
-#define ELAIMAGECARDPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAIMAGECARDPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAIMAGECARDPRIVATE_H_
 
 #include <QImage>
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 
 class ElaImageCard;
 class ElaImageCardPrivate : public QObject
@@ -22,4 +22,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELAIMAGECARDPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAIMAGECARDPRIVATE_H_
+

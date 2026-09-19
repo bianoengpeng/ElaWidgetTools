@@ -1,10 +1,11 @@
-﻿#ifndef ELACONTENTDIALOG_H
-#define ELACONTENTDIALOG_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELACONTENTDIALOG_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELACONTENTDIALOG_H_
 #include <QAbstractNativeEventFilter>
 #include <QDialog>
 
 #include "ElaAppBar.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaContentDialogPrivate;
 class ELA_EXPORT ElaContentDialog : public QDialog
 {
@@ -35,4 +36,5 @@ protected:
     virtual void keyPressEvent(QKeyEvent* event) override;
 };
 
-#endif // ELACONTENTDIALOG_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELACONTENTDIALOG_H_
+

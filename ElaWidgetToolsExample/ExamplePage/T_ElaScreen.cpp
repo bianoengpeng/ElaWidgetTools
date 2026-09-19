@@ -3,6 +3,7 @@
 #ifdef Q_OS_WIN
 #include "ElaComboBox.h"
 #include "ElaDxgiManager.h"
+#include "ElaImageCard.h"
 #include "ElaLineEdit.h"
 #include "ElaScrollPageArea.h"
 #include "ElaText.h"
@@ -25,9 +26,12 @@ T_ElaScreen::T_ElaScreen(QWidget* parent)
     ElaScrollPageArea* dxgiScreenArea = new ElaScrollPageArea(this);
     dxgiScreenArea->setFixedHeight(700);
     QHBoxLayout* dxgiScreenLayout = new QHBoxLayout(dxgiScreenArea);
-    _dxgiScreen = new ElaDxgiScreen(this);
-    _dxgiScreen->setFixedSize(1200, 678);
+    _dxgiScreen = new ElaImageCard(this);
+    _dxgiScreen->setFixedHeight(678);
     dxgiScreenLayout->addWidget(_dxgiScreen);
+    connect(dxgiManager, &ElaDxgiManager::grabImageUpdate, this, [=](const QImage& img) {
+        _dxgiScreen->setCardImage(img);
+    });
 
     ElaText* dxText = new ElaText("显卡选择", this);
     dxText->setTextPixelSize(15);
@@ -64,6 +68,7 @@ T_ElaScreen::T_ElaScreen(QWidget* parent)
         else
         {
             dxgiManager->stopGrabScreen();
+            _dxgiScreen->setCardImage({});
             _dxgiScreen->update();
         }
     });

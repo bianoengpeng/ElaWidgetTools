@@ -1,9 +1,9 @@
-#ifndef ELADOUBLESPINBOX_H
-#define ELADOUBLESPINBOX_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELADOUBLESPINBOX_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELADOUBLESPINBOX_H_
 
 #include <QDoubleSpinBox>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 
 class ElaDoubleSpinBoxPrivate;
 class ELA_EXPORT ElaDoubleSpinBox : public QDoubleSpinBox
@@ -22,4 +22,4 @@ protected:
     void contextMenuEvent(QContextMenuEvent* event) override;
 };
 
-#endif // ELADOUBLESPINBOX_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELADOUBLESPINBOX_H_

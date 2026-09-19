@@ -1,5 +1,6 @@
 #include "ElaPopularCard.h"
 
+#include "ElaApplication.h"
 #include <QEvent>
 #include <QPainter>
 #include <QPainterPath>
@@ -11,12 +12,12 @@
 #include "ElaPushButton.h"
 #include "ElaTheme.h"
 Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, int, BorderRadius)
-Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QPixmap, CardPixmap)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QPixmap, CardPixmap)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, Title)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, SubTitle)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, InteractiveTips)
 Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QString, DetailedText)
-Q_PROPERTY_CREATE_Q_CPP(ElaPopularCard, QPixmap, CardFloatPixmap)
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaPopularCard, QPixmap, CardFloatPixmap)
 ElaPopularCard::ElaPopularCard(QWidget* parent)
     : QWidget{parent}, d_ptr(new ElaPopularCardPrivate())
 {
@@ -138,6 +139,7 @@ bool ElaPopularCard::event(QEvent* event)
 void ElaPopularCard::paintEvent(QPaintEvent* event)
 {
     Q_D(ElaPopularCard);
+    int fontPixelSize = eApp->getFontPixelSize();
     if (d->_isFloating)
     {
         return;
@@ -181,7 +183,7 @@ void ElaPopularCard::paintEvent(QPaintEvent* event)
     painter.setPen(ElaThemeColor(d->_themeMode, BasicText));
     QFont font = painter.font();
     font.setWeight(QFont::Bold);
-    font.setPixelSize(15);
+    font.setPixelSize(fontPixelSize + 2);
     painter.setFont(font);
     int titleHeight = painter.fontMetrics().height();
     QRectF titleRect(pixRect.right() + d->_textHSpacing, pixRect.y(), d->_floater->_floatGeometryOffset * 2 + foregroundRect.width() - pixRect.width() - d->_textHSpacing * 2 - foregroundRect.height() * 0.15 - buttonTargetWidth, titleHeight);
@@ -190,7 +192,7 @@ void ElaPopularCard::paintEvent(QPaintEvent* event)
 
     // SubTitle
     font.setWeight(QFont::DemiBold);
-    font.setPixelSize(13);
+    font.setPixelSize(fontPixelSize);
     painter.setFont(font);
     int subTitleHeight = painter.fontMetrics().height();
     QRectF subTitleRect(pixRect.right() + d->_textHSpacing, titleRect.bottom() + d->_textVSpacing, d->_floater->_floatGeometryOffset * 2 + foregroundRect.width() - pixRect.width() - d->_textHSpacing * 2 - foregroundRect.height() * 0.15 - buttonTargetWidth,
@@ -204,7 +206,7 @@ void ElaPopularCard::paintEvent(QPaintEvent* event)
     if (!d->_pInteractiveTips.isEmpty())
     {
         font.setWeight(QFont::DemiBold);
-        font.setPixelSize(12);
+        font.setPixelSize(fontPixelSize - 1);
         painter.setFont(font);
         //覆盖背景绘制
         QRectF tipRect(foregroundRect.right() - d->_textHSpacing - tipWidth, foregroundRect.bottom() - d->_textHSpacing - tipHeight, foregroundRect.width() / 2 - d->_textHSpacing, tipHeight);

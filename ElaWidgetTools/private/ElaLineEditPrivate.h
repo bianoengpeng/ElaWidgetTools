@@ -1,7 +1,7 @@
-#ifndef ELALINEEDITPRIVATE_H
-#define ELALINEEDITPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELALINEEDITPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELALINEEDITPRIVATE_H_
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 #include <QObject>
 #include <QVariantMap>
 class ElaEvent;
@@ -25,4 +25,5 @@ private:
     qreal _textSpacing{0.5};
 };
 
-#endif // ELALINEEDITPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELALINEEDITPRIVATE_H_
+

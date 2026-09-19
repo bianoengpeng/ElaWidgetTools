@@ -1,6 +1,6 @@
 ﻿#include "T_IconModel.h"
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 T_IconModel::T_IconModel(QObject* parent)
     : QAbstractListModel{parent}
 {

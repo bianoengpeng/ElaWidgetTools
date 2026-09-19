@@ -1,10 +1,11 @@
-#ifndef ELAMENUBAR_H
-#define ELAMENUBAR_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAMENUBAR_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAMENUBAR_H_
 
 #include <QMenuBar>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaMenu;
 class ELA_EXPORT ElaMenuBar : public QMenuBar
@@ -23,4 +24,4 @@ public:
     QAction* addElaIconAction(ElaIconType::IconName icon, const QString& text, const QKeySequence& shortcut);
 };
 
-#endif // ELAMENUBAR_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAMENUBAR_H_

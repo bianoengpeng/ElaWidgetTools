@@ -1,11 +1,12 @@
-#ifndef ELAINTERACTIVECARD_H
-#define ELAINTERACTIVECARD_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAINTERACTIVECARD_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAINTERACTIVECARD_H_
 
 #include <QPixmap>
 #include <QPushButton>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaInteractiveCardPrivate;
 class ELA_EXPORT ElaInteractiveCard : public QPushButton
@@ -18,7 +19,7 @@ class ELA_EXPORT ElaInteractiveCard : public QPushButton
     Q_PROPERTY_CREATE_Q_H(int, TitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, SubTitlePixelSize);
     Q_PROPERTY_CREATE_Q_H(int, TitleSpacing);
-    Q_PROPERTY_CREATE_Q_H(QPixmap, CardPixmap);
+    Q_PROPERTY_REF_CREATE_Q_H(QPixmap, CardPixmap);
     Q_PROPERTY_CREATE_Q_H(QSize, CardPixmapSize);
     Q_PROPERTY_CREATE_Q_H(int, CardPixmapBorderRadius)
     Q_PROPERTY_CREATE_Q_H(ElaCardPixType::PixMode, CardPixMode);
@@ -32,4 +33,4 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELAINTERACTIVECARD_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAINTERACTIVECARD_H_

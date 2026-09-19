@@ -1,5 +1,6 @@
 #include "ElaCheckBox.h"
 
+#include "ElaApplication.h"
 #include "ElaCheckBoxStyle.h"
 ElaCheckBox::ElaCheckBox(QWidget* parent)
     : QCheckBox(parent)
@@ -9,7 +10,7 @@ ElaCheckBox::ElaCheckBox(QWidget* parent)
     setObjectName("ElaCheckBox");
     setStyle(new ElaCheckBoxStyle(style()));
     QFont font = this->font();
-    font.setPixelSize(15);
+    font.setPixelSize(eApp->getFontPixelSize() + 2);
     setFont(font);
 }
 

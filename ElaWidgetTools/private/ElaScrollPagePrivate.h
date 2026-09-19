@@ -1,10 +1,11 @@
-#ifndef ELASCROLLPAGEPRIVATE_H
-#define ELASCROLLPAGEPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLPAGEPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLPAGEPRIVATE_H_
 
 #include <QMap>
 #include <QObject>
 
-#include "ElaProperty.h"
+#include "ElaPropertyMacro.h"
+#include "ElaWidgetToolsExport.h"
 class ElaScrollPage;
 class ElaScrollArea;
 class QHBoxLayout;
@@ -16,13 +17,15 @@ class ElaScrollPagePrivate : public QObject
 {
     Q_OBJECT
     Q_D_CREATE(ElaScrollPage)
-    Q_PROPERTY_CREATE_D(QWidget*, CustomWidget)
+
 public:
     explicit ElaScrollPagePrivate(QObject* parent = nullptr);
     ~ElaScrollPagePrivate() override;
 
 private:
     friend class ElaScrollPageRouteCommand;
+    QWidget* _topCustomWidget{nullptr};
+    QWidget* _bottomCustomWidget{nullptr};
     QHBoxLayout* _pageTitleLayout{nullptr};
     QVBoxLayout* _mainLayout{nullptr};
     QStackedWidget* _centralStackedWidget{nullptr};
@@ -34,4 +37,4 @@ private:
     void _switchCentralStackIndex(int targetIndex, int lastIndex);
 };
 
-#endif // ELASCROLLPAGEPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASCROLLPAGEPRIVATE_H_

@@ -173,6 +173,19 @@ int ElaWindow::getAppBarHeight() const
     return d->_appBar->getAppBarHeight();
 }
 
+void ElaWindow::setRibbonHeight(int ribbonHeight)
+{
+    Q_D(ElaWindow);
+    d->_appBar->setRibbonHeight(ribbonHeight);
+    Q_EMIT pRibbonHeightChanged();
+}
+
+int ElaWindow::getRibbonHeight() const
+{
+    Q_D(const ElaWindow);
+    return d->_appBar->getRibbonHeight();
+}
+
 void ElaWindow::setCustomWidget(ElaAppBarType::CustomArea customArea, QWidget* widget, QObject* hitTestObject, const QString& hitTestFunctionName)
 {
     Q_D(ElaWindow);
@@ -689,7 +702,7 @@ void ElaWindow::setWindowPixmap(ElaThemeType::ThemeMode themeMode, const QPixmap
     update();
 }
 
-QPixmap ElaWindow::getWindowPixmap(ElaThemeType::ThemeMode themeMode) const
+const QPixmap& ElaWindow::getWindowPixmap(ElaThemeType::ThemeMode themeMode) const
 {
     Q_D(const ElaWindow);
     return themeMode == ElaThemeType::Light ? *d->_lightWindowPix : *d->_darkWindowPix;

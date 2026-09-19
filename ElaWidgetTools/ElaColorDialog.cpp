@@ -36,10 +36,6 @@ ElaColorDialog::ElaColorDialog(QWidget* parent)
     d->_appBar->setIsFixedSize(true);
     d->_appBar->setIsStayTop(true);
     d->_appBar->setWindowButtonFlags(ElaAppBarType::CloseButtonHint);
-    d->_appBar->setIsDefaultClosed(false);
-    connect(d->_appBar, &ElaAppBar::closeButtonClicked, this, [=]() {
-        close();
-    });
 
     // 颜色选择器
     ElaText* colorPickerText = new ElaText("编辑颜色", this);

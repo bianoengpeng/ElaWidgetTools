@@ -1,8 +1,9 @@
-#ifndef ELATABWIDGETPRIVATE_H
-#define ELATABWIDGETPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATABWIDGETPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATABWIDGETPRIVATE_H_
 
-#include "ElaProperty.h"
-#include "ElaSingleton.h"
+#include "ElaPropertyMacro.h"
+#include "ElaSingletonMacro.h"
+#include "ElaWidgetToolsExport.h"
 #include <QDrag>
 #include <QObject>
 #include <QPixmap>
@@ -25,6 +26,7 @@ class ElaTabWidgetPrivate : public QObject
     Q_PROPERTY_CREATE_D(bool, IsTabTransparent)
     Q_PROPERTY_CREATE_D(bool, IsContainerAcceptDrops);
     Q_PROPERTY_CREATE_D(QSize, TabSize)
+    Q_PROPERTY_CREATE_D(QSize, FloatWidgetSize)
 public:
     explicit ElaTabWidgetPrivate(QObject* parent = nullptr);
     ~ElaTabWidgetPrivate() override;
@@ -42,4 +44,4 @@ private:
     void _clearAllTabWidgetList();
 };
 
-#endif // ELATABWIDGETPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATABWIDGETPRIVATE_H_

@@ -1,11 +1,11 @@
-#ifndef ELAICONBUTTONPRIVATE_H
-#define ELAICONBUTTONPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAICONBUTTONPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAICONBUTTONPRIVATE_H_
 
 #include <QColor>
 #include <QObject>
 #include <QPixmap>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaIconButton;
 class ElaIconButtonPrivate : public QObject
 {
@@ -32,4 +32,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELAICONBUTTONPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAICONBUTTONPRIVATE_H_
+

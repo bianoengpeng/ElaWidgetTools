@@ -7,7 +7,6 @@
 #include "ElaImageCardPrivate.h"
 #include "ElaTheme.h"
 
-Q_PROPERTY_CREATE_Q_CPP(ElaImageCard, QImage, CardImage);
 Q_PROPERTY_CREATE_Q_CPP(ElaImageCard, int, BorderRadius)
 Q_PROPERTY_CREATE_Q_CPP(ElaImageCard, bool, IsPreserveAspectCrop)
 ElaImageCard::ElaImageCard(QWidget* parent)
@@ -26,6 +25,20 @@ ElaImageCard::ElaImageCard(QWidget* parent)
 
 ElaImageCard::~ElaImageCard()
 {
+}
+
+void ElaImageCard::setCardImage(const QImage& cardImage)
+{
+    Q_D(ElaImageCard);
+    d->_pCardImage = cardImage;
+    update();
+    Q_EMIT pCardImageChanged();
+}
+
+const QImage& ElaImageCard::getCardImage() const
+{
+    Q_D(const ElaImageCard);
+    return d->_pCardImage;
 }
 
 void ElaImageCard::paintEvent(QPaintEvent* event)

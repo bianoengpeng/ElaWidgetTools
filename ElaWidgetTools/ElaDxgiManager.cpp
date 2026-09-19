@@ -43,6 +43,7 @@ ElaDxgiManager::ElaDxgiManager(QObject* parent)
     d->_dxgiThread->start();
     connect(d, &ElaDxgiManagerPrivate::grabScreen, d->_dxgi, &ElaDxgi::onGrabScreen);
     connect(d->_dxgi, &ElaDxgi::grabScreenOver, this, &ElaDxgiManager::grabImageUpdate);
+    connect(d->_dxgiThread, &QThread::finished, d->_dxgi, &ElaDxgi::deleteLater);
 }
 
 ElaDxgiManager::~ElaDxgiManager()
@@ -57,7 +58,7 @@ ElaDxgiManager::~ElaDxgiManager()
         d->_dxgiThread->quit();
         d->_dxgiThread->wait();
     }
-    delete d->_dxgi;
+    delete d->_dxgiThread;
 }
 
 const QStringList& ElaDxgiManager::getDxDeviceList() const
@@ -77,7 +78,7 @@ QImage ElaDxgiManager::grabScreenToImage() const
     Q_D(const ElaDxgiManager);
     if (!d->_dxgi->getIsInitSuccess())
     {
-        return QImage();
+        return {};
     }
     return d->_dxgi->getGrabImage();
 }
@@ -203,7 +204,7 @@ void ElaDxgiManager::setGrabArea(int x, int y, int width, int height)
     d->_dxgi->setGrabArea(QRect(x, y, width, height));
 }
 
-const QRect& ElaDxgiManager::getGrabArea() const
+QRect ElaDxgiManager::getGrabArea() const
 {
     Q_D(const ElaDxgiManager);
     return d->_dxgi->getGrabArea();
@@ -239,55 +240,4 @@ int ElaDxgiManager::getTimeoutMsValue() const
     return d->_dxgi->getTimeoutMsValue();
 }
 
-Q_PROPERTY_CREATE_Q_CPP(ElaDxgiScreen, int, BorderRadius)
-ElaDxgiScreen::ElaDxgiScreen(QWidget* parent)
-    : QWidget(parent), d_ptr(new ElaDxgiScreenPrivate())
-{
-    Q_D(ElaDxgiScreen);
-    d->q_ptr = this;
-    d->_pBorderRadius = 5;
-    d->_dxgiManager = ElaDxgiManager::getInstance();
-    setFixedSize(700, 500);
-    connect(d->_dxgiManager, &ElaDxgiManager::grabImageUpdate, this, [=](QImage img) {
-        if (isVisible())
-        {
-            d->_img = std::move(img);
-            update();
-        }
-    });
-}
-
-ElaDxgiScreen::~ElaDxgiScreen()
-{
-}
-
-void ElaDxgiScreen::paintEvent(QPaintEvent* event)
-{
-    Q_D(ElaDxgiScreen);
-    if (d->_dxgiManager->getIsGrabScreen())
-    {
-        QPainter painter(this);
-        painter.save();
-        painter.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing);
-        QPainterPath path;
-        path.addRoundedRect(rect(), d->_pBorderRadius, d->_pBorderRadius);
-        painter.drawImage(rect(), d->_img);
-        painter.restore();
-    }
-}
-
-void ElaDxgiScreen::setIsSyncGrabSize(bool isSyncGrabSize)
-{
-    Q_D(ElaDxgiScreen);
-    if (isSyncGrabSize)
-    {
-        setFixedSize(d->_dxgiManager->getGrabArea().size());
-    }
-}
-
-bool ElaDxgiScreen::getIsSyncGrabSize() const
-{
-    Q_D(const ElaDxgiScreen);
-    return d->_isSyncGrabSize;
-}
 #endif

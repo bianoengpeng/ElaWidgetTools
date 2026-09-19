@@ -1,9 +1,9 @@
-#ifndef ELATOOLBUTTON_H
-#define ELATOOLBUTTON_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELATOOLBUTTON_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELATOOLBUTTON_H_
 
 #include <QToolButton>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaMenu;
 class ElaToolButtonPrivate;
 class ELA_EXPORT ElaToolButton : public QToolButton
@@ -29,4 +29,4 @@ protected:
     virtual bool eventFilter(QObject* watched, QEvent* event) override;
 };
 
-#endif // ELATOOLBUTTON_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELATOOLBUTTON_H_

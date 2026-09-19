@@ -3,7 +3,7 @@
 #include <QHeaderView>
 #include <QMouseEvent>
 
-#include "DeveloperComponents/ElaTableViewStyle.h"
+#include "ElaTableViewStyle.h"
 #include "ElaScrollBar.h"
 #include "ElaTableViewPrivate.h"
 ElaTableView::ElaTableView(QWidget* parent)

@@ -1,4 +1,5 @@
 #include "ElaRoller.h"
+#include "ElaApplication.h"
 #include "ElaRollerPrivate.h"
 #include "ElaTheme.h"
 #include <QDebug>
@@ -29,7 +30,7 @@ ElaRoller::ElaRoller(QWidget* parent)
     setObjectName("ElaRoller");
     setStyleSheet("#ElaRoller{background-color:transparent;}");
     QFont font = this->font();
-    font.setPixelSize(16);
+    font.setPixelSize(eApp->getFontPixelSize() + 3);
     setFont(font);
 
     d->_scrollAnimation = new QPropertyAnimation(d, "pScrollOffset");

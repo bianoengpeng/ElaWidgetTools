@@ -1,10 +1,10 @@
-#ifndef ELAPROMOTIONVIEWPRIVATE_H
-#define ELAPROMOTIONVIEWPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPROMOTIONVIEWPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPROMOTIONVIEWPRIVATE_H_
 
 #include <QObject>
 #include <QPixmap>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaPromotionCard;
 class ElaPromotionView;
 class ElaPromotionViewPrivate : public QObject
@@ -30,11 +30,12 @@ private:
     int _indicatorSpacing{12};
     bool _isAllowSwitch{true};
     QList<ElaPromotionCard*> _promotionCardList;
-    void _startCardGeometryAnimation(ElaPromotionCard* card, const QRect& start, const QRect& end);
+    void _startCardGeometryAnimation(ElaPromotionCard* card, QRect start, QRect end);
     void _startHorizontalCardPixmapRatioAnimation(ElaPromotionCard* card, qreal start, qreal end);
     void _updatePromotionCardGeometry();
     int _getAdjacentIndex(Qt::LayoutDirection direction, int index);
     int _getRightLimitX();
 };
 
-#endif // ELAPROMOTIONVIEWPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPROMOTIONVIEWPRIVATE_H_
+

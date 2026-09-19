@@ -20,12 +20,13 @@ endif()
 
 #在这里配置QT路径 例如 C:/Qt/6.8.3/msvc2022_64
 #SET(QT_SDK_DIR C:/Qt/6.8.3/msvc2022_64 CACHE PATH "QT SDK DIR" FORCE)
-SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/Install CACHE PATH "Installation path" FORCE)
 
 list(APPEND CMAKE_PREFIX_PATH ${QT_SDK_DIR})
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+
+SET(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/Install/${QT_VERSION} CACHE PATH "Installation path" FORCE)
 
 # if (${QT_VERSION} VERSION_GREATER 6.7.0 OR ${QT_VERSION} VERSION_LESS 5.12.0)
 #     message(FATAL_ERROR "The QT version you are currently using is no longer under maintenance! There may be issues such as compilation failures or crashes during use. The recommended QT versions are QT5.15.2, QT6.6.2, and QT6.6.3! Please be advised")

@@ -1,11 +1,12 @@
-#ifndef ELASUGGESTBOX_H
-#define ELASUGGESTBOX_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELASUGGESTBOX_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELASUGGESTBOX_H_
 
 #include <QVariantMap>
 #include <QWidget>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaSuggestBoxPrivate;
 class ELA_EXPORT ElaSuggestBox : public QWidget
@@ -26,7 +27,7 @@ public:
         Q_PRIVATE_CREATE(ElaIconType::IconName, ElaIcon)
         Q_PRIVATE_REF_CREATE(QString, SuggestText)
         Q_PRIVATE_REF_CREATE(QString, SuggestKey)
-        Q_PRIVATE_CREATE(QVariantMap, SuggestData)
+        Q_PRIVATE_REF_CREATE(QVariantMap, SuggestData)
     public:
         explicit SuggestData();
         explicit SuggestData(ElaIconType::IconName icon, const QString& suggestText, const QVariantMap& suggestData = {});
@@ -44,4 +45,4 @@ Q_SIGNALS:
     Q_SIGNAL void suggestionClicked(const ElaSuggestBox::SuggestData& suggestData);
 };
 
-#endif // ELASUGGESTBOX_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELASUGGESTBOX_H_

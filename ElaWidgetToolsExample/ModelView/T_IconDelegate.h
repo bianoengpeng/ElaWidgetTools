@@ -3,7 +3,7 @@
 
 #include <QStyledItemDelegate>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class T_IconDelegate : public QStyledItemDelegate
 {
     Q_OBJECT

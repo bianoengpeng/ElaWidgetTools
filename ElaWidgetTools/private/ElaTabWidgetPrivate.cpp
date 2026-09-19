@@ -80,8 +80,16 @@ void ElaTabWidgetPrivate::onTabDragCreate(QMimeData* mimeData)
         }
         ElaTabBar* customTabBar = floatWidget->getCustomTabBar();
         customTabBar->setTabSize(tabSize);
+        floatWidget->getCustomTabWidget()->setFloatWidgetSize(_pFloatWidgetSize);
         dragWidget->setProperty("CurrentCustomBar", QVariant::fromValue<ElaTabBar*>(customTabBar));
         floatWidget->addTab(dragWidget, tabIcon, tabText);
+        connect(customTabBar, &ElaTabBar::currentChanged, this, [=](int currentIndex) {
+            if (currentIndex < 0)
+            {
+                return;
+            }
+            Q_EMIT q->currentWidgetChanged(floatWidget->getCustomTabWidget()->widget(currentIndex));
+        });
     }
     QPoint dragPos = mimeData->property("DragPos").toPoint();
     QTimer* dragTimer = new QTimer(this);
@@ -121,7 +129,7 @@ void ElaTabWidgetPrivate::onTabDragCreate(QMimeData* mimeData)
         }
         if (!isFloatWidget)
         {
-            floatWidget->resize(700, 500);
+            floatWidget->resize(_pFloatWidgetSize);
         }
     });
     auto ret = drag->exec();
@@ -129,24 +137,24 @@ void ElaTabWidgetPrivate::onTabDragCreate(QMimeData* mimeData)
     ElaCustomTabWidget* tempFloatWidget = mimeData->property("TempFloatWidget").value<ElaCustomTabWidget*>();
     if (tempFloatWidget)
     {
-        if (ret == Qt::IgnoreAction)
+        if (tempFloatWidget->windowHandle())
         {
-            if (tempFloatWidget->windowHandle())
-            {
-                tempFloatWidget->windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
-            }
-        }
-        else
-        {
-            tempFloatWidget->deleteLater();
+            tempFloatWidget->windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
         }
         floatWidget->deleteLater();
     }
     else
     {
-        if (floatWidget->windowHandle())
+        if (floatWidget->isVisible())
         {
-            floatWidget->windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
+            if (floatWidget->windowHandle())
+            {
+                floatWidget->windowHandle()->setFlag(Qt::WindowTransparentForInput, false);
+            }
+        }
+        else
+        {
+            floatWidget->deleteLater();
         }
     }
 }
@@ -184,10 +192,18 @@ void ElaTabWidgetPrivate::onTabDragLeave(QMimeData* mimeData)
     QSize tabSize = mimeData->property("TabSize").toSize();
     ElaTabBar* customTabBar = floatWidget->getCustomTabBar();
     customTabBar->setTabSize(tabSize);
+    floatWidget->getCustomTabWidget()->setFloatWidgetSize(_pFloatWidgetSize);
     dragWidget->setProperty("CurrentCustomBar", QVariant::fromValue<ElaTabBar*>(customTabBar));
     floatWidget->addTab(dragWidget, tabIcon, tabText);
+    connect(customTabBar, &ElaTabBar::currentChanged, this, [=](int currentIndex) {
+        if (currentIndex < 0)
+        {
+            return;
+        }
+        Q_EMIT q->currentWidgetChanged(floatWidget->getCustomTabWidget()->widget(currentIndex));
+    });
     floatWidget->show();
-    floatWidget->resize(700, 500);
+    floatWidget->resize(_pFloatWidgetSize);
     if (floatWidget->windowHandle())
     {
         floatWidget->windowHandle()->setFlag(Qt::WindowTransparentForInput, true);
@@ -203,11 +219,6 @@ void ElaTabWidgetPrivate::onTabDragLeave(QMimeData* mimeData)
     connect(mimeData, &QMimeData::destroyed, this, [=]() {
         dragTimer->deleteLater();
     });
-    ElaCustomTabWidget* tempFloatWidget = mimeData->property("TempFloatWidget").value<ElaCustomTabWidget*>();
-    if (tempFloatWidget)
-    {
-        tempFloatWidget->deleteLater();
-    }
     mimeData->setProperty("TempFloatWidget", QVariant::fromValue<ElaCustomTabWidget*>(floatWidget));
 }
 
@@ -229,6 +240,11 @@ void ElaTabWidgetPrivate::onTabDragDrop(QMimeData* mimeData)
         dragWidget->setProperty("CurrentCustomBar", QVariant::fromValue<ElaTabBar*>(_customTabBar));
         _customTabBar->insertTab(dropIndex, tabIcon, tabText);
         _customTabBar->setCurrentIndex(dropIndex);
+    }
+    if (const auto tempFloatWidget = mimeData->property("TempFloatWidget").value<ElaCustomTabWidget*>())
+    {
+        tempFloatWidget->deleteLater();
+        mimeData->setProperty("TempFloatWidget", {});
     }
 }
 

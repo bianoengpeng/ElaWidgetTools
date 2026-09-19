@@ -7,7 +7,7 @@
 #include <QPainter>
 #include <QPropertyAnimation>
 
-#include "DeveloperComponents/ElaComboBoxView.h"
+#include "ElaComboBoxView.h"
 #include "ElaApplication.h"
 #include "ElaComboBoxStyle.h"
 #include "ElaScrollBar.h"
@@ -130,7 +130,7 @@ void ElaMultiSelectComboBox::setCurrentSelection(int index)
     d->_refreshCurrentIndexs();
 }
 
-void ElaMultiSelectComboBox::setCurrentSelection(QList<int> selectionIndex)
+void ElaMultiSelectComboBox::setCurrentSelection(const QList<int>& selectionIndex)
 {
     Q_D(ElaMultiSelectComboBox);
     d->_itemSelection.fill(false);
@@ -193,7 +193,7 @@ void ElaMultiSelectComboBox::paintEvent(QPaintEvent* e)
     if (count() > 0)
     {
         QFont iconFont = QFont("ElaAwesome");
-        iconFont.setPixelSize(17);
+        iconFont.setPixelSize(eApp->getFontPixelSize() + 4);
         painter.setFont(iconFont);
         painter.setPen(isEnabled() ? ElaThemeColor(d->_themeMode, BasicText) : ElaThemeColor(d->_themeMode, BasicTextDisable));
         QRectF expandIconRect(width() - 25, 0, 20, height());

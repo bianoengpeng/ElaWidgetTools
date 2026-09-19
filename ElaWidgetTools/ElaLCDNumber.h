@@ -1,9 +1,10 @@
-#ifndef ELAWIDGETTOOLS_ELALCDNUMBER_H
-#define ELAWIDGETTOOLS_ELALCDNUMBER_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELALCDNUMBER_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELALCDNUMBER_H_
 
 #include <QLCDNumber>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaLCDNumberPrivate;
 class ELA_EXPORT ElaLCDNumber : public QLCDNumber
@@ -23,4 +24,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif //ELAWIDGETTOOLS_ELALCDNUMBER_H
+#endif //ELAWORKSPACE_ELAWIDGETTOOLS_ELALCDNUMBER_H_

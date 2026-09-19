@@ -1,7 +1,7 @@
-#ifndef ELAWIDGETTOOLS_SRC_ELAKEYBINDER_H_
-#define ELAWIDGETTOOLS_SRC_ELAKEYBINDER_H_
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAKEYBINDER_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAKEYBINDER_H_
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 #include <QLabel>
 
 class ElaKeyBinderPrivate;
@@ -26,4 +26,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif //ELAWIDGETTOOLS_SRC_ELAKEYBINDER_H_
+#endif //ELAWORKSPACE_ELAWIDGETTOOLS_ELAKEYBINDER_H_

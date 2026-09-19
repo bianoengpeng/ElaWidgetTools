@@ -1,9 +1,10 @@
-#ifndef ELACOMBOBOX_H
-#define ELACOMBOBOX_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELACOMBOBOX_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELACOMBOBOX_H_
 
 #include <QComboBox>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaComboBoxPrivate;
 class ELA_EXPORT ElaComboBox : public QComboBox
@@ -23,4 +24,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELACOMBOBOX_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELACOMBOBOX_H_

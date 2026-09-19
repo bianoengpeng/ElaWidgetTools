@@ -1,9 +1,9 @@
-#ifndef ELATOOLBUTTONPRIVATE_H
-#define ELATOOLBUTTONPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLBUTTONPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLBUTTONPRIVATE_H_
 
 #include <QObject>
-#include "ElaDef.h"
-#include "ElaProperty.h"
+
+#include "ElaWidgetToolsDef.h"
 class ElaToolButton;
 class ElaToolButtonStyle;
 class ElaToolButtonPrivate : public QObject
@@ -19,4 +19,5 @@ private:
     ElaToolButtonStyle* _toolButtonStyle{nullptr};
 };
 
-#endif // ELATOOLBUTTONPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLBUTTONPRIVATE_H_
+

@@ -1,8 +1,9 @@
-#ifndef ELAMULTISELECTCOMBOBOX_H
-#define ELAMULTISELECTCOMBOBOX_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAMULTISELECTCOMBOBOX_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAMULTISELECTCOMBOBOX_H_
 #include <QComboBox>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaMultiSelectComboBoxPrivate;
 class ELA_EXPORT ElaMultiSelectComboBox : public QComboBox
 {
@@ -15,12 +16,12 @@ public:
     void setCurrentSelection(const QString& selection);
     void setCurrentSelection(const QStringList& selection);
     void setCurrentSelection(int index);
-    void setCurrentSelection(QList<int> selectionIndex);
+    void setCurrentSelection(const QList<int>& selectionIndex);
     const QStringList& getCurrentSelection() const;
     QList<int> getCurrentSelectionIndex() const;
 Q_SIGNALS:
     Q_SIGNAL void itemSelectionChanged(QVector<bool> itemSelection);
-    Q_SIGNAL void currentTextListChanged(QStringList selectedTextList);
+    Q_SIGNAL void currentTextListChanged(const QStringList& selectedTextList);
 
 protected:
     void paintEvent(QPaintEvent* e) override;
@@ -28,4 +29,4 @@ protected:
     void hidePopup() override;
 };
 
-#endif // ELAMULTISELECTCOMBOBOX_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAMULTISELECTCOMBOBOX_H_

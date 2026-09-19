@@ -1,12 +1,11 @@
-#ifndef ELAINPUTDIALOGPRIVATE_H
-#define ELAINPUTDIALOGPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAINPUTDIALOGPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAINPUTDIALOGPRIVATE_H_
 
 #include <QObject>
 #include <QPointer>
 #include <QLineEdit>
 
-#include "ElaDef.h"
-#include "ElaProperty.h"
+#include "ElaWidgetToolsDef.h"
 #include "ElaInputDialog.h"
 
 class QVBoxLayout;
@@ -92,4 +91,4 @@ public:
     bool dialogAccepted{false};
 };
 
-#endif // ELAINPUTDIALOGPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAINPUTDIALOGPRIVATE_H_

@@ -1,10 +1,10 @@
-#ifndef ELAPUSHBUTTONPRIVATE_H
-#define ELAPUSHBUTTONPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPUSHBUTTONPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPUSHBUTTONPRIVATE_H_
 
 #include <QColor>
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaPushButton;
 class ElaPushButtonPrivate : public QObject
 {
@@ -31,4 +31,5 @@ private:
     ElaThemeType::ThemeMode _themeMode;
 };
 
-#endif // ELAPUSHBUTTONPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAPUSHBUTTONPRIVATE_H_
+

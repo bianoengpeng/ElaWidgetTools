@@ -1,7 +1,8 @@
-#ifndef ELAFRAMEWORK_ELAWIDGETTOOLS_INCLUDE_ELAROLLER_H_
-#define ELAFRAMEWORK_ELAWIDGETTOOLS_INCLUDE_ELAROLLER_H_
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAROLLER_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAROLLER_H_
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 #include <QWidget>
 
 class ElaRollerPrivate;
@@ -34,4 +35,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif //ELAFRAMEWORK_ELAWIDGETTOOLS_INCLUDE_ELAROLLER_H_
+#endif //ELAWORKSPACE_ELAWIDGETTOOLS_ELAROLLER_H_

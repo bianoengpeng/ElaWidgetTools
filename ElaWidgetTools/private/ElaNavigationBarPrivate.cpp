@@ -31,7 +31,7 @@ ElaNavigationBarPrivate::~ElaNavigationBarPrivate()
 {
 }
 
-void ElaNavigationBarPrivate::onNavigationOpenNewWindow(QString nodeKey)
+void ElaNavigationBarPrivate::onNavigationOpenNewWindow(const QString& nodeKey)
 {
     Q_Q(ElaNavigationBar);
     const QMetaObject* meta = _pageMetaMap.value(nodeKey);

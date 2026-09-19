@@ -1,11 +1,12 @@
-#ifndef ELAINPUTDIALOG_H
-#define ELAINPUTDIALOG_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELAINPUTDIALOG_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELAINPUTDIALOG_H_
 
 #include <QDialog>
 #include <QLineEdit>
 #include <QStringList>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaLineEdit;
 class ElaComboBox;
@@ -120,4 +121,4 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
 };
 
-#endif // ELAINPUTDIALOG_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELAINPUTDIALOG_H_

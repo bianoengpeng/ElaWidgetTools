@@ -1,13 +1,13 @@
-#ifndef ELAMESSAGEBARPRIVATE_H
-#define ELAMESSAGEBARPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBARPRIVATE_H_
 
 #include <QMap>
 #include <QObject>
 #include <QQueue>
 #include <QVariantMap>
 
-#include "ElaDef.h"
-#include "ElaSingleton.h"
+#include "ElaWidgetToolsDef.h"
+#include "ElaSingletonMacro.h"
 
 class ElaIconButton;
 class QPainter;
@@ -71,4 +71,5 @@ private:
     void _drawError(QPainter* painter);
 };
 
-#endif // ELAMESSAGEBARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELAMESSAGEBARPRIVATE_H_
+

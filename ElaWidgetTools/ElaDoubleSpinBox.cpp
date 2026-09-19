@@ -1,8 +1,8 @@
 #include "ElaDoubleSpinBox.h"
 
-#include "DeveloperComponents/ElaSpinBoxStyle.h"
 #include "ElaDoubleSpinBoxPrivate.h"
 #include "ElaMenu.h"
+#include "ElaSpinBoxStyle.h"
 #include "ElaTheme.h"
 
 #include <QContextMenuEvent>

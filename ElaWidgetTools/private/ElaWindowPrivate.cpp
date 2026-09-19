@@ -266,7 +266,7 @@ void ElaWindowPrivate::onNavigationRouterStateChanged(const QString& domainName,
     }
 }
 
-qreal ElaWindowPrivate::_distance(const QPoint& point1, const QPoint& point2)
+qreal ElaWindowPrivate::_distance(QPoint point1, QPoint point2)
 {
     return std::sqrt((point1.x() - point2.x()) * (point1.x() - point2.x()) + (point1.y() - point2.y()) * (point1.y() - point2.y()));
 }

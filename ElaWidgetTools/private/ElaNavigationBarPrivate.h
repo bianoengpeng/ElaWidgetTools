@@ -1,7 +1,7 @@
-﻿#ifndef ELANAVIGATIONBARPRIVATE_H
-#define ELANAVIGATIONBARPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELANAVIGATIONBARPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELANAVIGATIONBARPRIVATE_H_
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 #include "ElaSuggestBox.h"
 #include <QMap>
 #include <QObject>
@@ -35,7 +35,7 @@ class ElaNavigationBarPrivate : public QObject
 public:
     explicit ElaNavigationBarPrivate(QObject* parent = nullptr);
     ~ElaNavigationBarPrivate() override;
-    Q_SLOT void onNavigationOpenNewWindow(QString nodeKey);
+    Q_SLOT void onNavigationOpenNewWindow(const QString& nodeKey);
 
     //核心跳转逻辑
     void onTreeViewClicked(const QModelIndex& index, bool isLogRoute = true, bool isRouteBack = false);
@@ -87,4 +87,6 @@ private:
     void _doUserButtonAnimation(bool isCompact, bool isAnimation);
 };
 
-#endif // ELANAVIGATIONBARPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELANAVIGATIONBARPRIVATE_H_
+
+

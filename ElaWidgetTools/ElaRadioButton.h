@@ -1,9 +1,10 @@
-#ifndef ELARADIOBUTTON_H
-#define ELARADIOBUTTON_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELARADIOBUTTON_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELARADIOBUTTON_H_
 
 #include <QRadioButton>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 class ElaRadioButtonPrivate;
 class ELA_EXPORT ElaRadioButton : public QRadioButton
 {
@@ -18,4 +19,4 @@ protected:
     virtual void paintEvent(QPaintEvent* event) override;
 };
 
-#endif // ELARADIOBUTTON_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELARADIOBUTTON_H_

@@ -1,9 +1,9 @@
-#ifndef ELASPINBOXPRIVATE_H
-#define ELASPINBOXPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASPINBOXPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASPINBOXPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 
 class ElaMenu;
 class ElaSpinBox;
@@ -24,4 +24,5 @@ private:
     ElaMenu* _createStandardContextMenu();
 };
 
-#endif // ELASPINBOXPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELASPINBOXPRIVATE_H_
+

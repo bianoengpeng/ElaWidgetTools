@@ -1,9 +1,9 @@
-#ifndef ELATOOLTIPPRIVATE_H
-#define ELATOOLTIPPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLTIPPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLTIPPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 class ElaToolTip;
 class QVBoxLayout;
 class ElaText;
@@ -35,4 +35,5 @@ private:
     void _updatePos();
 };
 
-#endif // ELATOOLTIPPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELATOOLTIPPRIVATE_H_
+

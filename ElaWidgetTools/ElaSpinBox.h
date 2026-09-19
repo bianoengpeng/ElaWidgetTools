@@ -1,9 +1,9 @@
-#ifndef ELASPINBOX_H
-#define ELASPINBOX_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_ELASPINBOX_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_ELASPINBOX_H_
 
 #include <QSpinBox>
 
-#include "ElaDef.h"
+#include "ElaWidgetToolsDef.h"
 
 class ElaSpinBoxPrivate;
 class ELA_EXPORT ElaSpinBox : public QSpinBox
@@ -22,4 +22,4 @@ protected:
     void contextMenuEvent(QContextMenuEvent* event) override;
 };
 
-#endif // ELASPINBOX_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_ELASPINBOX_H_

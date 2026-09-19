@@ -1,9 +1,10 @@
-#ifndef ELALISTVIEWPRIVATE_H
-#define ELALISTVIEWPRIVATE_H
+#ifndef ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELALISTVIEWPRIVATE_H_
+#define ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELALISTVIEWPRIVATE_H_
 
 #include <QObject>
 
-#include "ElaProperty.h"
+#include "ElaWidgetToolsExport.h"
+#include "ElaPropertyMacro.h"
 
 class ElaListView;
 class ElaListViewStyle;
@@ -19,4 +20,5 @@ private:
     ElaListViewStyle* _listViewStyle{nullptr};
 };
 
-#endif // ELALISTVIEWPRIVATE_H
+#endif // ELAWORKSPACE_ELAWIDGETTOOLS_PRIVATE_ELALISTVIEWPRIVATE_H_
+

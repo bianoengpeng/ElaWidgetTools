@@ -1,5 +1,6 @@
 #include "ElaAcrylicUrlCard.h"
 
+#include "ElaApplication.h"
 #include <QDesktopServices>
 #include <QPainter>
 #include <QPainterPath>
@@ -17,7 +18,7 @@ Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, int, TitlePixelSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, int, SubTitlePixelSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, int, TitleSpacing);
 Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, int, SubTitleSpacing);
-Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, QPixmap, CardPixmap);
+Q_PROPERTY_REF_CREATE_Q_CPP(ElaAcrylicUrlCard, QPixmap, CardPixmap);
 Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, QSize, CardPixmapSize);
 Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, int, CardPixmapBorderRadius)
 Q_PROPERTY_CREATE_Q_CPP(ElaAcrylicUrlCard, ElaCardPixType::PixMode, CardPixMode);
@@ -121,7 +122,7 @@ void ElaAcrylicUrlCard::paintEvent(QPaintEvent* event)
     // 图标绘制
     painter.save();
     QFont iconFont = QFont("ElaAwesome");
-    iconFont.setPixelSize(13);
+    iconFont.setPixelSize(eApp->getFontPixelSize());
     painter.setFont(iconFont);
     painter.setPen(ElaThemeColor(d->_themeMode, BasicText));
     painter.drawText(width - 1.5 * iconFont.pixelSize(), height() - iconFont.pixelSize(), QChar(ElaIconType::UpRightFromSquare));
