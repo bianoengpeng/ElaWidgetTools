@@ -201,11 +201,6 @@ void ElaTableViewStyle::drawControl(ControlElement element, const QStyleOption* 
                 bool isPressed = vopt->state.testFlag(QStyle::State_Sunken);
                 bool isHover   = vopt->state.testFlag(QStyle::State_MouseOver);
 
-                // 调试输出
-                qDebug() << "CheckBox State - Row:" << vopt->index.row() 
-                         << "Checked:" << isChecked 
-                         << "CheckStateRole:" << vopt->index.data(Qt::CheckStateRole).toInt();
-
                 // 背景
                 painter->save();
                 painter->setPen(Qt::NoPen);
