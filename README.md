@@ -6,6 +6,12 @@
 
 原项目是基于 QT-Widget 开发的 FluentUI 风格的组件库，同时提供不限于组件的常用集成功能；目前 Main 分支支持 QT5.12 以上所有版本（Linux 为 QT5.15 以上），推荐版本为 QT6.4.3 和 QT6.6.2。
 
+## 项目官网
+
+> 🌐 **[访问 ElaWidgetTools 官网](https://liniyous.com)**
+>
+> 查阅完整的 **API 文档** 与 **二次开发技能文档**，获取项目 **最新动态**。
+
 ## Fork 说明
 
 **上游项目：** [Liniyous/ElaWidgetTools](https://github.com/Liniyous/ElaWidgetTools)

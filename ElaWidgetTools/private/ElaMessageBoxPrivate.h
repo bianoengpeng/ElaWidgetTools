@@ -21,7 +21,7 @@ class ElaMessageBox;
 class ElaMessageBoxPrivate : public QObject
 {
     Q_OBJECT
-    Q_D_CREATE(ElaMessageBox)
+    ELA_PIMPL_D(ElaMessageBox)
 public:
     explicit ElaMessageBoxPrivate(QObject* parent = nullptr);
     ~ElaMessageBoxPrivate() override;

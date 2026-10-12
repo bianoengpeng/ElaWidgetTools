@@ -7,7 +7,7 @@
 class ElaTextEditStyle : public QProxyStyle
 {
     Q_OBJECT
-    Q_PROPERTY_CREATE(qreal, ExpandMarkWidth)
+    ELA_PROPERTY(qreal, ExpandMarkWidth)
 public:
     explicit ElaTextEditStyle(QStyle* style = nullptr);
     ~ElaTextEditStyle();

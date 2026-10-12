@@ -14,7 +14,7 @@ class ElaMessageBoxPrivate;
 class ELA_EXPORT ElaMessageBox : public QDialog
 {
     Q_OBJECT
-    Q_Q_CREATE(ElaMessageBox)
+    ELA_PIMPL_Q(ElaMessageBox)
 public:
     explicit ElaMessageBox(QWidget* parent = nullptr);
     ~ElaMessageBox() override;

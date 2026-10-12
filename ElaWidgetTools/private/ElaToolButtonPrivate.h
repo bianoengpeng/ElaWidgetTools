@@ -9,13 +9,13 @@ class ElaToolButtonStyle;
 class ElaToolButtonPrivate : public QObject
 {
     Q_OBJECT
-    Q_D_CREATE(ElaToolButton)
+    ELA_PIMPL_D(ElaToolButton)
 public:
     explicit ElaToolButtonPrivate(QObject* parent = nullptr);
     ~ElaToolButtonPrivate();
 
 private:
-    Q_PROPERTY_CREATE_D(ElaPushButtonType::Appearance, ButtonAppearance)
+    ELA_PROPERTY_D(ElaPushButtonType::Appearance, ButtonAppearance)
     ElaToolButtonStyle* _toolButtonStyle{nullptr};
 };
 

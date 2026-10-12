@@ -10,7 +10,7 @@ class ElaTextEditStyle;
 class ElaTextEditPrivate : public QObject
 {
     Q_OBJECT
-    Q_D_CREATE(ElaTextEdit)
+    ELA_PIMPL_D(ElaTextEdit)
 
 public:
     explicit ElaTextEditPrivate(QObject* parent = nullptr);

@@ -25,7 +25,7 @@ class ElaInputDialog;
 class ElaInputDialogPrivate : public QObject
 {
     Q_OBJECT
-    Q_D_CREATE(ElaInputDialog)
+    ELA_PIMPL_D(ElaInputDialog)
 public:
     explicit ElaInputDialogPrivate(QObject* parent = nullptr);
     ~ElaInputDialogPrivate() override;

@@ -6,15 +6,15 @@
 
 #include "ElaTheme.h"
 #include "private/ElaPushButtonPrivate.h"
-Q_PROPERTY_CREATE_Q_CPP(ElaPushButton, int, BorderRadius)
-Q_PROPERTY_REF_CREATE_Q_CPP(ElaPushButton, QColor, LightDefaultColor)
-Q_PROPERTY_REF_CREATE_Q_CPP(ElaPushButton, QColor, DarkDefaultColor)
-Q_PROPERTY_REF_CREATE_Q_CPP(ElaPushButton, QColor, LightHoverColor)
-Q_PROPERTY_REF_CREATE_Q_CPP(ElaPushButton, QColor, DarkHoverColor)
-Q_PROPERTY_REF_CREATE_Q_CPP(ElaPushButton, QColor, LightPressColor)
-Q_PROPERTY_REF_CREATE_Q_CPP(ElaPushButton, QColor, DarkPressColor)
-Q_PROPERTY_CREATE_Q_CPP(ElaPushButton, ElaPushButtonType::Appearance, ButtonAppearance)
-Q_PROPERTY_CREATE_Q_CPP(ElaPushButton, ElaPushButtonType::Shape, ButtonShape)
+ELA_PROPERTY_Q_CPP(ElaPushButton, int, BorderRadius)
+ELA_PROPERTY_Q_CPP(ElaPushButton, QColor, LightDefaultColor)
+ELA_PROPERTY_Q_CPP(ElaPushButton, QColor, DarkDefaultColor)
+ELA_PROPERTY_Q_CPP(ElaPushButton, QColor, LightHoverColor)
+ELA_PROPERTY_Q_CPP(ElaPushButton, QColor, DarkHoverColor)
+ELA_PROPERTY_Q_CPP(ElaPushButton, QColor, LightPressColor)
+ELA_PROPERTY_Q_CPP(ElaPushButton, QColor, DarkPressColor)
+ELA_PROPERTY_Q_CPP(ElaPushButton, ElaPushButtonType::Appearance, ButtonAppearance)
+ELA_PROPERTY_Q_CPP(ElaPushButton, ElaPushButtonType::Shape, ButtonShape)
 ElaPushButton::ElaPushButton(QWidget* parent)
     : QPushButton(parent), d_ptr(new ElaPushButtonPrivate())
 {
@@ -33,7 +33,7 @@ ElaPushButton::ElaPushButton(QWidget* parent)
     d->_pButtonAppearance = ElaPushButtonType::Appearance::Default;
 	d->_pButtonShape = ElaPushButtonType::Shape::Rounded;
     setMouseTracking(true);
-    setFixedHeight(38);
+    setFixedHeight(30);
     QFont font = this->font();
     font.setPixelSize(eApp->getFontPixelSize() + 2);
     setFont(font);
@@ -106,12 +106,9 @@ void ElaPushButton::paintEvent(QPaintEvent* event)
         radius = height() / 2;
     }
 
-    // 阴影
-    eTheme->drawEffectShadow(&painter, rect(), d->_shadowBorderWidth, radius);
-
     // 背景与边框
     painter.save();
-    QRect foregroundRect(d->_shadowBorderWidth, d->_shadowBorderWidth, width() - 2 * d->_shadowBorderWidth, height() - 2 * d->_shadowBorderWidth);
+    QRect foregroundRect = rect().adjusted(1, 1, -1, -1);
 
     QColor bgColor, borderColor, textColor;
     borderColor = Qt::transparent;

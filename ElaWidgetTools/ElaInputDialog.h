@@ -18,7 +18,7 @@ class ElaInputDialogPrivate;
 class ELA_EXPORT ElaInputDialog : public QDialog
 {
     Q_OBJECT
-    Q_Q_CREATE(ElaInputDialog)
+    ELA_PIMPL_Q(ElaInputDialog)
 public:
     enum InputMode {
         TextInput,
