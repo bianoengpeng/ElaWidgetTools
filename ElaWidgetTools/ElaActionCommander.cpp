@@ -84,8 +84,8 @@ ElaActionCommander::ElaActionCommander(QObject* parent)
     messageDisplayText->setFixedWidth(textWidth);
     auto messageDisplayCheckBox = new ElaCheckBox(d->_commanderDesign);
     messageDisplayCheckBox->setChecked(true);
-    connect(messageDisplayCheckBox, &ElaCheckBox::stateChanged, this, [=](int state) {
-        setIsMessageDisplayEnable(state);
+    connect(messageDisplayCheckBox, &ElaCheckBox::toggled, this, [=](bool checked) {
+        setIsMessageDisplayEnable(checked);
     });
     firstSettingLayout->addWidget(messageDisplayText);
     firstSettingLayout->addWidget(messageDisplayCheckBox);
@@ -95,8 +95,8 @@ ElaActionCommander::ElaActionCommander(QObject* parent)
     processEventEnableText->setFixedWidth(textWidth);
     auto processEventEnableCheckBox = new ElaCheckBox(d->_commanderDesign);
     processEventEnableCheckBox->setChecked(true);
-    connect(processEventEnableCheckBox, &ElaCheckBox::stateChanged, this, [=](int state) {
-        setIsRunToCommandProcessEventEnable(state);
+    connect(processEventEnableCheckBox, &ElaCheckBox::toggled, this, [=](bool checked) {
+        setIsRunToCommandProcessEventEnable(checked);
     });
     firstSettingLayout->addWidget(processEventEnableText);
     firstSettingLayout->addWidget(processEventEnableCheckBox);

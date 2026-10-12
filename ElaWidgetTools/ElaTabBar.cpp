@@ -1,6 +1,7 @@
 #include "ElaTabBar.h"
 
 #include <QApplication>
+#include <QCursor>
 #include <QDrag>
 #include <QMimeData>
 #include <QMouseEvent>
@@ -197,9 +198,14 @@ void ElaTabBar::dragEnterEvent(QDragEnterEvent* event)
 #endif
         Q_EMIT tabDragEnter(mimeData);
         qApp->processEvents();
-        QMouseEvent pressEvent(QEvent::MouseButtonPress, QPoint(tabRect(currentIndex()).x() + d->_style->getTabSize().width() / 2, 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+        QMouseEvent pressEvent(QEvent::MouseButtonPress, QPoint(tabRect(currentIndex()).x() + d->_style->getTabSize().width() / 2, 0), QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
         QApplication::sendEvent(this, &pressEvent);
-        QMouseEvent moveEvent(QEvent::MouseMove, QPoint(event->pos().x(), 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QPoint dragPos = event->position().toPoint();
+#else
+        QPoint dragPos = event->pos();
+#endif
+        QMouseEvent moveEvent(QEvent::MouseMove, QPoint(dragPos.x(), 0), QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
         QApplication::sendEvent(this, &moveEvent);
     }
     QTabBar::dragEnterEvent(event);
@@ -210,7 +216,12 @@ void ElaTabBar::dragMoveEvent(QDragMoveEvent* event)
     Q_D(ElaTabBar);
     if (event->mimeData()->property("DragType").toString() == "ElaTabBarDrag")
     {
-        QMouseEvent moveEvent(QEvent::MouseMove, QPoint(event->pos().x(), 0), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        QPoint dragPos = event->position().toPoint();
+#else
+        QPoint dragPos = event->pos();
+#endif
+        QMouseEvent moveEvent(QEvent::MouseMove, QPoint(dragPos.x(), 0), QCursor::pos(), Qt::LeftButton, Qt::LeftButton, Qt::NoModifier);
         QApplication::sendEvent(this, &moveEvent);
     }
     QWidget::dragMoveEvent(event);
