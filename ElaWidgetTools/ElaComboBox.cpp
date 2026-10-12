@@ -11,7 +11,9 @@
 #include <QLineEdit>
 #include <QListView>
 #include <QMouseEvent>
+#include <QPainter>
 #include <QPropertyAnimation>
+#include <QStyleOption>
 ELA_PROPERTY_Q_CPP(ElaComboBox, int, BorderRadius)
 ElaComboBox::ElaComboBox(QWidget* parent)
     : QComboBox(parent), d_ptr(new ElaComboBoxPrivate())
@@ -226,10 +228,17 @@ void ElaComboBox::hidePopup()
 
 void ElaComboBox::paintEvent(QPaintEvent* event)
 {
+    Q_UNUSED(event)
     Q_D(ElaComboBox);
     if (lineEdit() && lineEdit()->palette().color(QPalette::Text) != ElaThemeColor(d->_themeMode, BasicText))
     {
         d->onThemeChanged(d->_themeMode);
     }
-    QComboBox::paintEvent(event);
+    // 不经过 QComboBox::paintEvent：Qt 6.8.2 起，祖先控件设置了样式表时 QStyleSheetStyle 会用调色板文字色
+    // 自行绘制 CE_ComboBoxLabel，深色主题下会在 ElaComboBoxStyle 已绘制的文字上叠加一层深色文字。
+    // 主体与文字均由 ElaComboBoxStyle 的 CC_ComboBox 绘制，CE_ComboBoxLabel 本就被其忽略，因此直接调用该样式
+    QPainter painter(this);
+    QStyleOptionComboBox option;
+    initStyleOption(&option);
+    d->_comboBoxStyle->drawComplexControl(QStyle::CC_ComboBox, &option, &painter, this);
 }
