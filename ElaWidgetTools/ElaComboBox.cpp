@@ -11,7 +11,6 @@
 #include <QLineEdit>
 #include <QListView>
 #include <QMouseEvent>
-#include <QPainter>
 #include <QPropertyAnimation>
 ELA_PROPERTY_Q_CPP(ElaComboBox, int, BorderRadius)
 ElaComboBox::ElaComboBox(QWidget* parent)
@@ -77,45 +76,6 @@ void ElaComboBox::setEditable(bool editable)
     {
         lineEdit()->setStyle(d->_comboBoxStyle);
         d->onThemeChanged(d->_themeMode);
-    }
-}
-
-void ElaComboBox::paintEvent(QPaintEvent* e)
-{
-    Q_D(ElaComboBox);
-    QPainter painter(this);
-    painter.save();
-    painter.setRenderHints(QPainter::SmoothPixmapTransform | QPainter::Antialiasing | QPainter::TextAntialiasing);
-    painter.setPen(ElaThemeColor(d->_themeMode, BasicBorder));
-    painter.setBrush(isEnabled() ? underMouse() ? ElaThemeColor(d->_themeMode, BasicHover) : ElaThemeColor(d->_themeMode, BasicBase) : Qt::transparent);
-    QRect foregroundRect = rect();
-    foregroundRect.adjust(6, 1, -6, -1);
-    painter.drawRoundedRect(foregroundRect, d->_pBorderRadius, d->_pBorderRadius);
-    // 底边线绘制
-    painter.setPen(ElaThemeColor(d->_themeMode, BasicBaseLine));
-    painter.drawLine(foregroundRect.x() + 3, foregroundRect.y() + foregroundRect.height(), foregroundRect.x() + foregroundRect.width() - 3, foregroundRect.y() + foregroundRect.height());
-    //文字绘制
-    painter.setPen(isEnabled() ? ElaThemeColor(d->_themeMode, BasicText) : ElaThemeColor(d->_themeMode, BasicTextDisable));
-    QString currentText = painter.fontMetrics().elidedText(this->currentText(), Qt::ElideRight, foregroundRect.width() - 27 - width() * 0.05);
-    painter.drawText(15, height() / 2 + painter.fontMetrics().ascent() / 2 - 1, currentText);
-    //展开指示器绘制
-    painter.setPen(Qt::NoPen);
-    painter.setBrush(d->_themeMode == ElaThemeType::Light ? QColor(0x0E, 0x6F, 0xC3) : QColor(0x4C, 0xA0, 0xE0));
-    painter.drawRoundedRect(QRectF(foregroundRect.center().x() - d->_comboBoxStyle->getExpandMarkWidth(), foregroundRect.y() + foregroundRect.height() - 3, d->_comboBoxStyle->getExpandMarkWidth() * 2, 3), 2, 2);
-
-    // 展开图标绘制
-    if (count() > 0)
-    {
-        QFont iconFont = QFont("ElaAwesome");
-        iconFont.setPixelSize(17);
-        painter.setFont(iconFont);
-        painter.setPen(isEnabled() ? ElaThemeColor(d->_themeMode, BasicText) : ElaThemeColor(d->_themeMode, BasicTextDisable));
-        QRectF expandIconRect(width() - 25, 0, 20, height());
-        painter.translate(expandIconRect.x() + (qreal)expandIconRect.width() / 2 - 2, expandIconRect.y() + (qreal)expandIconRect.height() / 2);
-        painter.rotate(d->_comboBoxStyle->getExpandIconRotate());
-        painter.translate(-expandIconRect.x() - (qreal)expandIconRect.width() / 2 + 2, -expandIconRect.y() - (qreal)expandIconRect.height() / 2);
-        painter.drawText(expandIconRect, Qt::AlignVCenter, QChar((unsigned short)ElaIconType::AngleDown));
-        painter.restore();
     }
 }
 
@@ -262,4 +222,14 @@ void ElaComboBox::hidePopup()
         markAnimation->start(QAbstractAnimation::DeleteWhenStopped);
 	    }
 	}
+}
+
+void ElaComboBox::paintEvent(QPaintEvent* event)
+{
+    Q_D(ElaComboBox);
+    if (lineEdit() && lineEdit()->palette().color(QPalette::Text) != ElaThemeColor(d->_themeMode, BasicText))
+    {
+        d->onThemeChanged(d->_themeMode);
+    }
+    QComboBox::paintEvent(event);
 }
