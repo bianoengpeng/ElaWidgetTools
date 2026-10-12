@@ -342,10 +342,14 @@ void ElaMessageBox::mousePressEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton)
     {
         d->isMousePressed = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        d->mousePressPos = event->globalPosition().toPoint() - this->frameGeometry().topLeft();
+#else
         d->mousePressPos = event->globalPos() - this->frameGeometry().topLeft();
+#endif
         
         // 判断是否在可拖动区域（排除按钮栏区域）
-        if (event->y() < height() - 60)
+        if (event->pos().y() < height() - 60)
         {
             d->canDrag = true;
         }
@@ -371,7 +375,11 @@ void ElaMessageBox::mouseMoveEvent(QMouseEvent* event)
     if (d->isMousePressed && d->canDrag && (event->buttons() & Qt::LeftButton))
     {
         // 移动窗口
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        move(event->globalPosition().toPoint() - d->mousePressPos);
+#else
         move(event->globalPos() - d->mousePressPos);
+#endif
     }
     QDialog::mouseMoveEvent(event);
 }

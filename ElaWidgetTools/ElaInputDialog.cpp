@@ -497,9 +497,13 @@ void ElaInputDialog::mousePressEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton)
     {
         d->isMousePressed = true;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        d->mousePressPos = event->globalPosition().toPoint() - this->frameGeometry().topLeft();
+#else
         d->mousePressPos = event->globalPos() - this->frameGeometry().topLeft();
+#endif
         
-        if (event->y() < height() - 60)
+        if (event->pos().y() < height() - 60)
         {
             d->canDrag = true;
         }
@@ -524,7 +528,11 @@ void ElaInputDialog::mouseMoveEvent(QMouseEvent* event)
     Q_D(ElaInputDialog);
     if (d->isMousePressed && d->canDrag && (event->buttons() & Qt::LeftButton))
     {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        move(event->globalPosition().toPoint() - d->mousePressPos);
+#else
         move(event->globalPos() - d->mousePressPos);
+#endif
     }
     QDialog::mouseMoveEvent(event);
 }
